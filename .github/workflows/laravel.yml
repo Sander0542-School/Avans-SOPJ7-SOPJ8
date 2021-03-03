@@ -38,6 +38,8 @@ jobs:
     - name: Run Dusk Tests
       env:
         APP_URL: "http://127.0.0.1:8000"
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
       run: php artisan dusk
     - name: Upload Screenshots
       if: failure()
