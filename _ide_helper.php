@@ -10453,6 +10453,16 @@
         {
                         return \Illuminate\Http\Request::hasValidRelativeSignature();
         }
+                    /**
+         * 
+         *
+         * @see \Inertia\ServiceProvider::registerRequestMacro()
+         * @static 
+         */ 
+        public static function inertia()
+        {
+                        return \Illuminate\Http\Request::inertia();
+        }
          
     }
             /**
@@ -11564,6 +11574,19 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
+        }
+                    /**
+         * 
+         *
+         * @see \Inertia\ServiceProvider::registerRouterMacro()
+         * @param mixed $uri
+         * @param mixed $component
+         * @param mixed $props
+         * @static 
+         */ 
+        public static function inertia($uri, $component, $props = [])
+        {
+                        return \Illuminate\Routing\Router::inertia($uri, $component, $props);
         }
          
     }
@@ -15649,6 +15672,55 @@
      
 }
 
+    namespace NascentAfrica\Jetstrap { 
+            /**
+     * 
+     *
+     * @method static Jetstrap bootstrap4()
+     * @method static Jetstrap bootstrap5()
+     * @method static bool isBootstrap4()
+     * @method static bool isBootstrap5()
+     * @see Jetstrap
+     */ 
+        class JetstrapFacade {
+                    /**
+         * Use Core Ui presets
+         *
+         * @return \NascentAfrica\Jetstrap\Jetstrap 
+         * @static 
+         */ 
+        public static function useCoreUi3()
+        {
+                        /** @var \NascentAfrica\Jetstrap\Jetstrap $instance */
+                        return $instance->useCoreUi3();
+        }
+                    /**
+         * Use Core Ui presets
+         *
+         * @return \NascentAfrica\Jetstrap\Jetstrap 
+         * @static 
+         */ 
+        public static function useAdminLte3()
+        {
+                        /** @var \NascentAfrica\Jetstrap\Jetstrap $instance */
+                        return $instance->useAdminLte3();
+        }
+                    /**
+         * Get preset name
+         *
+         * @return false|string 
+         * @static 
+         */ 
+        public static function getPreset()
+        {
+                        /** @var \NascentAfrica\Jetstrap\Jetstrap $instance */
+                        return $instance->getPreset();
+        }
+         
+    }
+     
+}
+
     namespace Illuminate\Http { 
             /**
      * 
@@ -15700,6 +15772,16 @@
         public static function hasValidRelativeSignature()
         {
                         return \Illuminate\Http\Request::hasValidRelativeSignature();
+        }
+                    /**
+         * 
+         *
+         * @see \Inertia\ServiceProvider::registerRequestMacro()
+         * @static 
+         */ 
+        public static function inertia()
+        {
+                        return \Illuminate\Http\Request::inertia();
         }
          
     }
@@ -15763,6 +15845,31 @@
         public static function assertDontSeeLivewire($component)
         {
                         return \Illuminate\Testing\TestResponse::assertDontSeeLivewire($component);
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Routing { 
+            /**
+     * 
+     *
+     * @mixin \Illuminate\Routing\RouteRegistrar
+     */ 
+        class Router {
+                    /**
+         * 
+         *
+         * @see \Inertia\ServiceProvider::registerRouterMacro()
+         * @param mixed $uri
+         * @param mixed $component
+         * @param mixed $props
+         * @static 
+         */ 
+        public static function inertia($uri, $component, $props = [])
+        {
+                        return \Illuminate\Routing\Router::inertia($uri, $component, $props);
         }
          
     }
@@ -19002,6 +19109,7 @@ namespace  {
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
             class Livewire extends \Livewire\Livewire {}
+            class Jetstrap extends \NascentAfrica\Jetstrap\JetstrapFacade {}
      
 }
 
