@@ -21,7 +21,7 @@ class Sidemenu extends Component
         foreach (Subject::all() as $subject) {
             $subMenu = [
                 'name' => $subject->name,
-                'children' => $this->getSubjectChildren($subject)
+                'children' => $this->getChildren($subject->layers)
             ];
 
             array_push($menu, $subMenu);
@@ -30,36 +30,20 @@ class Sidemenu extends Component
         return $menu;
     }
 
-    private function getSubjectChildren(Subject $subject) {
-        if ($subject->layers->count() <= 0) {
+    private function getChildren($layers) {
+        if ($layers->count() <= 0) {
             return null;
         }
 
         $menu = [];
 
-        foreach ($subject->layers as $layer) {
+        /**
+         * @var $layer Layer
+         */
+        foreach ($layers as $layer) {
             $subMenu = [
                 'name' => $layer->name,
-                'children' => $this->getLayerChildren($layer)
-            ];
-
-            array_push($menu, $subMenu);
-        }
-
-        return $menu;
-    }
-
-    private function getLayerChildren(Layer $layer) {
-        if ($layer->childLayers->count() <= 0) {
-            return null;
-        }
-
-        $menu = [];
-
-        foreach ($layer->childLayers as $layer) {
-            $subMenu = [
-                'name' => $layer->name,
-                'children' => $this->getLayerChildren($layer)
+                'children' => $this->getChildren($layer->childLayers)
             ];
 
             array_push($menu, $subMenu);
