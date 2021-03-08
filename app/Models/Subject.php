@@ -15,6 +15,6 @@ class Subject extends Model
     }
 
     public function layers() {
-        return $this->hasManyThrough(Layer::class, SubjectChoice::class);
+        return $this->hasManyThrough(Layer::class, SubjectChoice::class, 'subject_id', 'id', 'id', 'layer_id');
     }
 }
