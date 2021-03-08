@@ -9,6 +9,11 @@ class LayerChoice extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'parent_layer_id',
+        'child_layer_id',
+    ];
+
     public function parentLayer()
     {
         return $this->hasOne(Layer::class, 'id', 'parent_layer_id');
