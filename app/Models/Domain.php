@@ -9,6 +9,11 @@ class Domain extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'color'
+    ];
+
     public function subjects()
     {
         return $this->hasMany(Subject::class);
