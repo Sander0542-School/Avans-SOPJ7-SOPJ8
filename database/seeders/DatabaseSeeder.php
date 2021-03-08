@@ -61,8 +61,7 @@ class DatabaseSeeder extends Seeder
                     SubjectChoice::create([
                         'name' => $faker->word,
                         'description' => $faker->text(10),
-                        //'icon' => $faker->fontAwesomeIcon(),
-                        'icon' => 'home',
+                        'icon' => $faker->fontAwesomeIcon(),
                         'subject_id' => $subject->id,
                         'layer_id' => $layer2->id,
                     ]);
