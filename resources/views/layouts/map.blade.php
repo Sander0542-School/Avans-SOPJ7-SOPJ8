@@ -22,7 +22,7 @@
         <main class="wrapper">
             <x-navigation.side-menu/>
             <div class="content">
-
+                <button onclick="toggleSideMenu()" class="btn btn-primary">Sidemenu</button>
             </div>
         </main>
 

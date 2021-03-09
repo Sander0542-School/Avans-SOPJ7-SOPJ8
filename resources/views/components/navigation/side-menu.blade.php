@@ -1,4 +1,4 @@
-<nav class="sidebar">
+<nav class="sidemenu">
     <div class="sidebar-header">
         <h3>HAS Expeditiekaart</h3>
     </div>
