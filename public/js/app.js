@@ -3792,6 +3792,19 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/Homepage.js":
+/*!**********************************!*\
+  !*** ./resources/js/Homepage.js ***!
+  \**********************************/
+/***/ (() => {
+
+var mymap = L.map('mapid').setView([52.1305, 6.4893], 16);
+L.tileLayer("http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+  maxZoom: 20
+}).addTo(mymap);
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -3799,6 +3812,8 @@ module.exports = {
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./Homepage */ "./resources/js/Homepage.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
