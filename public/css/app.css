@@ -16438,3 +16438,103 @@ readers do not read off random characters that represent icons */
 .small {
   font-size: 0.875rem !important;
 }
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  height: 100vh;
+}
+.wrapper > * {
+  overflow-y: auto;
+}
+
+.sidebar {
+  min-width: 300px;
+  max-width: 300px;
+  background: #7386D5;
+  color: #fff;
+  transition: all 0.3s;
+}
+.sidebar .sidebar-header {
+  padding: 20px;
+  background: #6d7fcc;
+}
+.sidebar .menu-item,
+.sidebar .menu-item:hover,
+.sidebar .menu-item:focus {
+  transition: all 0.3s;
+}
+.sidebar .menu-item > a,
+.sidebar .menu-item:hover > a,
+.sidebar .menu-item:focus > a {
+  color: inherit;
+  text-decoration: none;
+}
+.sidebar a.sidebar-toggle {
+  padding-right: 8px;
+}
+.sidebar a.sidebar-toggle > i:before {
+  content: "";
+}
+.sidebar a.sidebar-toggle[aria-expanded=true] > i:before {
+  content: "";
+}
+.sidebar a[data-toggle=collapse] {
+  position: relative;
+}
+.sidebar ul.components {
+  padding: 20px 0;
+}
+.sidebar ul.show {
+  background: #6d7fcc;
+}
+.sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+.sidebar ul li > .menu-item {
+  font-size: 1.1em;
+  display: flex;
+}
+.sidebar ul li > .menu-item > a {
+  padding: 8px 14px;
+}
+.sidebar ul li > .menu-item:hover {
+  color: #7386D5;
+  background: #fff;
+}
+.sidebar ul li > .menu-item.single > a {
+  margin-left: 40px;
+}
+.sidebar ul li.active > .menu-item {
+  color: #fff;
+  background: #6d7fcc;
+}
+.sidebar ul ul {
+  padding-left: 18px !important;
+}
+.sidebar ul ul .menu-item {
+  font-size: 0.9em !important;
+  background: #6d7fcc;
+}
+.sidebar.active {
+  margin-left: -300px;
+}
+
+.content {
+  width: 100%;
+  padding: 20px;
+  min-height: 100vh;
+  transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    margin-left: -300px;
+  }
+
+  .sidebar.active {
+    margin-left: 0;
+  }
+}
