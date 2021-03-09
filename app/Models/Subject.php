@@ -9,6 +9,11 @@ class Subject extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'domain_id',
+        'name',
+    ];
+
     public function domain()
     {
         return $this->hasOne(Domain::class);
