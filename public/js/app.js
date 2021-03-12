@@ -3806,9 +3806,9 @@ var mymap = L.map('mapid', {
 var layerTemplate = "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
 var southWest = L.latLng(52.12506, 6.47332),
     northEast = L.latLng(52.13543, 6.50320),
-    bounds = L.latLngBounds(southWest, northEast);
+    bounds = mymap.getBounds();
+mymap.setMaxBounds(bounds);
 L.tileLayer(layerTemplate, {
-  maxBounds: bounds,
   maxZoom: 18,
   minZoom: 16
 }).addTo(mymap);
