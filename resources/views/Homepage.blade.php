@@ -8,6 +8,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 
 </head>
+<<<<<<< Updated upstream
 
 <x-map-layout>
 
@@ -17,6 +18,14 @@
 
 </x-map-layout>
 
+=======
+<body>
+    <div class="parent">
+        <div class="frontIMG" ></div>
+    </div>
+    <div id="mapid"  class="fadeObject"></div>
+
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+</body>
+>>>>>>> Stashed changes
 </html>
-
-

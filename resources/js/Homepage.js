@@ -7,6 +7,7 @@ let southWest = L.latLng(52.12506, 6.47332),
 
 map.setMaxBounds(bounds);
 
+<<<<<<< Updated upstream
 L.tileLayer(layerTemplate, {
     maxZoom: 18,
     minZoom: 16
@@ -19,3 +20,9 @@ $('mapid').on("mousedown", L.DomEvent.stopPropagation);
 function mapOnResize(){
     //fit bounds op nieuw zoomniveau
 }
+=======
+L.tileLayer("http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+    maxZoom: 20
+}).addTo(mymap);
+
+>>>>>>> Stashed changes

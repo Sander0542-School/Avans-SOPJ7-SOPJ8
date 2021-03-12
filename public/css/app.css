@@ -17070,6 +17070,55 @@ readers do not read off random characters that represent icons */
   width: 100%;
 }
 
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.frontIMG {
+  background-image: url("/images/img.png");
+  top: 0;
+  let: 0;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: center;
+  opacity: 1;
+  transition: all 1s;
+  overflow: hidden;
+}
+
+.frontIMG.transition {
+  transform: scale(6);
+  opacity: 0;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.parent {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  float: left;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.fadeObject {
+  opacity: 0;
+  position: center;
+  transform: scale(0.2);
+  transition: all 1s;
+}
+
+.fadeObject.transition {
+  opacity: 1;
+  position: center;
+  transform: scale(1);
+}
+
 .wrapper {
   display: flex;
   width: 100%;
