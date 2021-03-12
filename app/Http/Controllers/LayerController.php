@@ -47,7 +47,7 @@ class LayerController extends Controller
         $updatedAt = $createdAt;
 
         if (Layer::where('name', $name)->exists()) {
-            return response()->json(['Error'=> 'Post \''.$name.'\' already exists.'])->setStatusCode(400);
+            return response()->json(['Error'=> 'Layer \''.$name.'\' already exists.'])->setStatusCode(400);
         }
 
         $newLayerObject = Layer::create([
@@ -59,9 +59,9 @@ class LayerController extends Controller
         ]);
 
         if ($newLayerObject->save()) {
-            return response()->json(['Message'=> 'Post \''.$name.'\' created!'])->setStatusCode(201);
+            return response()->json(['Message'=> 'Layer \''.$name.'\' created!'])->setStatusCode(201);
         } else {
-            return response()->json(['Error'=> 'Post \''.$name.'\' could not be created.'])->setStatusCode(400);
+            return response()->json(['Error'=> 'Layer \''.$name.'\' could not be created.'])->setStatusCode(400);
         }
     }
 
