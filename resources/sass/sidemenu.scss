@@ -1,0 +1,122 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    height: 100vh;
+
+    > * {
+        overflow-y: auto;
+    }
+}
+
+.sidemenu {
+    min-width: $sidebar-width;
+    max-width: $sidebar-width;
+    background: $sidebar-color;
+    color: #fff;
+    transition: all 0.3s;
+
+    .sidebar-header {
+        padding: 20px;
+        background: $sidebar-color-active;
+    }
+
+    .menu-item,
+    .menu-item:hover,
+    .menu-item:focus {
+        transition: all 0.3s;
+
+        > a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+
+    a.sidebar-toggle {
+        padding-right: 8px;
+
+        > i:before {
+            content: '\f0fe';
+        }
+
+        &[aria-expanded="true"] {
+            > i:before {
+                content: '\f146';
+            }
+        }
+    }
+
+    a[data-toggle="collapse"] {
+        position: relative;
+    }
+
+    ul.components {
+        padding: 20px 0;
+    }
+
+    ul.show {
+        background: $sidebar-color-active;
+    }
+
+    ul {
+        p {
+            color: #fff;
+            padding: 10px;
+        }
+
+        li {
+            > .menu-item {
+                font-size: 1.1em;
+                display: flex;
+
+                > a {
+                    padding: 8px 14px;
+                }
+
+                &:hover {
+                    color: #7386D5;
+                    background: #fff;
+                }
+
+                &.single > a {
+                    margin-left: 40px;
+                }
+            }
+        }
+
+        li.active {
+            > .menu-item {
+                color: #fff;
+                background: $sidebar-color-active;
+            }
+        }
+
+        ul {
+            padding-left: 18px !important;
+
+            .menu-item {
+                font-size: 0.9em !important;
+                background: $sidebar-color-active;
+            }
+        }
+    }
+
+    &.active {
+        margin-left: -$sidebar-width;
+    }
+}
+
+.content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+    .sidemenu {
+        margin-left: -$sidebar-width;
+    }
+    .sidemenu.active {
+        margin-left: 0;
+    }
+}
