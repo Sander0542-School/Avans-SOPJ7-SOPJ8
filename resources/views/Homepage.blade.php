@@ -9,15 +9,13 @@
 
 </head>
 
-<body>
+<x-map-layout>
 
 <div id="mapid"></div>
 
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
-</script>
-
-</body>
+</x-map-layout>
 
 </html>
 

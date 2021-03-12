@@ -3835,6 +3835,7 @@ __webpack_require__(/*! ./Homepage */ "./resources/js/Homepage.js");
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
 __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
+
 __webpack_require__(/*! ./sidemenu */ "./resources/js/sidemenu.js");
 
 /***/ }),

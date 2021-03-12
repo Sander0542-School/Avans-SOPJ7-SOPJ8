@@ -17068,6 +17068,8 @@ readers do not read off random characters that represent icons */
 #mapid {
   height: 101vh;
   width: 100%;
+}
+
 .wrapper {
   display: flex;
   width: 100%;
