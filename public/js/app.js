@@ -3799,19 +3799,26 @@ module.exports = {
 /***/ (() => {
 
 debugger;
-var mymap = L.map('mapid', {
+var map = L.map('mapid', {
   minZoom: 16,
   maxZoom: 18
 }).setView([52.1305, 6.4893], 16);
 var layerTemplate = "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
 var southWest = L.latLng(52.12506, 6.47332),
     northEast = L.latLng(52.13543, 6.50320),
-    bounds = mymap.getBounds();
-mymap.setMaxBounds(bounds);
+    bounds = map.getBounds();
+map.setMaxBounds(bounds);
 L.tileLayer(layerTemplate, {
   maxZoom: 18,
   minZoom: 16
-}).addTo(mymap);
+}).addTo(map);
+map.on({
+  resize: mapOnResize
+});
+$('mapid').on("mousedown", L.DomEvent.stopPropagation);
+
+function mapOnResize() {//fit bounds op nieuw zoomniveau
+}
 
 /***/ }),
 
