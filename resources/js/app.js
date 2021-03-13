@@ -1,9 +1,6 @@
 require('./bootstrap');
-require('./Homepage');
 require('alpinejs');
-require('leaflet');
-<<<<<<< Updated upstream
+
 require('./sidemenu');
-=======
+require('./subjectmap');
 require('./ScrollAnimationScript');
->>>>>>> Stashed changes

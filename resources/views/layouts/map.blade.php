@@ -22,9 +22,13 @@
         <main class="wrapper">
             <x-navigation.side-menu/>
             <div class="content">
-                <button onclick="toggleSideMenu()" class="btn btn-primary">Sidemenu</button>
-                
-                {{ $slot }}
+{{--                <div class="page-content">--}}
+                    {{ $slot }}
+{{--                </div>--}}
+
+{{--                <div class="sidemenu-control">--}}
+{{--                    <button onclick="toggleSideMenu()" class="btn btn-primary">Sidemenu</button>--}}
+{{--                </div>--}}
             </div>
         </main>
 

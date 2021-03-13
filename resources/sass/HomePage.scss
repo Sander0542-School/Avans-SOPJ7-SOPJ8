@@ -1,14 +1,12 @@
-#mapid  {
-    height: 101vh; width: 100%;
-}
-body, html {
+.leaflet-container {
+    width: 100%;
     height: 100%;
-    margin: 0;
 }
+
 .frontIMG {
     background-image: url("/images/img.png");
     top: 0;
-    let: 0;
+    left: 0;
     height: 100%;
 
     background-position: center;
@@ -20,12 +18,14 @@ body, html {
     overflow: hidden;
 
 }
+
 .frontIMG.transition {
     transform: scale(6);
     opacity: 0.0;
     animation-delay: 1s;
 
 }
+
 .parent {
     width: 100%;
     height: 100%;
@@ -35,7 +35,8 @@ body, html {
     display: inline-block;
     cursor: pointer;
 }
-.fadeObject{
+
+.fadeObject {
 
     opacity: 0;
     position: center;
@@ -43,7 +44,8 @@ body, html {
     transition: all 1s;
 
 }
-.fadeObject.transition{
+
+.fadeObject.transition {
     opacity: 1;
     position: center;
     transform: scale(1);
