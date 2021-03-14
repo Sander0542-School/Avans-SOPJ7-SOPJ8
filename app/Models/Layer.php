@@ -16,7 +16,7 @@ class Layer extends Model
 
     public function childLayers()
     {
-        return $this->hasManyThrough(Layer::class, LayerChoice::class, 'parent_layer_id', 'child_layer_id', 'id', 'id');
+        return $this->hasManyThrough(Layer::class, LayerChoice::class, 'parent_layer_id', 'id', 'id', 'child_layer_id');
     }
 
     public function parentLayer()
