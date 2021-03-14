@@ -2,34 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateLayerRequest;
 use App\Http\Resources\LayerResource;
 use App\Models\Layer;
 use http\Env\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class LayerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function index() {
+        return Layer::all();
     }
 
     /**
@@ -95,22 +82,39 @@ class LayerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        DB::table('layers')
+            ->where('slug', $slug)
+            ->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'content' => $request->text,
+                'updated_at' => Carbon::now()
+                ]);
+
+        $updatedLayer = Layer::where('slug', $slug)->firstOrFail();
+
+        return new LayerResource($updatedLayer);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $slug)
     {
-        //
+        $layerToDestroy = Layer::where('slug', $slug)->firstOrFail();
+
+        if ($layerToDestroy->delete()) {
+            return response()->json(['Message' => 'Layer \''.$slug.'\' has been deleted.'])->setStatusCode(200);
+        } else {
+            return response()->json(['Error' => 'Layer \''.$slug.'\' could not deleted.'])->setStatusCode(500);
+        }
     }
 }
