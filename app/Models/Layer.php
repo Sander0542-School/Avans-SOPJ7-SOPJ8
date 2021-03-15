@@ -9,7 +9,7 @@ class Layer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','slug','content','created_at','updated_at'];
+    protected $fillable = ['name','slug','content'];
 
     public function subject()
     {
