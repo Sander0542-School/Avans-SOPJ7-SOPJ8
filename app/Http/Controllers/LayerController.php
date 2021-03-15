@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateLayerRequest;
 use App\Http\Resources\LayerResource;
 use App\Models\Layer;
 use http\Env\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class LayerController extends Controller
@@ -21,14 +21,19 @@ class LayerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Illuminate\Http\Request $request
      * @return LayerResource
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'exists:layers,name',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:layers,name',
+            'body' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()])->setStatusCode(400);
+        }
 
         $newLayerObject = Layer::create([
             'name' => $request->name,
@@ -39,7 +44,7 @@ class LayerController extends Controller
         if ($newLayerObject->save()) {
             return new LayerResource($newLayerObject);
         } else {
-            return response()->json(['error' => 'Layer \''.$request->name.'\' could not be created.'])->setStatusCode(400);
+            return response()->json(['error' => 'Layer \''.$request->name.'\' could not be created.'])->setStatusCode(500);
         }
     }
 
@@ -86,11 +91,7 @@ class LayerController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        DB::table('layers')->where('slug', $slug)->update([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'content' => $request->body,
-        ]);
+        DB::table('layers')->where('slug', $slug)->update($request->all());
 
         $updatedLayer = Layer::where('slug', $slug)->first();
 
