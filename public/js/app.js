@@ -3802,6 +3802,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
+__webpack_require__(/*! ./sidemenu */ "./resources/js/sidemenu.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -3849,6 +3851,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/sidemenu.js":
+/*!**********************************!*\
+  !*** ./resources/js/sidemenu.js ***!
+  \**********************************/
+/***/ (() => {
+
+window.toggleSideMenu = function () {
+  document.querySelector('nav.sidemenu').classList.toggle('active');
+};
 
 /***/ }),
 

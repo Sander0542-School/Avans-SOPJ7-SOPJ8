@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'Samen land',
             'Rustige weide',
             'Steile helling',
-            'speelweide',
+            'Speelweide',
         ],
         'Gebied 2' => [
             'Rechte pad',
