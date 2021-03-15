@@ -4,6 +4,7 @@ namespace App\View\Components\Navigation;
 
 use App\Models\Layer;
 use App\Models\Subject;
+use Cache;
 use Illuminate\View\Component;
 
 class SideMenu extends Component
@@ -17,7 +18,7 @@ class SideMenu extends Component
      */
     public function __construct()
     {
-        $this->menu = $this->buildMenu();
+        $this->menu = $this->getMenu();
     }
 
     /**
@@ -27,8 +28,20 @@ class SideMenu extends Component
      */
     public function render()
     {
-
         return view('components.navigation.side-menu');
+    }
+
+    private function getMenu()
+    {
+        $menu = Cache::get('sidemenu');
+
+        if ($menu == null) {
+            $menu = $this->buildMenu();
+
+            Cache::put('sidemenu', $menu, 3600);
+        }
+
+        return $menu;
     }
 
     private function buildMenu()
