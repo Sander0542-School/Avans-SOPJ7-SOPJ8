@@ -18,5 +18,5 @@ Leaflet.tileLayer(layerTemplate, {
 //     minZoom: 12
 // }).addTo(StamenMap);
 
-window.subjectMap = StamenMap;
+window.subjectMap = map;
 
