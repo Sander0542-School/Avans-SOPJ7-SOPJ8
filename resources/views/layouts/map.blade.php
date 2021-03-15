@@ -16,14 +16,12 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="bg-light">
-        <x-jet-banner/>
-
         <!-- Page Content -->
         <main class="wrapper">
             <x-navigation.side-menu/>
             <div class="content">
-                <button onclick="toggleSideMenu()" class="btn btn-primary">Sidemenu</button>
-                
+                <button onclick="toggleSideMenu()" class="btn btn-link btn-sm text-black-50" style="outline: none; box-shadow: none"><i class="fas fa-3x fa-bars"></i></button>
+
                 {{ $slot }}
             </div>
         </main>
