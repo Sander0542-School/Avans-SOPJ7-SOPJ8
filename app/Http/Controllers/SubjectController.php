@@ -96,19 +96,17 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $subject = Subject::findOrFail($id);
+        DB::table('subjects')
+            ->where('id', $id)
+            ->update([
+                'domain_id' => $request->domain_id,
+                'name' => $request->name,
+                'updated_at' => Carbon::now()
+            ]);
 
-        $subject->id = $request->id;
-        $subject->domain_id = $request->domain_id;
-        $subject->name = $request->name;
-        $subject->created_at = $request->created_at;
-        $subject->updated_at = $request->updated_at;
+        $updatedSubject = Subject::where('id', $id)->firstOrFail();
 
-        if ($subject->save()) {
-            return response()->json(['Message' => 'Subject with id: \''.$id.'\' updated!'])->setStatusCode(200);
-        } else {
-            return response()->json(['Error' => 'Subject with id: \''.$id.'\' could not be updated.'])->setStatusCode(400);
-        }
+        return new LayerResource($updatedSubject);
     }
 
     /**
@@ -124,7 +122,7 @@ class SubjectController extends Controller
         if ($subject->delete()) {
             return response()->json(['Message' => 'Subject with id: \''.$id.'\' deleted!'])->setStatusCode(200);
         } else {
-            return response()->json(['Error' => 'Subject with id: \''.$id.'\' could not be deleted.'])->setStatusCode(400);
+            return response()->json(['Error' => 'Subject with id: \''.$id.'\' could not be deleted.'])->setStatusCode(500);
         }
     }
 }
