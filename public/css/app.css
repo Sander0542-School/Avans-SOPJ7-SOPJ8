@@ -17070,6 +17070,10 @@ readers do not read off random characters that represent icons */
   height: 100%;
 }
 
+#mapid {
+  cursor: default;
+}
+
 .frontIMG {
   background-image: url("/images/img.png");
   top: 0;
