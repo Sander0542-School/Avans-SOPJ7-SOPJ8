@@ -4,7 +4,6 @@ document.addEventListener('keydown', function(event){
     {
         let frontImage = document.querySelector(".frontIMG");
         let backImage = document.querySelector(".fadeObject");
-        //frontImage.style.display = 'none';
         frontImage.classList.toggle('transition');
         backImage.classList.toggle('transition');
 

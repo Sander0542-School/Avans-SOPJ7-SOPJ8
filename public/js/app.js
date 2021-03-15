@@ -3801,8 +3801,7 @@ module.exports = {
 document.addEventListener('keydown', function (event) {
   if (event.keyCode == 38) {
     var frontImage = document.querySelector(".frontIMG");
-    var backImage = document.querySelector(".fadeObject"); //frontImage.style.display = 'none';
-
+    var backImage = document.querySelector(".fadeObject");
     frontImage.classList.toggle('transition');
     backImage.classList.toggle('transition');
   }
@@ -3920,7 +3919,7 @@ Leaflet.tileLayer(layerTemplate, {
 //     minZoom: 12
 // }).addTo(StamenMap);
 
-window.subjectMap = StamenMap;
+window.subjectMap = map;
 
 /***/ }),
 
