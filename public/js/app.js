@@ -3792,24 +3792,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/js/ScrollAnimationScript.js":
-/*!***********************************************!*\
-  !*** ./resources/js/ScrollAnimationScript.js ***!
-  \***********************************************/
-/***/ (() => {
-
-document.addEventListener('keydown', function (event) {
-  if (event.keyCode === 38) {
-    // const swapperContent = document.querySelector(".frontIMG");
-    var swapperContent = document.querySelector(".swapper-content");
-    var swapperMap = document.querySelector(".swapper-map");
-    swapperContent.classList.toggle('transition');
-    swapperMap.classList.toggle('transition');
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -3824,7 +3806,7 @@ __webpack_require__(/*! ./sidemenu */ "./resources/js/sidemenu.js");
 
 __webpack_require__(/*! ./subjectmap */ "./resources/js/subjectmap.js");
 
-__webpack_require__(/*! ./ScrollAnimationScript */ "./resources/js/ScrollAnimationScript.js");
+__webpack_require__(/*! ./swapper */ "./resources/js/swapper.js");
 
 /***/ }),
 
@@ -3913,6 +3895,24 @@ Leaflet.tileLayer(layerTemplate, {
   minZoom: 16
 }).addTo(map);
 window.subjectMap = Map;
+
+/***/ }),
+
+/***/ "./resources/js/swapper.js":
+/*!*********************************!*\
+  !*** ./resources/js/swapper.js ***!
+  \*********************************/
+/***/ (() => {
+
+document.addEventListener('keydown', function (event) {
+  if (event.keyCode === 38) {
+    // const swapperContent = document.querySelector(".frontIMG");
+    var swapperContent = document.querySelector(".swapper-content");
+    var swapperMap = document.querySelector(".swapper-map");
+    swapperContent.classList.toggle('transition');
+    swapperMap.classList.toggle('transition');
+  }
+});
 
 /***/ }),
 
