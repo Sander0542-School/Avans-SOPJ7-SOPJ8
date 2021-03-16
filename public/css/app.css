@@ -17071,29 +17071,29 @@ readers do not read off random characters that represent icons */
   cursor: default;
 }
 
-.home-swapper {
+.swapper {
   width: 100%;
   height: 100%;
 }
-.home-swapper > * {
+.swapper > * {
   width: 100%;
   height: 100%;
   position: absolute;
   transition: all 1s;
 }
-.home-swapper .swapper-content {
+.swapper .swapper-content {
   opacity: 0;
   transform: scale(0.2);
 }
-.home-swapper .swapper-content.transition {
+.swapper .swapper-content.transition {
   transform: scale(1);
   opacity: 1;
 }
-.home-swapper .swapper-map {
+.swapper .swapper-map {
   opacity: 1;
   transform: scale(1);
 }
-.home-swapper .swapper-map.transition {
+.swapper .swapper-map.transition {
   opacity: 0;
   transform: scale(0.2);
 }

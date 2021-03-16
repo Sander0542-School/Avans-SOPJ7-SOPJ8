@@ -1,5 +1,5 @@
 <x-map-layout>
-    <div class="home-swapper">
+    <div class="swapper">
         <div class="swapper-content">
             <div class="frontIMG"></div>
         </div>
