@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Layer;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class LayerFactory extends Factory
 {
@@ -21,9 +22,13 @@ class LayerFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->words(3, true);
+        $slug = Str::slug($name, '-');
+
         return [
-            'name' => $this->faker->words(3, true),
-            'content' => $this->faker->realText()
+            'name' => $name,
+            'content' => $this->faker->realText(),
+            'slug' => $slug
         ];
     }
 }

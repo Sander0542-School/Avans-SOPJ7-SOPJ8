@@ -9,6 +9,8 @@ class Layer extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','slug','content'];
+
     public function subject()
     {
         return $this->hasOneThrough(Subject::class, SubjectChoice::class);
