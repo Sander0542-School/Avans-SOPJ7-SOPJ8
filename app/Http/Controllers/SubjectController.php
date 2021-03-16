@@ -17,12 +17,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjectArray =[];
-        foreach (Subject::all() as $subject) {
-             array_push($subjectArray, ['id'=>$subject->id, 'name'=>$subject->name]);
-        }
-
-        return response()->json($subjectArray);
+        return SubjectResource::collection(Subject::all());
     }
 
     /**
