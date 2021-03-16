@@ -3897,29 +3897,21 @@ window.toggleSideMenu = function () {
 /***/ (() => {
 
 var layerTemplate = "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
-var southWest = L.latLng(52.12606258692764, 6.474997008464673),
-    northEast = L.latLng(52.134743339394106, 6.501807460723494),
+var southWest = L.latLng(52.112274861603105, 6.581252579235523),
+    northEast = L.latLng(52.122157941753734, 6.611493785039989),
     bounds = L.latLngBounds(southWest, northEast);
 var map = Leaflet.map('mapid', {
   minZoom: 16,
   maxZoom: 19,
   zoomControl: false,
-  maxBounds: bounds
-}).setView([52.1305, 6.4893], 16);
-map.scrollWheelZoom.disable();
+  maxBounds: bounds,
+  attributionControl: false
+}).setView([52.11662944833734, 6.595218386682539], 16);
 Leaflet.tileLayer(layerTemplate, {
   maxZoom: 19,
   minZoom: 16
-}).addTo(map); // const StamenTemplate = "http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg";
-// const StamenMap = Leaflet.map('mapid', {minZoom: 12, maxZoom: 14, zoomControl: false}).setView([41.055408357430274, -95.88192848817997],12)
-// StamenMap.zoomControl = false;
-// StamenMap.dragging.disable();
-// Leaflet.tileLayer(StamenTemplate, {
-//     maxZoom: 14,
-//     minZoom: 12
-// }).addTo(StamenMap);
-
-window.subjectMap = map;
+}).addTo(map);
+window.subjectMap = Map;
 
 /***/ }),
 
