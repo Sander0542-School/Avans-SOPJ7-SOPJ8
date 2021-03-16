@@ -10,15 +10,23 @@
 }
 
 .sidemenu {
-    min-width: $sidebar-width;
-    max-width: $sidebar-width;
-    background: $sidebar-color;
+    min-width: $sidemenu-width;
+    max-width: $sidemenu-width;
+    background: $sidemenu-color;
     color: #fff;
     transition: all 0.3s;
 
-    .sidebar-header {
+    .sidemenu-header {
         padding: 20px;
-        background: $sidebar-color-active;
+        background: $sidemenu-color-active;
+    }
+
+    .sidemenu-control {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        margin-left: $sidemenu-width;
+        z-index: 1001;
     }
 
     .menu-item,
@@ -32,7 +40,7 @@
         }
     }
 
-    a.sidebar-toggle {
+    a.sidemenu-toggle {
         padding-right: 8px;
 
         > i:before {
@@ -55,7 +63,7 @@
     }
 
     ul.show {
-        background: $sidebar-color-active;
+        background: $sidemenu-color-active;
     }
 
     ul {
@@ -87,7 +95,7 @@
         li.active {
             > .menu-item {
                 color: #fff;
-                background: $sidebar-color-active;
+                background: $sidemenu-color-active;
             }
         }
 
@@ -96,27 +104,46 @@
 
             .menu-item {
                 font-size: 0.9em !important;
-                background: $sidebar-color-active;
+                background: $sidemenu-color-active;
             }
         }
     }
 
     &.active {
-        margin-left: -$sidebar-width;
+        margin-left: -$sidemenu-width;
+
+        .sidemenu-control {
+            margin-left: 0;
+        }
     }
 }
 
 .content {
     width: 100%;
-    padding: 20px;
     min-height: 100vh;
+    //position: relative;
+    //display: contents;
+    //
+    //.sidemenu-control {
+    //    position: relative;
+    //    left: 16px;
+    //    top: 16px;
+    //    z-index: 9999;
+    //}
+    //
+    //.page-content {
+    //    width: 100%;
+    //    height: 100%;
+    //    position: absolute;
+    //}
 }
 
 @media (max-width: 768px) {
     .sidemenu {
-        margin-left: -$sidebar-width;
-    }
-    .sidemenu.active {
-        margin-left: 0;
+        margin-left: -$sidemenu-width;
+
+        &.active {
+            margin-left: 0;
+        }
     }
 }
