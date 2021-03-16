@@ -5,6 +5,5 @@ document.addEventListener('keydown', function (event) {
 
         frontImage.classList.toggle('transition');
         backImage.classList.toggle('transition');
-
     }
 });
