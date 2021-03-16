@@ -17075,27 +17075,17 @@ readers do not read off random characters that represent icons */
   width: 100%;
   height: 100%;
 }
-.swapper > * {
+.swapper > .swapper-content, .swapper > .swapper-map {
   width: 100%;
   height: 100%;
   position: absolute;
   transition: all 1s;
-}
-.swapper .swapper-content {
   opacity: 0;
-  transform: scale(0.2);
+  transform: scale(0);
 }
-.swapper .swapper-content.transition {
+.swapper > .swapper-content.swapper-active, .swapper > .swapper-map.swapper-active {
   transform: scale(1);
   opacity: 1;
-}
-.swapper .swapper-map {
-  opacity: 1;
-  transform: scale(1);
-}
-.swapper .swapper-map.transition {
-  opacity: 0;
-  transform: scale(0.2);
 }
 
 .frontIMG {

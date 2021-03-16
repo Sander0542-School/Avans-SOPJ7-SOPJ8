@@ -1,4 +1,4 @@
-$swapper-transform-off: scale(0.2);
+$swapper-transform-off: scale(0);
 $swapper-transform-on: scale(1);
 $swapper-transition: all 1s;
 
@@ -6,30 +6,18 @@ $swapper-transition: all 1s;
     width: 100%;
     height: 100%;
 
-    > * {
+    > .swapper-content, > .swapper-map {
         width: 100%;
         height: 100%;
         position: absolute;
         transition: $swapper-transition;
-    }
 
-    .swapper-content {
         opacity: 0;
         transform: $swapper-transform-off;
 
-        &.transition {
+        &.swapper-active {
             transform: $swapper-transform-on;
             opacity: 1;
-        }
-    }
-
-    .swapper-map {
-        opacity: 1;
-        transform: $swapper-transform-on;
-
-        &.transition {
-            opacity: 0;
-            transform: $swapper-transform-off;
         }
     }
 }
