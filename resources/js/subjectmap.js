@@ -16,4 +16,4 @@ Leaflet.tileLayer(layerTemplate, {
     minZoom: 16
 }).addTo(map);
 
-window.subjectMap = Map;
+window.subjectMap = map;
