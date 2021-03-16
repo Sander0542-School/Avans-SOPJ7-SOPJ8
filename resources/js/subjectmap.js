@@ -10,6 +10,7 @@ const map = Leaflet.map('subjectmap', {
     maxBounds: bounds,
     attributionControl: false
 }).setView([52.11662944833734, 6.595218386682539], 16);
+
 Leaflet.tileLayer(layerTemplate, {
     maxZoom: 19,
     minZoom: 16
