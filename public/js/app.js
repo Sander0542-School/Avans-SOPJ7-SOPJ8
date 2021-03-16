@@ -3800,10 +3800,11 @@ module.exports = {
 
 document.addEventListener('keydown', function (event) {
   if (event.keyCode === 38) {
-    var frontImage = document.querySelector(".frontIMG");
-    var backImage = document.querySelector(".fadeObject");
-    frontImage.classList.toggle('transition');
-    backImage.classList.toggle('transition');
+    // const swapperContent = document.querySelector(".frontIMG");
+    var swapperContent = document.querySelector(".swapper-content");
+    var swapperMap = document.querySelector(".swapper-map");
+    swapperContent.classList.toggle('transition');
+    swapperMap.classList.toggle('transition');
   }
 });
 

@@ -17071,45 +17071,40 @@ readers do not read off random characters that represent icons */
   cursor: default;
 }
 
-.parent {
+.home-swapper {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+}
+.home-swapper > * {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  float: left;
-  display: inline-block;
+  transition: all 1s;
+}
+.home-swapper .swapper-content {
+  opacity: 0;
+  transform: scale(0.2);
+}
+.home-swapper .swapper-content.transition {
+  transform: scale(1);
+  opacity: 1;
+}
+.home-swapper .swapper-map {
+  opacity: 1;
+  transform: scale(1);
+}
+.home-swapper .swapper-map.transition {
+  opacity: 0;
+  transform: scale(0.2);
 }
 
 .frontIMG {
-  background-image: url("/images/img.png");
+  width: 100%;
   height: 100%;
+  background-image: url("/images/img.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  position: center;
-  opacity: 0;
-  transition: all 1s;
-  overflow: hidden;
-  pointer-events: none;
-  transform: scale(6);
-}
-.frontIMG.transition {
-  transform: scale(1);
-  opacity: 1;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
-}
-
-.fadeObject {
-  opacity: 1;
-  position: center;
-  transform: scale(1);
-  transition: all 1s;
-}
-.fadeObject.transition {
-  opacity: 0;
-  position: center;
-  transform: scale(0.2);
 }
 
 .wrapper {

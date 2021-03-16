@@ -1,9 +1,10 @@
 document.addEventListener('keydown', function (event) {
     if (event.keyCode === 38) {
-        let frontImage = document.querySelector(".frontIMG");
-        let backImage = document.querySelector(".fadeObject");
+        // const swapperContent = document.querySelector(".frontIMG");
+        const swapperContent = document.querySelector(".swapper-content");
+        const swapperMap = document.querySelector(".swapper-map");
 
-        frontImage.classList.toggle('transition');
-        backImage.classList.toggle('transition');
+        swapperContent.classList.toggle('transition');
+        swapperMap.classList.toggle('transition');
     }
 });

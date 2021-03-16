@@ -1,6 +1,8 @@
 <x-map-layout>
-    <div class="parent">
-        <div class="frontIMG"></div>
+    <div class="home-swapper">
+        <div class="swapper-content">
+            <div class="frontIMG"></div>
+        </div>
+        <div id="subjectmap" class="swapper-map"></div>
     </div>
-    <div id="subjectmap" class="fadeObject"></div>
 </x-map-layout>
