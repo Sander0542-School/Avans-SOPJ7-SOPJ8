@@ -1,7 +1,6 @@
-<x-map-layout >
+<x-map-layout>
+    <div id="subjectmap" class="fadeObject"></div>
     <div class="parent">
         <div class="frontIMG"></div>
     </div>
-    <div id="mapid" class="fadeObject"></div>
-
 </x-map-layout>

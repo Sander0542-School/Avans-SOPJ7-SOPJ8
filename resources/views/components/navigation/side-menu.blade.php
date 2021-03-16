@@ -8,8 +8,4 @@
             <x-navigation.side-menu-item :menu-item="$menuItem" :first-layer="true"/>
         @endforeach
     </ul>
-
-    <div class="sidemenu-control">
-        <button onclick="toggleSideMenu()" class="btn btn-primary">Sidemenu</button>
-    </div>
 </nav>

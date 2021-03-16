@@ -1,16 +1,21 @@
 .leaflet-container {
     width: 100%;
     height: 100%;
+    cursor: default;
 }
 
-#mapid  {
-    cursor: default;
+.parent {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    float: left;
+    display: inline-block;
 }
 
 .frontIMG {
     background-image: url("/images/img.png");
     height: 100%;
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -21,37 +26,24 @@
     pointer-events: none;
     transform: scale(6);
 
-}
+    &.transition {
+        transform: scale(1);
+        opacity: 1.0;
+        animation-delay: 1s;
 
-.frontIMG.transition {
-    transform: scale(1);
-    opacity: 1.0;
-    animation-delay: 1s;
-
-}
-
-.parent {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    float: left;
-    display: inline-block;
-    cursor: pointer;
+    }
 }
 
 .fadeObject {
-
     opacity: 1;
     position: center;
     transform: scale(1);
     transition: all 1s;
 
-}
+    &.transition {
+        opacity: 0;
+        position: center;
+        transform: scale(0.2);
 
-.fadeObject.transition {
-    opacity: 0;
-    position: center;
-    transform: scale(0.2);
-
+    }
 }

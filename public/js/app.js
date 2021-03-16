@@ -3799,7 +3799,7 @@ module.exports = {
 /***/ (() => {
 
 document.addEventListener('keydown', function (event) {
-  if (event.keyCode == 38) {
+  if (event.keyCode === 38) {
     var frontImage = document.querySelector(".frontIMG");
     var backImage = document.querySelector(".fadeObject");
     frontImage.classList.toggle('transition');
@@ -3900,7 +3900,7 @@ var layerTemplate = "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
 var southWest = L.latLng(52.112274861603105, 6.581252579235523),
     northEast = L.latLng(52.122157941753734, 6.611493785039989),
     bounds = L.latLngBounds(southWest, northEast);
-var map = Leaflet.map('mapid', {
+var map = Leaflet.map('subjectmap', {
   minZoom: 16,
   maxZoom: 19,
   zoomControl: false,

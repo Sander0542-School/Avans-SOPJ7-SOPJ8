@@ -1,9 +1,5 @@
-document.addEventListener('keydown', function(event){
-
-
-
-    if(event.keyCode == 38)
-    {
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode === 38) {
         let frontImage = document.querySelector(".frontIMG");
         let backImage = document.querySelector(".fadeObject");
 
@@ -11,4 +7,4 @@ document.addEventListener('keydown', function(event){
         backImage.classList.toggle('transition');
 
     }
-} );
+});
