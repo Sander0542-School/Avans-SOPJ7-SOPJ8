@@ -21,7 +21,7 @@ window.subjectMap = map;
 getData();
 
 async function getData(){
-    var data = fetch('/api/subjects').then(function(response){
+    let  data = fetch('/api/subjects').then(function(response){
         return response.json();
     }).then(function (obj){
         console.log(obj['data']);
@@ -32,7 +32,7 @@ async function getData(){
 function placeMarkers(obj){
     obj.forEach(function(item){
         if(item.lon != null && item.lat != null){
-            var marker = new L.marker([item.lon, item.lat], {
+            let  marker = new L.marker([item.lon, item.lat], {
                 icon: new L.DivIcon({
                     className: 'my-div-icon',
                     html: '<div>'+
