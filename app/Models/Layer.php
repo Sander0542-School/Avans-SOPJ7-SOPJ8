@@ -23,6 +23,6 @@ class Layer extends Model
 
     public function parentLayer()
     {
-        return $this->hasOneThrough(Layer::class, LayerChoice::class, 'child_layer_id', 'parent_layer_id', 'id', 'id');
+        return $this->hasOneThrough(Layer::class, LayerChoice::class, 'child_layer_id', 'id', 'id', 'parent_layer_id');
     }
 }
