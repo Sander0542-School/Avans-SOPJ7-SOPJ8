@@ -17,6 +17,8 @@ class CreateSubjectsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('domain_id');
             $table->string('name');
+            $table->decimal('lon', 9, 6);
+            $table->decimal('lat', 8, 6);
             $table->timestamps();
 
             $table->foreign('domain_id')->references('id')->on('domains');
