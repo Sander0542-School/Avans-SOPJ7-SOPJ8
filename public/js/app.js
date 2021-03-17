@@ -3808,6 +3808,8 @@ __webpack_require__(/*! ./subjectmap */ "./resources/js/subjectmap.js");
 
 __webpack_require__(/*! ./swapper */ "./resources/js/swapper.js");
 
+__webpack_require__(/*! ./layer */ "./resources/js/layer.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -3861,14 +3863,56 @@ window.Leaflet = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist
 
 /***/ }),
 
+/***/ "./resources/js/layer.js":
+/*!*******************************!*\
+  !*** ./resources/js/layer.js ***!
+  \*******************************/
+/***/ (() => {
+
+window.Layer = {
+  load: function load(layerSlug) {
+    if (document.querySelector('.layer-content')) {
+      window.location.hash = layerSlug;
+      Livewire.emit('layerChanged', layerSlug);
+      window.Swapper.loadContent();
+      window.SideMenu.close();
+    }
+  }
+};
+
+if (window.location.hash) {
+  var layerSlug = window.location.hash.substr(1);
+  window.Swapper.loadContent();
+  document.addEventListener("DOMContentLoaded", function () {
+    window.Layer.load(layerSlug);
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/sidemenu.js":
 /*!**********************************!*\
   !*** ./resources/js/sidemenu.js ***!
   \**********************************/
 /***/ (() => {
 
-window.toggleSideMenu = function () {
-  document.querySelector('nav.sidemenu').classList.toggle('active');
+var sideMenu = document.querySelector('nav.sidemenu');
+window.SideMenu = {
+  toggle: function toggle() {
+    if (sideMenu) {
+      sideMenu.classList.toggle('active');
+    }
+  },
+  open: function open() {
+    if (sideMenu) {
+      sideMenu.classList.remove('active');
+    }
+  },
+  close: function close() {
+    if (sideMenu) {
+      sideMenu.classList.add('active');
+    }
+  }
 };
 
 /***/ }),
@@ -3894,7 +3938,7 @@ Leaflet.tileLayer(layerTemplate, {
   maxZoom: 19,
   minZoom: 16
 }).addTo(map);
-window.subjectMap = Map;
+window.subjectMap = map;
 
 /***/ }),
 
@@ -3921,16 +3965,22 @@ var swapperContent = document.querySelector(".swapper .swapper-content");
 var swapperMap = document.querySelector(".swapper .swapper-map");
 window.Swapper = {
   toggle: function toggle() {
-    swapperMap.classList.toggle('swapper-active');
-    swapperContent.classList.toggle('swapper-active');
+    if (swapperContent && swapperMap) {
+      swapperMap.classList.toggle('swapper-active');
+      swapperContent.classList.toggle('swapper-active');
+    }
   },
   loadContent: function loadContent() {
-    swapperMap.classList.add('swapper-active');
-    swapperContent.classList.remove('swapper-active');
+    if (swapperContent && swapperMap) {
+      swapperMap.classList.remove('swapper-active');
+      swapperContent.classList.add('swapper-active');
+    }
   },
   loadMap: function loadMap() {
-    swapperMap.classList.remove('swapper-active');
-    swapperContent.classList.add('swapper-active');
+    if (swapperContent && swapperMap) {
+      swapperMap.classList.add('swapper-active');
+      swapperContent.classList.remove('swapper-active');
+    }
   }
 };
 
