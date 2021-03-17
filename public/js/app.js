@@ -3792,23 +3792,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/js/ScrollAnimationScript.js":
-/*!***********************************************!*\
-  !*** ./resources/js/ScrollAnimationScript.js ***!
-  \***********************************************/
-/***/ (() => {
-
-document.addEventListener('keydown', function (event) {
-  if (event.keyCode == 38) {
-    var frontImage = document.querySelector(".frontIMG");
-    var backImage = document.querySelector(".fadeObject");
-    frontImage.classList.toggle('transition');
-    backImage.classList.toggle('transition');
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -3823,7 +3806,7 @@ __webpack_require__(/*! ./sidemenu */ "./resources/js/sidemenu.js");
 
 __webpack_require__(/*! ./subjectmap */ "./resources/js/subjectmap.js");
 
-__webpack_require__(/*! ./ScrollAnimationScript */ "./resources/js/ScrollAnimationScript.js");
+__webpack_require__(/*! ./swapper */ "./resources/js/swapper.js");
 
 /***/ }),
 
@@ -3900,7 +3883,7 @@ var layerTemplate = "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
 var southWest = L.latLng(52.112274861603105, 6.581252579235523),
     northEast = L.latLng(52.122157941753734, 6.611493785039989),
     bounds = L.latLngBounds(southWest, northEast);
-var map = Leaflet.map('mapid', {
+var map = Leaflet.map('subjectmap', {
   minZoom: 16,
   maxZoom: 19,
   zoomControl: false,
@@ -3912,6 +3895,44 @@ Leaflet.tileLayer(layerTemplate, {
   minZoom: 16
 }).addTo(map);
 window.subjectMap = Map;
+
+/***/ }),
+
+/***/ "./resources/js/swapper.js":
+/*!*********************************!*\
+  !*** ./resources/js/swapper.js ***!
+  \*********************************/
+/***/ (() => {
+
+document.addEventListener('keydown', function (event) {
+  if (event.keyCode === 38) {
+    window.Swapper.toggle();
+  }
+
+  if (event.keyCode === 37) {
+    window.Swapper.loadContent();
+  }
+
+  if (event.keyCode === 39) {
+    window.Swapper.loadMap();
+  }
+});
+var swapperContent = document.querySelector(".swapper .swapper-content");
+var swapperMap = document.querySelector(".swapper .swapper-map");
+window.Swapper = {
+  toggle: function toggle() {
+    swapperMap.classList.toggle('swapper-active');
+    swapperContent.classList.toggle('swapper-active');
+  },
+  loadContent: function loadContent() {
+    swapperMap.classList.add('swapper-active');
+    swapperContent.classList.remove('swapper-active');
+  },
+  loadMap: function loadMap() {
+    swapperMap.classList.remove('swapper-active');
+    swapperContent.classList.add('swapper-active');
+  }
+};
 
 /***/ }),
 

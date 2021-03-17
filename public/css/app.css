@@ -17068,54 +17068,33 @@ readers do not read off random characters that represent icons */
 .leaflet-container {
   width: 100%;
   height: 100%;
-}
-
-#mapid {
   cursor: default;
 }
 
-.frontIMG {
-  background-image: url("/images/img.png");
+.swapper {
+  width: 100%;
   height: 100%;
+}
+.swapper > .swapper-content, .swapper > .swapper-map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 1s;
+  opacity: 0;
+  transform: scale(0);
+}
+.swapper > .swapper-content.swapper-active, .swapper > .swapper-map.swapper-active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.frontIMG {
+  width: 100%;
+  height: 100%;
+  background-image: url("/images/img.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  position: center;
-  opacity: 0;
-  transition: all 1s;
-  overflow: hidden;
-  pointer-events: none;
-  transform: scale(6);
-}
-
-.frontIMG.transition {
-  transform: scale(1);
-  opacity: 1;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
-}
-
-.parent {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: absolute;
-  float: left;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.fadeObject {
-  opacity: 1;
-  position: center;
-  transform: scale(1);
-  transition: all 1s;
-}
-
-.fadeObject.transition {
-  opacity: 0;
-  position: center;
-  transform: scale(0.2);
 }
 
 .wrapper {
@@ -17129,6 +17108,7 @@ readers do not read off random characters that represent icons */
 }
 
 .sidemenu {
+  z-index: 1001;
   min-width: 300px;
   max-width: 300px;
   background: #7386D5;
@@ -17138,13 +17118,6 @@ readers do not read off random characters that represent icons */
 .sidemenu .sidemenu-header {
   padding: 20px;
   background: #6d7fcc;
-}
-.sidemenu .sidemenu-control {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  margin-left: 300px;
-  z-index: 1001;
 }
 .sidemenu .menu-item,
 .sidemenu .menu-item:hover,
@@ -17214,6 +17187,19 @@ readers do not read off random characters that represent icons */
 .content {
   width: 100%;
   min-height: 100vh;
+  position: relative;
+  display: contents;
+}
+.content .sidemenu-control {
+  position: relative;
+  margin: 12px;
+  z-index: 1001;
+}
+.content .page-content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
 }
 
 @media (max-width: 768px) {
