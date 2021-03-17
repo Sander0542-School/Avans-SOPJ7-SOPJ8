@@ -38,6 +38,7 @@ Homestead.json
 .idea/**/contentModel.xml
 
 # Sensitive or high-churn files
+.idea/**/commandlinetools/
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
