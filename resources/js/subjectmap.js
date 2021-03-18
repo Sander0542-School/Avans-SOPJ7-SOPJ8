@@ -36,7 +36,7 @@ function placeMarkers(obj){
                 icon: new L.DivIcon({
                     className: 'my-div-icon',
                     html: '<div>'+
-                        '<img class="my-div-image" width="65" height="80" src="\images\MarkerImage.png"/>'+
+                        '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>'+
                         '<button class="btn btn-primary" style="text-align: center;">'+item.name+'</button>'+
                         '</div>'
                 })

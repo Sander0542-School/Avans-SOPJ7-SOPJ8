@@ -17111,13 +17111,13 @@ readers do not read off random characters that represent icons */
   z-index: 1001;
   min-width: 300px;
   max-width: 300px;
-  background: #7386D5;
+  background: #388e3c;
   color: #fff;
   transition: all 0.3s;
 }
 .sidemenu .sidemenu-header {
   padding: 20px;
-  background: #6d7fcc;
+  background: #2E7D32;
 }
 .sidemenu .menu-item,
 .sidemenu .menu-item:hover,
@@ -17146,7 +17146,7 @@ readers do not read off random characters that represent icons */
   padding: 20px 0;
 }
 .sidemenu ul.show {
-  background: #6d7fcc;
+  background: #2E7D32;
 }
 .sidemenu ul p {
   color: #fff;
@@ -17168,14 +17168,14 @@ readers do not read off random characters that represent icons */
 }
 .sidemenu ul li.active > .menu-item {
   color: #fff;
-  background: #6d7fcc;
+  background: #2E7D32;
 }
 .sidemenu ul ul {
   padding-left: 18px !important;
 }
 .sidemenu ul ul .menu-item {
   font-size: 0.9em !important;
-  background: #6d7fcc;
+  background: #2E7D32;
 }
 .sidemenu.active {
   margin-left: -300px;

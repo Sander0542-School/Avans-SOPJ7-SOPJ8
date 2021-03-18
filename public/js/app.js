@@ -3905,7 +3905,7 @@ var southWest = L.latLng(52.109024, 6.573585),
     northEast = L.latLng(52.123450, 6.616385),
     bounds = L.latLngBounds(southWest, northEast);
 var map = Leaflet.map('subjectmap', {
-  minZoom: 10,
+  minZoom: 16,
   maxZoom: 19,
   zoomControl: false,
   maxBounds: bounds,
@@ -3952,7 +3952,7 @@ function placeMarkers(obj) {
       var marker = new L.marker([item.lon, item.lat], {
         icon: new L.DivIcon({
           className: 'my-div-icon',
-          html: '<div>' + '<img class="my-div-image" width="65" height="80" src="https://www.stichting-ranja.nl/wp-content/uploads/Boer.png"/>' + '<button class="btn btn-primary" style="text-align: center;">' + item.name + '</button>' + '</div>'
+          html: '<div>' + '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' + '<button class="btn btn-primary" style="text-align: center;">' + item.name + '</button>' + '</div>'
         })
       });
       marker.addTo(map);
