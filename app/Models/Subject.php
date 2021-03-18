@@ -12,6 +12,8 @@ class Subject extends Model
     protected $fillable = [
         'domain_id',
         'name',
+        'lon',
+        'lat',
     ];
 
     public function domain()

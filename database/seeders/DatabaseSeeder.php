@@ -14,25 +14,26 @@ class DatabaseSeeder extends Seeder
 {
     private const Domains = [
         'Gebied 1' => [
-            'Koude kant',
-            'Het liefdes nest',
-            'Eigen weg',
-            'Het oude nest',
-            'Samen land',
-            'Rustige weide',
-            'Steile helling',
-            'Speelweide',
+            ['Koude kant', 52.116256, 6.594441],
+            ['Het liefdes nest', 52.113052, 6.602479],
+            ['Eigen weg', 52.113462, 6.611401],
+            ['Het oude nest', 52.114807, 6.591480],
+            ['Samen land', 52.111188, 6.604755],
+            ['Rustige weide', 52.111300, 6.613009],
+            ['Steile helling', 52.113574, 6.586973],
+            ['Speelweide', 52.113290, 6.582111],
+            ['De vergezichten', 52.112325, 6.596835],
         ],
         'Gebied 2' => [
-            'Rechte pad',
-            'Financiële moeras',
-            'Politiek oerwoud',
-            'De nabije omgeving',
+            ['Rechte pad', 52.120367, 6.600836],
+            ['Financiële moeras', 52.118978, 6.604421],
+            ['Politiek oerwoud', 52.116388, 6.604725],
+            ['De nabije omgeving', 52.121065, 6.594741],
         ],
         'Gebied 3' => [
-            'Sparrenbos',
-            'Marktplaats',
-            'Ambacht',
+            ['Sparrenbos', 52.118918, 6.586781],
+            ['Marktplaats', 52.118575, 6.591566],
+            ['Ambacht', 52.117627, 6.581910],
         ],
     ];
 
@@ -54,7 +55,9 @@ class DatabaseSeeder extends Seeder
             foreach ($subjectNames as $subjectName) {
                 $subject = Subject::create([
                     'domain_id' => $domain->id,
-                    'name' => $subjectName,
+                    'name' => $subjectName[0],
+                    'lon' => $subjectName[1],
+                    'lat' => $subjectName[2],
                 ]);
 
                 Layer::factory($faker->numberBetween(1, 3))->afterCreating(function (Layer $layer2) use ($faker, $subject) {
