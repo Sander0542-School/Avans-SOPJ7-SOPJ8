@@ -1,6 +1,7 @@
 <nav class="sidemenu active">
     <div class="sidemenu-header">
-        <h3>HAS Expeditiekaart</h3>
+        <h3>Expeditiekaart</h3>
+        <h4>Bedrijfsovername</h4>
     </div>
 
     <ul class="list-unstyled components">
