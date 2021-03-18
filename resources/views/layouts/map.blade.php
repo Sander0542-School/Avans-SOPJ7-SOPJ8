@@ -21,7 +21,7 @@
             <x-navigation.side-menu/>
             <div class="content">
                 <div class="sidemenu-control">
-                    <button onclick="toggleSideMenu()" class="btn btn-link btn-sm text-black-50" style="outline: none; box-shadow: none"><i class="fas fa-3x fa-bars"></i></button>
+                    <button onclick="window.SideMenu.toggle()" class="btn btn-link btn-sm text-black-50" style="outline: none; box-shadow: none"><i class="fas fa-3x fa-bars"></i></button>
                 </div>
 
                 <div class="page-content">

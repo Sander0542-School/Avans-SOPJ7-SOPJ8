@@ -17071,32 +17071,6 @@ readers do not read off random characters that represent icons */
   cursor: default;
 }
 
-.swapper {
-  width: 100%;
-  height: 100%;
-}
-.swapper > .swapper-content, .swapper > .swapper-map {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transition: all 1s;
-  opacity: 0;
-  transform: scale(0);
-}
-.swapper > .swapper-content.swapper-active, .swapper > .swapper-map.swapper-active {
-  transform: scale(1);
-  opacity: 1;
-}
-
-.frontIMG {
-  width: 100%;
-  height: 100%;
-  background-image: url("/images/img.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
 .wrapper {
   display: flex;
   width: 100%;
@@ -17209,4 +17183,25 @@ readers do not read off random characters that represent icons */
   .sidemenu.active {
     margin-left: 0;
   }
+}
+.swapper {
+  width: 100%;
+  height: 100%;
+}
+.swapper > .swapper-content, .swapper > .swapper-map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 1s;
+  opacity: 0;
+  transform: scale(0);
+}
+.swapper > .swapper-content.swapper-active, .swapper > .swapper-map.swapper-active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.layer-content .btn-layer {
+  width: 100%;
+  padding: 16px;
 }
