@@ -24,7 +24,6 @@ async function getData(){
     let  data = fetch('/api/subjects').then(function(response){
         return response.json();
     }).then(function (obj){
-        console.log(obj['data']);
         placeMarkers(obj['data'])
     })
 }
