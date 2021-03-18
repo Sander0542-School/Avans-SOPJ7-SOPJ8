@@ -27,7 +27,7 @@ class LayerFactory extends Factory
 
         return [
             'name' => $name,
-            'content' => $this->faker->realText(),
+            'content' => $this->faker->realText(20000),
             'slug' => $slug
         ];
     }

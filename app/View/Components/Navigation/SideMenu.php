@@ -6,6 +6,7 @@ use App\Models\Layer;
 use App\Models\Subject;
 use Cache;
 use Illuminate\View\Component;
+use Str;
 
 class SideMenu extends Component
 {
@@ -51,6 +52,7 @@ class SideMenu extends Component
         foreach (Subject::all() as $subject) {
             $subMenu = [
                 'name' => $subject->name,
+                'slug' => Str::slug($subject->name),
                 'children' => $this->getChildren($subject->layers),
             ];
             array_push($menu, $subMenu);
@@ -73,6 +75,7 @@ class SideMenu extends Component
         foreach ($layers as $layer) {
             $subMenu = [
                 'name' => $layer->name,
+                'slug' => $layer->slug,
                 'children' => $this->getChildren($layer->childLayers),
             ];
             array_push($menu, $subMenu);

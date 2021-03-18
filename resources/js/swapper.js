@@ -15,15 +15,21 @@ const swapperMap = document.querySelector(".swapper .swapper-map");
 
 window.Swapper = {
     toggle: () => {
-        swapperMap.classList.toggle('swapper-active');
-        swapperContent.classList.toggle('swapper-active');
+        if (swapperContent && swapperMap) {
+            swapperMap.classList.toggle('swapper-active');
+            swapperContent.classList.toggle('swapper-active');
+        }
     },
     loadContent: () => {
-        swapperMap.classList.add('swapper-active');
-        swapperContent.classList.remove('swapper-active');
+        if (swapperContent && swapperMap) {
+            swapperMap.classList.remove('swapper-active');
+            swapperContent.classList.add('swapper-active');
+        }
     },
     loadMap: () => {
-        swapperMap.classList.remove('swapper-active');
-        swapperContent.classList.add('swapper-active');
+        if (swapperContent && swapperMap) {
+            swapperMap.classList.add('swapper-active');
+            swapperContent.classList.remove('swapper-active');
+        }
     }
 }
