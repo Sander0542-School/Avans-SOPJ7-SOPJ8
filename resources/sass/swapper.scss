@@ -1,0 +1,23 @@
+$swapper-transform-off: scale(0);
+$swapper-transform-on: scale(1);
+$swapper-transition: all 1s;
+
+.swapper {
+    width: 100%;
+    height: 100%;
+
+    > .swapper-content, > .swapper-map {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transition: $swapper-transition;
+
+        opacity: 0;
+        transform: $swapper-transform-off;
+
+        &.swapper-active {
+            transform: $swapper-transform-on;
+            opacity: 1;
+        }
+    }
+}
