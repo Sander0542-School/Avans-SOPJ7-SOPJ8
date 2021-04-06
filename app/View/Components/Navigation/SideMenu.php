@@ -34,15 +34,12 @@ class SideMenu extends Component
 
     private function getMenu()
     {
-        $menu = Cache::get('sidemenu');
-
-        if ($menu == null) {
-            $menu = $this->buildMenu();
-
-            Cache::put('sidemenu', $menu, 3600);
+        if (Cache::has('sidemenu')) {
+            $ttl = config('app.debug', false) ? 3600 : null; // 1 hour if debug, else forever
+            Cache::put('sidemenu', $this->buildMenu(), $ttl);
         }
 
-        return $menu;
+        return Cache::get('sidemenu');
     }
 
     private function buildMenu()
