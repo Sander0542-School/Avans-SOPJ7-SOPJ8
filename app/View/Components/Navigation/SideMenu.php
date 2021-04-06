@@ -49,7 +49,7 @@ class SideMenu extends Component
     {
         $menu = [];
 
-        foreach (Subject::all() as $subject) {
+        foreach (Subject::orderBy('order')->get() as $subject) {
             $subMenu = [
                 'name' => $subject->name,
                 'slug' => Str::slug($subject->name),
