@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $faker = app()->make(Generator::class);
+        $orderId = 0;
 
         foreach (self::Domains as $domainName => $subjectNames) {
             $domain = Domain::create([
@@ -56,6 +57,7 @@ class DatabaseSeeder extends Seeder
                 $subject = Subject::create([
                     'domain_id' => $domain->id,
                     'name' => $subjectName[0],
+                    'order' => ++$orderId,
                     'lon' => $subjectName[1],
                     'lat' => $subjectName[2],
                 ]);
