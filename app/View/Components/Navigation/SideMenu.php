@@ -34,7 +34,7 @@ class SideMenu extends Component
 
     private function getMenu()
     {
-        if (Cache::has('sidemenu')) {
+        if (!Cache::has('sidemenu')) {
             $ttl = config('app.debug', false) ? 3600 : null; // 1 hour if debug, else forever
             Cache::put('sidemenu', $this->buildMenu(), $ttl);
         }
