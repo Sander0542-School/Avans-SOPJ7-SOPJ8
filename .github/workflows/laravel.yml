@@ -59,7 +59,7 @@ jobs:
       id: date
       run: echo "::set-output name=date::$(date +'%Y%m%d%H%I%S')"
     - name: 'Run Cypress Tests'
-      run: npx cy2 run --record --key ${{ secrets.CYPRESS_KEY }} --ci-build-id ${{ github.run_id }}-${{ steps.date.outputs.date }}
+      run: npx cy2 run --parallel --record --key ${{ secrets.CYPRESS_KEY }} --ci-build-id ${{ github.run_id }}-${{ steps.date.outputs.date }}
       env:
         CYPRESS_API_URL: ${{ secrets.CYPRESS_API_URL }}
 
