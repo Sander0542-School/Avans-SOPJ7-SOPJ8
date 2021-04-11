@@ -31,7 +31,7 @@ jobs:
     - name: 'Install Composer Dependencies'
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: 'Install Node Dependencies'
-      run: npm install
+      run: npm ci
 #    - name: 'Setup Cypress'
 #      run: "sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /*/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
     - name: 'Run Laravel Mix'
@@ -46,13 +46,20 @@ jobs:
       run: vendor/bin/phpunit
     - name: 'Run Laravel Server'
       run: php artisan serve &
-#    - name: 'Setup Cypress'
-#      run: npx cypress run --spec "cypress/integration/home.spec.js"
+    - name: 'Setup Cypress'
+      run: |
+        npx cypress verify
+        npx cypress info
+        npx cypress version
+        npx cypress version --component package
+        npx cypress version --component binary
+        npx cypress version --component electron
+        npx cypress version --component node
     - name: 'Get current date'
       id: date
       run: echo "::set-output name=date::$(date +'%Y%m%d%H%I%S')"
     - name: 'Run Cypress Tests'
-      run: cy2 run --record --key ${{ secrets.CYPRESS_KEY }} --ci-build-id ${{ github.run_id }}-${{ steps.date.outputs.date }}
+      run: npx cy2 run --record --key ${{ secrets.CYPRESS_KEY }} --ci-build-id ${{ github.run_id }}-${{ steps.date.outputs.date }}
       env:
         CYPRESS_API_URL: ${{ secrets.CYPRESS_API_URL }}
 
