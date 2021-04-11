@@ -32,8 +32,17 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: 'Install Node Dependencies'
       run: npm ci
-#    - name: 'Setup Cypress'
-#      run: "sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /*/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
+    - name: 'Setup Cypress'
+      run: |
+        npx cypress install
+        npx cypress verify
+        npx cypress info
+        npx cypress version
+        npx cypress version --component package
+        npx cypress version --component binary
+        npx cypress version --component electron
+        npx cypress version --component node
+#        "sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /*/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
     - name: 'Run Laravel Mix'
       run: npm run production
     - name: 'Generate key'
@@ -46,16 +55,6 @@ jobs:
       run: vendor/bin/phpunit
     - name: 'Run Laravel Server'
       run: php artisan serve &
-    - name: 'Setup Cypress'
-      run: |
-        npm cypress install
-        npx cypress verify
-        npx cypress info
-        npx cypress version
-        npx cypress version --component package
-        npx cypress version --component binary
-        npx cypress version --component electron
-        npx cypress version --component node
     - name: 'Get current date'
       id: date
       run: echo "::set-output name=date::$(date +'%Y%m%d%H%I%S')"
