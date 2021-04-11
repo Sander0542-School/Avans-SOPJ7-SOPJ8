@@ -48,7 +48,7 @@ jobs:
       run: php artisan serve &
     - name: 'Setup Cypress'
       run: |
-        npm install cypress
+        npm cypress install
         npx cypress verify
         npx cypress info
         npx cypress version
