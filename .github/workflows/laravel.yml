@@ -47,7 +47,7 @@ jobs:
     - name: 'Run Laravel Server'
       run: php artisan serve &
     - name: 'Setup Cypress'
-      run: npx run --spec "cypress/integration/home.js"
+      run: npx cypress run --spec "cypress/integration/home.spec.js"
     - name: 'Get current date'
       id: date
       run: echo "::set-output name=date::$(date +'%Y%m%d%H%I%S')"
