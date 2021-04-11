@@ -48,6 +48,9 @@ jobs:
       run: php artisan serve &
     - name: 'Setup Cypress'
       run: |
+        npx cypress info
+        npx cypress verify
+        npx cypress version
         npx cypress cache path
         npx cypress cache list
     - name: 'Get current date'
