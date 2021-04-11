@@ -46,13 +46,13 @@ jobs:
       run: vendor/bin/phpunit
     - name: 'Run Laravel Server'
       run: php artisan serve &
-    - name: 'Setup Cypress'
-      run: npx cypress run --spec "cypress/integration/home.spec.js"
+#    - name: 'Setup Cypress'
+#      run: npx cypress run --spec "cypress/integration/home.spec.js"
     - name: 'Get current date'
       id: date
       run: echo "::set-output name=date::$(date +'%Y%m%d%H%I%S')"
     - name: 'Run Cypress Tests'
-      run: npx cy2 run --record --key ${{ secrets.CYPRESS_KEY }} --ci-build-id ${{ github.run_id }}-${{ steps.date.outputs.date }}
+      run: cy2 run --record --key ${{ secrets.CYPRESS_KEY }} --ci-build-id ${{ github.run_id }}-${{ steps.date.outputs.date }}
       env:
         CYPRESS_API_URL: ${{ secrets.CYPRESS_API_URL }}
 
