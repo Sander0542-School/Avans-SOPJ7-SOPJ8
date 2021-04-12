@@ -39,6 +39,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
+ * @property string $slug
  * @property string $content
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -53,6 +54,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Layer whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Layer whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Layer whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Layer whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Layer whereUpdatedAt($value)
  */
 	class Layer extends \Eloquent {}
@@ -90,6 +92,7 @@ namespace App\Models{
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $order
  * @property-read \App\Models\Domain|null $domain
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Layer[] $layers
  * @property-read int|null $layers_count
@@ -100,6 +103,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereDomainId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereUpdatedAt($value)
  */
 	class Subject extends \Eloquent {}
@@ -153,11 +157,17 @@ namespace App\Models{
  * @property-read string $profile_photo_url
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
+ * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
