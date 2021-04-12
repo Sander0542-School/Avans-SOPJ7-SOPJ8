@@ -27,13 +27,14 @@
                     </optgroup>
                 @endif
             </select>
-            <div id="editor" class="text-editor">
+            <div id="editor" class="text-editor" name="editor1">
                 <h1>
                     Sample text
                 </h1>
                 <p>
                     Bottom text
                 </p>
+
             </div>
             <input type="submit" value="Bevestigen" class="btn btn-success">
             <form>
@@ -41,17 +42,8 @@
             </form>
         </form>
     </div>
-    <script src="https://cdn.ckeditor.com/ckeditor5/27.0.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( editor => {
-                console.log( editor );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
+    <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
+    <script>CKEDITOR.replace('editor1');</script>
 </x-app-layout>
 
 

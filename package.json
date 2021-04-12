@@ -31,6 +31,7 @@
         "sass-loader": "^10.1.1"
     },
     "dependencies": {
-        "bootstrap-select": "^1.13.18"
+        "bootstrap-select": "^1.13.18",
+        "ckeditor4": "^4.16.0"
     }
 }
