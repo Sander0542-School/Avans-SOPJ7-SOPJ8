@@ -87,5 +87,9 @@ class DatabaseSeeder extends Seeder
                 })->create();
             }
         }
+
+        $this->call([
+            PermissionsSeeder::class
+        ]);
     }
 }
