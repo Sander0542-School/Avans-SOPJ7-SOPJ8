@@ -16,10 +16,18 @@ class MenuController extends Controller
         return view('pages.admin.menu.index')->with('subjects', $subjectArray);
     }
 
-    public function edit($id)
+    //public function edit($id)
+    //{
+    //    $subject = Subject::find($id);
+    //    return view('pages.admin.menu.edit', ['subject' => $subject]);
+    //}
+
+    public function edit()
     {
-        $subject = Subject::find($id);
-        return view('pages.admin.menu.edit', ['subject' => $subject]);
+        $subjects = Subject::all()->toArray();
+        $subjects = collect($subjects)->sortBy('order')->toArray();
+
+        return view('pages.admin.menu.editAll', ['subjects' => $subjects]);
     }
 
     public function update(UpdateRequest $request)

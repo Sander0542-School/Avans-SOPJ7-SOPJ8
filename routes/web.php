@@ -23,7 +23,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
 
     Route::prefix('menu')->name('menu.')->group(function () {
         Route::get('', [MenuController::class, 'index'])->name('getIndex');
-        Route::get('/{id}/edit', [MenuController::class, 'edit'])->name('getEdit');
+        Route::get('edit', [MenuController::class, 'edit'])->name('getEdit');
 
         Route::post('update', [MenuController::class, 'update'])->name('postUpdate');
     });

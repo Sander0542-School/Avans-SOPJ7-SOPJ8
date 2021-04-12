@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div>
-                <form action="{{ route('admin.menu.postUpdate', $subject->id) }}" method="POST">
+                <form action="{{ route('admin.menu.postUpdate', $subject) }}" method="POST">
                     <div class="col-span-1">
                         <label>Naam</label>
                         <div class="form-group">
