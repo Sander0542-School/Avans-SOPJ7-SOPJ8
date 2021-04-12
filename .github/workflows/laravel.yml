@@ -23,42 +23,43 @@ jobs:
         node-version: '15.x'
     - uses: actions/checkout@v2
     - name: 'Copy .env'
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: php -r "file_exists('.env') || copy('.env.github', '.env');"
     - name: 'Create Database'
       run: |
         sudo systemctl start mysql
-        mysql --user="root" --password="root" -e "CREATE DATABASE avans_soprj7 character set UTF8mb4 collate utf8mb4_bin;"
+        mysql --user="root" --password="root" -e "CREATE DATABASE expeditiekaart character set UTF8mb4 collate utf8mb4_bin;"
     - name: 'Install Composer Dependencies'
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: 'Install Node Dependencies'
-      run: npm install
-    - name: 'Run NPM Build'
+      run: npm ci
+    - name: 'Setup Cypress'
+      run: |
+        npx cypress install
+        npx cypress verify
+        npx cypress info
+        npx cypress version
+        npx cypress version --component package
+        npx cypress version --component binary
+        npx cypress version --component electron
+        npx cypress version --component node
+#        "sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /*/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
+    - name: 'Run Laravel Mix'
       run: npm run production
     - name: 'Generate key'
       run: php artisan key:generate
+    - name: 'Link Storage'
+      run: php artisan storage:link
     - name: 'Directory Permissions'
       run: chmod -R 777 storage bootstrap/cache
     - name: 'Run Unit Tests'
       run: vendor/bin/phpunit
-    - name: 'Upgrade Chrome Driver'
-      run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
-    - name: 'Start Chrome Driver'
-      run: ./vendor/laravel/dusk/bin/chromedriver-linux &
     - name: 'Run Laravel Server'
       run: php artisan serve &
-    - name: 'Run Dusk Tests'
+    - name: 'Get current date'
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y%m%d%H%I%S')"
+    - name: 'Run Cypress Tests'
+      run: npx cy2 run --parallel --record --key ${{ secrets.CYPRESS_KEY }} --ci-build-id ${{ github.run_id }}-${{ steps.date.outputs.date }}
       env:
-        APP_URL: "http://127.0.0.1:8000"
-      run: php artisan dusk
-    - name: 'Upload Screenshots'
-      if: failure()
-      uses: actions/upload-artifact@v2
-      with:
-        name: screenshots
-        path: tests/Browser/screenshots
-    - name: 'Upload Console Logs'
-      if: failure()
-      uses: actions/upload-artifact@v2
-      with:
-        name: console
-        path: tests/Browser/console
+        CYPRESS_API_URL: ${{ secrets.CYPRESS_API_URL }}
+
