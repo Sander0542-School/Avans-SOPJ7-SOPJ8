@@ -4,6 +4,8 @@
             {{ __('Menu') }}
         </h2>
     </x-slot>
+
+{{--    MOET NOG GECHECKED WORDEN OP ADMIN ROL--}}
     <div class="layer-container">
         <form method="post" action="">
             @csrf
