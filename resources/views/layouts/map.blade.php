@@ -13,7 +13,9 @@
         @livewireStyles
 
     <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        @livewireScripts
+
+        <script src="{{ mix('js/app.js') }}"></script>
     </head>
     <body class="bg-light">
         <!-- Page Content -->
@@ -31,8 +33,6 @@
         </main>
 
         @stack('modals')
-
-        @livewireScripts
 
         @stack('scripts')
     </body>
