@@ -17096,6 +17096,9 @@ readers do not read off random characters that represent icons */
   background: #388e3c;
   color: #fff;
   transition: all 0.3s;
+  margin-left: -300px;
+  height: 100vh;
+  position: fixed;
 }
 .sidemenu .sidemenu-header {
   padding: 20px;
@@ -17160,9 +17163,6 @@ readers do not read off random characters that represent icons */
   background: #2E7D32;
 }
 .sidemenu.active {
-  margin-left: -300px;
-}
-.sidemenu.active .sidemenu-control {
   margin-left: 0;
 }
 
@@ -17170,12 +17170,18 @@ readers do not read off random characters that represent icons */
   width: 100%;
   min-height: 100vh;
   position: relative;
-  display: contents;
+  display: flex;
 }
 .content .sidemenu-control {
   position: relative;
-  margin: 12px;
   z-index: 1001;
+  transition: all 0.3s;
+}
+.content .sidemenu-control.active {
+  margin-left: 300px;
+}
+.content .sidemenu-control .controls {
+  margin: 12px;
 }
 .content .page-content {
   width: 100%;
@@ -17184,14 +17190,6 @@ readers do not read off random characters that represent icons */
   display: flex;
 }
 
-@media (max-width: 768px) {
-  .sidemenu {
-    margin-left: -300px;
-  }
-  .sidemenu.active {
-    margin-left: 0;
-  }
-}
 .swapper {
   width: 100%;
   height: 100%;

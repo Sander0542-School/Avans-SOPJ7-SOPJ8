@@ -53,6 +53,8 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: 'Run Unit Tests'
       run: vendor/bin/phpunit
+    - name: 'Seed Database'
+      run: php artisan migrate:fresh --seed
     - name: 'Run Laravel Server'
       run: php artisan serve &
     - name: 'Get current date'
