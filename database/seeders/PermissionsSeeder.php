@@ -17,12 +17,12 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'layers.']);
-        Permission::create(['name' => 'subjects.']);
+        Permission::create(['name' => 'layers.*']);
+        Permission::create(['name' => 'subjects.*']);
 
         $admin = Role::create(['name' => 'admin']);
-        $admin->givePermissionTo('layers.');
-        $admin->givePermissionTo('subjects.');
+        $admin->givePermissionTo('layers.*');
+        $admin->givePermissionTo('subjects.*');
 
         $user = User::create([
             'name' => 'admin',
