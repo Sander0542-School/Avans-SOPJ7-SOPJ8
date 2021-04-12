@@ -2,7 +2,6 @@ window.Layer = {
     load: (layerSlug) => {
         if (document.querySelector('.layer-content')) {
             window.location.hash = layerSlug;
-            console.log(Livewire);
             Livewire.emit('layerChanged', layerSlug);
             window.Swapper.loadContent();
             window.SideMenu.close();
