@@ -3908,12 +3908,12 @@ window.SideMenu = {
     window.SideMenu.menuControl.classList.toggle('active');
   },
   open: function open() {
-    window.SideMenu.menu.classList.remove('active');
-    window.SideMenu.menuControl.classList.remove('active');
-  },
-  close: function close() {
     window.SideMenu.menu.classList.add('active');
     window.SideMenu.menuControl.classList.add('active');
+  },
+  close: function close() {
+    window.SideMenu.menu.classList.remove('active');
+    window.SideMenu.menuControl.classList.remove('active');
   }
 };
 
