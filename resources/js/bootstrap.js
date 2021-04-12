@@ -9,6 +9,7 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
+    require('bootstrap-select');
 } catch (e) {}
 
 import * as Bootstrap from 'bootstrap'
@@ -44,3 +45,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // Leaflet
 window.Leaflet = require('leaflet');
+//bootstrap selectpicker
+
+$( document ).ready(function() {
+    $('select').selectpicker();
+});
+

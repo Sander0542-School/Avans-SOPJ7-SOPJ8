@@ -5,30 +5,34 @@
         </h2>
     </x-slot>
     <div class="layer-container">
-        <form method="post">
-               <label>What is your layer title?</label>
-                <input required class="form-control" type="text" name="layerTitle" placeholder="Title">
-            <label>Please select the subject or layer that was previous to this layer.</label>
-            <input type="text" autocomplete="off" class="form-control" placeholder="Search layer/subject.." id="layerSearch">
-            <select class="mdb-select md-form" id="previousSelectList" multiple>
+        <form method="post" action="">
+            @csrf
+            <label>Wat is de titel van de nieuwe laag?</label>
+            <input required class="form-control" type="text" name="layerTitle" placeholder="Titel">
+            <label>Selecteer de voorgaande laag:</label>
+            <select class="form-control" class="selectpicker" id="previousSelectList" data-live-search="true">
                 @if($layers->isEmpty() && $subjects->isEmpty())
-                    <option>No previously existing layers found</option>
+                    <option selected>Geen bestaande lagen gevonden</option>
                 @else
-                    @foreach($layers as $layer)
-                        <option value="layer{{$layer->id}}" id="layer{{$layer->id}}">{{$layer->name}}</option>
-                    @endforeach
-                    @foreach($subjects as $subject)
-                        <option value="subject{{$subject->id}}" id="subject{{$subject->id}}">{{$subject->name}}</option>
-                    @endforeach
+                    <optgroup label="Subjects">
+                        @foreach($subjects as $subject)
+                            <option data-tokens="{{$subject->name}}" value="subject{{$subject->id}}" id="subject{{$subject->id}}">{{$subject->name}}</option>
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Layers">
+                        @foreach($layers as $layer)
+                            <option data-tokens="{{$layer->name}}" value="layer{{$layer->id}}" id="layer{{$layer->id}}">{{$layer->name}}</option>
+                        @endforeach
+                    </optgroup>
                 @endif
             </select>
             <div class="text-editor">
                 hier komt de tekst editor van Fedor
             </div>
-            <input type="submit" value="Submit">
-        </form>
-        <form>
-            <input type="submit" value="Cancel">
+            <input type="submit" value="Bevestigen" class="btn btn-success">
+            <form>
+                <input type="submit" value="Annuleren" class="btn btn-danger">
+            </form>
         </form>
     </div>
 </x-app-layout>
