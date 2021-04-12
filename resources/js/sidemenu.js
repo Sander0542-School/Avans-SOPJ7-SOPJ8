@@ -1,20 +1,20 @@
 window.SideMenu = {
     get menu() {
-        return document.querySelector("nav.sidemenu");
+        return document.querySelector("nav.sidemenu") || document.createElement('div');
+    },
+    get menuControl() {
+        return document.querySelector(".sidemenu-control") || document.createElement('div');
     },
     toggle: () => {
-        if (window.SideMenu.menu) {
-            window.SideMenu.menu.classList.toggle('active');
-        }
+        window.SideMenu.menu.classList.toggle('active');
+        window.SideMenu.menuControl.classList.toggle('active');
     },
     open: () => {
-        if (window.SideMenu.menu) {
-            window.SideMenu.menu.classList.remove('active');
-        }
+        window.SideMenu.menu.classList.remove('active');
+        window.SideMenu.menuControl.classList.remove('active');
     },
     close: () => {
-        if (window.SideMenu.menu) {
-            window.SideMenu.menu.classList.add('active');
-        }
+        window.SideMenu.menu.classList.add('active');
+        window.SideMenu.menuControl.classList.add('active');
     }
 }
