@@ -18,12 +18,12 @@
                 @else
                     <optgroup label="Onderwerpen">
                         @foreach($subjects as $subject)
-                            <option data-tokens="{{$subject->name}}" value="subject{{$subject->id}}" id="subject{{$subject->id}}">{{$subject->name}}</option>
+                            <option data-tokens="{{$subject->name}}" value="subject{{$subject->id}}" name="subject{{$subject->id}}">{{$subject->name}}</option>
                         @endforeach
                     </optgroup>
                     <optgroup label="Lagen">
                         @foreach($layers as $layer)
-                            <option data-tokens="{{$layer->name}}" value="layer{{$layer->id}}" id="layer{{$layer->id}}">{{$layer->name}}</option>
+                            <option data-tokens="{{$layer->name}}" value="layer{{$layer->id}}" name="layer{{$layer->id}}">{{$layer->name}}</option>
                         @endforeach
                     </optgroup>
                 @endif
