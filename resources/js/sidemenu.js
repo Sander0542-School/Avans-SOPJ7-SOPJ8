@@ -1,19 +1,20 @@
-const sideMenu = document.querySelector('nav.sidemenu')
-
 window.SideMenu = {
+    get menu() {
+        return document.querySelector("nav.sidemenu");
+    },
     toggle: () => {
-        if (sideMenu) {
-            sideMenu.classList.toggle('active');
+        if (window.SideMenu.menu) {
+            window.SideMenu.menu.classList.toggle('active');
         }
     },
     open: () => {
-        if (sideMenu) {
-            sideMenu.classList.remove('active');
+        if (window.SideMenu.menu) {
+            window.SideMenu.menu.classList.remove('active');
         }
     },
     close: () => {
-        if (sideMenu) {
-            sideMenu.classList.add('active');
+        if (window.SideMenu.menu) {
+            window.SideMenu.menu.classList.add('active');
         }
     }
 }
