@@ -10,9 +10,16 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $subjects = Subject::orderBy('order');
+        $subjects = Subject::all()->toArray();
+        $subjectArray = collect($subjects)->sortBy('order')->toArray();
 
-        return view('pages.admin.menu.index')->with('subjects', $subjects);
+        return view('pages.admin.menu.index')->with('subjects', $subjectArray);
+    }
+
+    public function edit($id)
+    {
+        $subject = Subject::find($id);
+        return view('pages.admin.menu.edit', ['subject' => $subject]);
     }
 
     public function update(UpdateRequest $request)

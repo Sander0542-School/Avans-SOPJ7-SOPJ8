@@ -9,4 +9,8 @@
             <x-navigation.side-menu-item :menu-item="$menuItem" :first-layer="true"/>
         @endforeach
     </ul>
+
+    <div>
+        <a href="{{ route('admin.menu.getIndex') }}" class="rounded shadow">Bewerk Menu</a>
+    </div>
 </nav>
