@@ -14,11 +14,10 @@
 
             <div>
                 @foreach($subjects as $subject)
-                    <div class="p-xl-5 bg-white border-b border-gray-200">
+                    <div class="p-xl-3 bg-white border-b border-gray-200">
                         <div class="d-flex flex-column w-50">
                             <b>{{ $subject['name'] }}</b>
-                            <b>Order: {{ $subject['order'] }}</b>
-                            <b>Domein: {{ $subject['domain_id'] }}</b>
+                            Domein: {{ $subject['domain_id'] }}
                         </div>
                     </div>
                     <br>
