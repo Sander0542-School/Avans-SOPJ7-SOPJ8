@@ -58,8 +58,8 @@ class DatabaseSeeder extends Seeder
                     'domain_id' => $domain->id,
                     'name' => $subjectName[0],
                     'order' => ++$orderId,
-                    'lon' => $subjectName[1],
-                    'lat' => $subjectName[2],
+                    'lat' => $subjectName[1],
+                    'lon' => $subjectName[2],
                 ]);
 
                 Layer::factory($faker->numberBetween(1, 3))->afterCreating(function (Layer $layer2) use ($faker, $subject) {

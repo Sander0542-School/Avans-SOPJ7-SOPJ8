@@ -17,6 +17,9 @@
                 <x-jet-nav-link href="{{ route('admin.menu.index') }}" :active="request()->routeIs('admin.menu.index')">
                     {{ __('Menu') }}
                 </x-jet-nav-link>
+                <x-jet-nav-link href="{{ route('admin.map.index') }}" :active="request()->routeIs('admin.map.index')">
+                    {{ __('Map') }}
+                </x-jet-nav-link>
             </ul>
 
             <!-- Right Side Of Navbar -->

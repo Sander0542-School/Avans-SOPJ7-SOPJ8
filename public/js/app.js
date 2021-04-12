@@ -3969,7 +3969,10 @@ window.SubjectMap = {
     var draggable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (window.SubjectMap.map == null) return;
     subjects.forEach(function (item) {
-      var marker = new Leaflet.marker([item.lon, item.lat], {
+      var marker = new Leaflet.marker({
+        lat: item.lat,
+        lng: item.lon
+      }, {
         draggable: draggable,
         icon: new Leaflet.DivIcon({
           className: 'my-div-icon',

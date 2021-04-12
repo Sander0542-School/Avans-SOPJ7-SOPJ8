@@ -40,7 +40,7 @@ window.SubjectMap = {
         if (window.SubjectMap.map == null) return;
 
         subjects.forEach(function (item) {
-            let marker = new Leaflet.marker([item.lon, item.lat], {
+            let marker = new Leaflet.marker({lat: item.lat, lng: item.lon}, {
                 draggable: draggable,
                 icon: new Leaflet.DivIcon({
                     className: 'my-div-icon',
