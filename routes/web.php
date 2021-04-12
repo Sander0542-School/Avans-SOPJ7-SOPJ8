@@ -26,3 +26,5 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::post('update', [MenuController::class, 'update'])->name('update');
     });
 });
+
+Route::get('/admintest',[\App\Http\Controllers\LayerController::class,'layerCreateTest']);

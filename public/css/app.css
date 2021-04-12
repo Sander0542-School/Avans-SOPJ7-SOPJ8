@@ -17065,6 +17065,16 @@ readers do not read off random characters that represent icons */
   font-size: 0.875rem !important;
 }
 
+.layer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#previousSelectList {
+  width: 100%;
+}
+
 .leaflet-container {
   width: 100%;
   height: 100%;

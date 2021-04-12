@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\LayerResource;
 use App\Models\Layer;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -14,6 +15,12 @@ class LayerController extends Controller
     public function index()
     {
         return Layer::all();
+    }
+
+    public function layerCreateTest() {
+        $layers = Layer::all();
+        $subjects = Subject::all();
+        return view('pages.admin.layer-create.layercreate',['layers'=>$layers,'subjects'=>$subjects]);
     }
 
     /**
