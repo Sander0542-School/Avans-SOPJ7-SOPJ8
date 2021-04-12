@@ -16,12 +16,12 @@
                 @if($layers->isEmpty() && $subjects->isEmpty())
                     <option selected>Geen bestaande lagen gevonden</option>
                 @else
-                    <optgroup label="Subjects">
+                    <optgroup label="Onderwerpen">
                         @foreach($subjects as $subject)
                             <option data-tokens="{{$subject->name}}" value="subject{{$subject->id}}" id="subject{{$subject->id}}">{{$subject->name}}</option>
                         @endforeach
                     </optgroup>
-                    <optgroup label="Layers">
+                    <optgroup label="Lagen">
                         @foreach($layers as $layer)
                             <option data-tokens="{{$layer->name}}" value="layer{{$layer->id}}" id="layer{{$layer->id}}">{{$layer->name}}</option>
                         @endforeach
