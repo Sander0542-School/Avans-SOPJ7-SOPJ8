@@ -4,7 +4,6 @@
             {{ __('Menu') }}
         </h2>
     </x-slot>
-
 {{--    MOET NOG GECHECKED WORDEN OP ADMIN ROL--}}
     <div class="layer-container">
         <form method="post" action="">
@@ -28,8 +27,13 @@
                     </optgroup>
                 @endif
             </select>
-            <div class="text-editor">
-                hier komt de tekst editor van Fedor
+            <div id="editor" class="text-editor">
+                <h1>
+                    Sample text
+                </h1>
+                <p>
+                    Bottom text
+                </p>
             </div>
             <input type="submit" value="Bevestigen" class="btn btn-success">
             <form>
@@ -37,4 +41,17 @@
             </form>
         </form>
     </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 </x-app-layout>
+
+
