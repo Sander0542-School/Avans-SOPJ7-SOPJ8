@@ -3932,16 +3932,28 @@ var southWest = L.latLng(52.109024, 6.573585),
 window.SubjectMap = {
   map: null,
   renderMap: function renderMap() {
+    var adminMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var adminZoom = 15;
+    var maxZoom = adminMap ? adminZoom : 19;
+    var minZoom = adminMap ? adminZoom : 16;
     var map = Leaflet.map('subjectmap', {
-      minZoom: 16,
-      maxZoom: 19,
+      minZoom: minZoom,
+      maxZoom: maxZoom,
       zoomControl: false,
       maxBounds: bounds,
       attributionControl: false
     }).setView([52.115329, 6.596776], 16);
+
+    if (adminMap) {
+      Leaflet.rectangle(bounds, {
+        color: "rgba(0, 0, 0, 0.8)",
+        weight: 1
+      }).addTo(map);
+    }
+
     Leaflet.tileLayer(layerTemplate, {
-      maxZoom: 19,
-      minZoom: 16
+      maxZoom: maxZoom,
+      minZoom: minZoom
     }).addTo(map);
     window.SubjectMap.map = map;
   },
@@ -3957,16 +3969,29 @@ window.SubjectMap = {
     var draggable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (window.SubjectMap.map == null) return;
     subjects.forEach(function (item) {
-      if (item.lon != null && item.lat != null) {
-        var marker = new L.marker([item.lon, item.lat], {
-          icon: new L.DivIcon({
-            className: 'my-div-icon',
-            html: '<div>' + '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' + '<button class="btn btn-primary" style="text-align: center;">' + item.name + '</button>' + '</div>'
-          })
+      var marker = new Leaflet.marker([item.lon, item.lat], {
+        draggable: draggable,
+        icon: new Leaflet.DivIcon({
+          className: 'my-div-icon',
+          html: '<div>' + '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' + '<button class="btn btn-primary" style="text-align: center;">' + item.name + '</button>' + '</div>'
+        }),
+        subjectId: item.id
+      });
+      marker.addTo(window.SubjectMap.map);
+    });
+  },
+  getSubjects: function getSubjects() {
+    var subjects = [];
+    window.SubjectMap.map.eachLayer(function (layer) {
+      if (layer.options.subjectId !== undefined) {
+        subjects.push({
+          id: layer.options.subjectId,
+          lat: layer.getLatLng().lat,
+          lon: layer.getLatLng().lng
         });
-        marker.addTo(window.SubjectMap.map);
       }
     });
+    return subjects;
   }
 };
 

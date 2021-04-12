@@ -5,18 +5,26 @@ const southWest = L.latLng(52.109024, 6.573585),
 
 window.SubjectMap = {
     map: null,
-    renderMap: () => {
+    renderMap: (adminMap = false) => {
+        const adminZoom = 15;
+        const maxZoom = adminMap ? adminZoom : 19;
+        const minZoom = adminMap ? adminZoom : 16;
+
         const map = Leaflet.map('subjectmap', {
-            minZoom: 16,
-            maxZoom: 19,
+            minZoom: minZoom,
+            maxZoom: maxZoom,
             zoomControl: false,
             maxBounds: bounds,
             attributionControl: false
         }).setView([52.115329, 6.596776], 16);
 
+        if (adminMap) {
+            Leaflet.rectangle(bounds, {color: "rgba(0, 0, 0, 0.8)", weight: 1}).addTo(map);
+        }
+
         Leaflet.tileLayer(layerTemplate, {
-            maxZoom: 19,
-            minZoom: 16
+            maxZoom: maxZoom,
+            minZoom: minZoom
         }).addTo(map);
 
         window.SubjectMap.map = map;
@@ -32,18 +40,34 @@ window.SubjectMap = {
         if (window.SubjectMap.map == null) return;
 
         subjects.forEach(function (item) {
-            if (item.lon != null && item.lat != null) {
-                let marker = new L.marker([item.lon, item.lat], {
-                    icon: new L.DivIcon({
-                        className: 'my-div-icon',
-                        html: '<div>' +
-                            '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' +
-                            '<button class="btn btn-primary" style="text-align: center;">' + item.name + '</button>' +
-                            '</div>'
-                    })
-                });
-                marker.addTo(window.SubjectMap.map);
+            let marker = new Leaflet.marker([item.lon, item.lat], {
+                draggable: draggable,
+                icon: new Leaflet.DivIcon({
+                    className: 'my-div-icon',
+                    html: '<div>' +
+                        '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' +
+                        '<button class="btn btn-primary" style="text-align: center;">' + item.name + '</button>' +
+                        '</div>'
+                }),
+                subjectId: item.id
+            });
+
+            marker.addTo(window.SubjectMap.map);
+        });
+    },
+    getSubjects: () => {
+        const subjects = [];
+
+        window.SubjectMap.map.eachLayer((layer) => {
+            if (layer.options.subjectId !== undefined) {
+                subjects.push({
+                    id: layer.options.subjectId,
+                    lat: layer.getLatLng().lat,
+                    lon: layer.getLatLng().lng,
+                })
             }
         });
+
+        return subjects;
     }
 }
