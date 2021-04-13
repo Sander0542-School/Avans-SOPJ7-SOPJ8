@@ -90,11 +90,8 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // Create admin
-        User::create([
-            'name' => "admin",
-            'email' => 'admin@hotmail.com',
-            'password' => Hash::make('password'),
+        $this->call([
+            PermissionsSeeder::class
         ]);
     }
 }

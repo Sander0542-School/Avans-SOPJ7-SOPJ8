@@ -16,13 +16,13 @@
         @livewireStyles
 
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+        @livewireScripts
 
+        <script src="{{ mix('js/app.js') }}"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     </head>
-    <body class="font-sans antialiased bg-light">
+    <body class="font-sans antialiased bg-light {{ $bodyClasses }}">
         <x-jet-banner />
         @livewire('navigation-menu')
 
@@ -34,13 +34,11 @@
         </header>
 
         <!-- Page Content -->
-        <main class="container my-5">
+        <main class="{{ $mainClasses }}">
             {{ $slot }}
         </main>
 
         @stack('modals')
-
-        @livewireScripts
 
         @stack('scripts')
     </body>
