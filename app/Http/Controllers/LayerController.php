@@ -16,6 +16,10 @@ class LayerController extends Controller
         return Layer::all();
     }
 
+    public function create()
+    {
+        return view('pages.admin.layers.create');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -24,6 +28,14 @@ class LayerController extends Controller
      */
     public function store(Request $request)
     {
+        $user = \Auth::user();
+
+        dd($user->hasRole('admin'));
+
+        if ($user == null || !$user->hasPermissionTo('layer.store')) {
+            return response('Forbidden',403);
+        }
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:layers,name',
             'body' => 'required',
@@ -72,11 +84,15 @@ class LayerController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        $user = \Auth::user();
+
+        if ($user == null || !$user->hasPermissionTo('layer.update')) {
+            return response('Forbidden',403);
+        }
+
         DB::table('layers')->where('slug', $slug)->update($request->all());
 
-        $updatedLayer = Layer::where('slug', $slug)->first();
-
-        return new LayerResource($updatedLayer);
+        return new LayerResource(Layer::where('slug', $slug)->first());
     }
 
     /**
@@ -87,6 +103,12 @@ class LayerController extends Controller
      */
     public function destroy(string $slug)
     {
+        $user = \Auth::user();
+
+        if ($user == null || !$user->hasPermissionTo('layer.destroy')) {
+            return response('Forbidden',403);
+        }
+
         $layerToDestroy = Layer::where('slug', $slug)->firstOrFail();
 
         if ($layerToDestroy->delete()) {
