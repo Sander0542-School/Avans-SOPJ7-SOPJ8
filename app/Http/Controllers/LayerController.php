@@ -30,9 +30,7 @@ class LayerController extends Controller
     {
         $user = \Auth::user();
 
-        dd($user->hasRole('admin'));
-
-        if ($user == null || !$user->hasPermissionTo('layer.store')) {
+        if ($user == null || !$user->can('layers.store')) {
             return response('Forbidden',403);
         }
 
@@ -86,7 +84,7 @@ class LayerController extends Controller
     {
         $user = \Auth::user();
 
-        if ($user == null || !$user->hasPermissionTo('layer.update')) {
+        if ($user == null || !$user->can('layers.update')) {
             return response('Forbidden',403);
         }
 
@@ -105,7 +103,7 @@ class LayerController extends Controller
     {
         $user = \Auth::user();
 
-        if ($user == null || !$user->hasPermissionTo('layer.destroy')) {
+        if ($user == null || !$user->can('layers.destroy')) {
             return response('Forbidden',403);
         }
 
