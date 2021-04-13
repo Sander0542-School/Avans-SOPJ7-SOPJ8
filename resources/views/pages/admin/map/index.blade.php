@@ -17,7 +17,6 @@
             @csrf
         </form>
     </x-slot>
-    @dump($errors)
     <div id="subjectmap"></div>
 
     @push('scripts')

@@ -57,7 +57,7 @@ class UpdateRequest extends FormRequest
             'subjects.*.lat.distinct' => 'An id must be distinct',
             'subjects.*.lat.numeric' => 'A latitude is numeric',
             'subjects.*.lat.regex' => 'A latitude must match the regex',
-            
+
             'subjects.*.lon.required' => 'A longitude is required',
             'subjects.*.lon.distinct' => 'An id must be distinct',
             'subjects.*.lon.numeric' => 'A longitude is numeric',
