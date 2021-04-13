@@ -59,7 +59,6 @@ class LayerController extends Controller
         ]);
 
         if ($newLayerObject->save()) {
-            $parentArray = [];
             $parentType = '';
             $parentId = 0;
 
@@ -89,6 +88,7 @@ class LayerController extends Controller
             return view('pages.admin.layer-create.layercreate', [
                 'layers' => Layer::all(),
                 'subjects' => Subject::all(),
+                'success' => 'Laag "'. $request->title .'" is aangemaakt'
             ]);
         } else {
             return view('pages.admin.layer-create.layercreate', [
