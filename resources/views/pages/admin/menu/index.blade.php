@@ -1,82 +1,59 @@
 <x-app-layout>
     <x-slot name="header">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <h2 class="h4 font-weight-bold">
+            {{ __('Menu') }}
+        </h2>
     </x-slot>
 
-    <div class="row mt-5">
-        <div class="col-md-10 offset-md-1">
-            <h3 class="text-center mb-4">Menu index</h3>
-            <table id="table" class="table table-bordered">
-                <thead>
-                <tr>
-                    <th width="30px">#</th>
-                    <th>Naam</th>
-                    <th>Domein</th>
-                    <th>Lengtegraad</th>
-                    <th>Breedtegraad</th>
-                </tr>
-                </thead>
-                <tbody id="tablecontents">
+    <div class="row">
+        <form class="col" action="{{ route('admin.menu.update') }}">
+            @csrf
+
+            <div class="sortable">
                 @foreach($subjects as $subject)
-                    <tr class="row1" data-id="{{ $subject->id }}">
-                        <td class="pl-3"><i class="fa fa-sort"></i></td>
-                        <td>{{ $subject->name }}</td>
-                        <td>{{ $subject->domain_name }}</td>
-                        <td>{{ $subject->lat }}</td>
-                        <td>{{ $subject->lon }}</td>
-                    </tr>
+                    <div id="subjectItem{{ $subject->id }}" class="sortable-item card my-2 w-100">
+                        <input type="hidden" name="subjects[{{ $subject->id }}][subject_id]" value="{{ $subject->id }}">
+                        <input type="hidden" class="subject-order" name="subjects[{{ $subject->id }}][order]" value="{{ $subject->order }}">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span class="btn btn-link" style="cursor: grab">
+                                        <i class="fas fa-2x fa-sort"></i>
+                                    </span>
+                                </div>
+                                <div class="col">
+                                    <input name="subjects[{{ $subject->id }}][name]" type="text" class="form-control" value="{{ $subject->name }}" placeholder="Onderwerp naam">
+                                </div>
+                                <div class="col">
+                                    <select name="subjects[{{ $subject->id }}][domain_id]" class="form-control">
+                                        @foreach($domains as $domain)
+                                            <option @if($subject->domain_id == $domain->id) selected @endif value="{{ $domain->id }}">{{ $domain->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
-                </tbody>
-            </table>
-            <hr>
-            <div class="col-span-1 text-left">
-                <a href="{{ route('admin.menu.getEdit') }}" class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">
-                    Bewerk
-                </a>
             </div>
-        </div>
+        </form>
     </div>
 
-    <script type="text/javascript">
-
-        $( "#tablecontents" ).sortable({
+    <script defer type="text/javascript">
+        $(".sortable").sortable({
             revert: true,
-            items: "tr",
-            cursor: 'move',
-            opacity: 0.6,
-            update: function() {
-                sendOrderToServer();
+            items: ".sortable-item",
+            update: () => {
+                listOrderInputs();
             }
         });
 
-        function sendOrderToServer() {
-            var order = [];
-            var token = $('meta[name="csrf-token"]').attr('content');
-            $('tr.row1').each(function(index,element) {
-                order.push({
-                    id: $(this).attr('data-id'),
-                    position: index+1
-                });
-            });
+        function listOrderInputs() {
+            const subjectElems = document.querySelectorAll('.sortable > .sortable-item');
 
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "{{ url('menu-sortable') }}",
-                data: {
-                    order: order,
-                    _token: token
-                },
-                success: function(response) {
-                    if (response.status == "success") {
-                        console.log(response);
-                    } else {
-                        console.log(response);
-                    }
-                }
+            subjectElems.forEach((subjectElem, index) => {
+                const orderInput = subjectElem.querySelector('input.subject-order');
+                orderInput.value = index + 1;
             });
         }
     </script>

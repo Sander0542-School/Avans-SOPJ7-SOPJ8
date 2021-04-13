@@ -13,69 +13,38 @@ class MenuController extends Controller
     public function index()
     {
         $subjects = Subject::orderBy('order','ASC')->get();
+        $domains = Domain::orderBy('name')->get();
 
-        foreach($subjects as $subject)
-        {
-            $domain = Domain::find($subject->domain_id);
-            $subject->domain_name = $domain->name;
-        }
-
-        return view('pages.admin.menu.index',compact('subjects'));
+        return view('pages.admin.menu.index')
+            ->with('subjects', $subjects)
+            ->with('domains', $domains);
     }
 
-    public function edit()
+    public function update(UpdateRequest $request)
     {
-        $subjects = Subject::orderBy('order','ASC')->get();
+        $formSubjects = collect($request->input('subjects', []));
+        $errors = [];
 
-        foreach($subjects as $subject)
-        {
-            $domain = Domain::find($subject->domain_id);
-            $subject->domain_name = $domain->name;
-        }
+        foreach ($formSubjects as $formSubject) {
+            $subject = Subject::updateOrCreate([
+                'id' => $formSubject['id'],
+            ], [
+                'domain_id' => $formSubject['domain_id'],
+                'name' => $formSubject['name'],
+                'order' => $formSubject['order'],
+            ]);
 
-        return view('pages.admin.menu.editAll', ['subjects' => $subjects]);
-    }
-
-    public function update(Request $request)
-    {
-        $subjects = Subject::all();
-
-        foreach ($subjects as $subject) {
-            foreach ($request->order as $order) {
-                if ($order['id'] == $subject->id) {
-                    $subject->update(['order' => $order['position']]);
-                }
+            if ($subject == null) {
+                $errors[] = __('admin.menu.errors.subject_not_created_updated', [
+                    'name' => $formSubject['name'],
+                ]);
             }
         }
 
-        return response('Update Successfully.', 200);
-    }
+        Cache::forget('sidemenu');
 
-    //public function update(UpdateRequest $request)
-    //{
-    //    $formSubjects = collect($request->input('subjects', []));
-    //    $errors = [];
-    //
-    //    foreach ($formSubjects as $formSubject) {
-    //        $subject = Subject::updateOrCreate([
-    //            'id' => $formSubject['id'],
-    //        ], [
-    //            'domain_id' => $formSubject['domain_id'],
-    //            'name' => $formSubject['name'],
-    //            'order' => $formSubject['order'],
-    //        ]);
-    //
-    //        if ($subject == null) {
-    //            $errors[] = __('admin.menu.errors.subject_not_created_updated', [
-    //                'name' => $formSubject['name'],
-    //            ]);
-    //        }
-    //    }
-    //
-    //    Cache::forget('sidemenu');
-    //
-    //    return redirect()->back()->withErrors([
-    //        'menu' => $errors,
-    //    ]);
-    //}
+        return redirect()->back()->withErrors([
+            'menu' => $errors,
+        ]);
+    }
 }

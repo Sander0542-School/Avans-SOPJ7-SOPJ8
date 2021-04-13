@@ -10,6 +10,7 @@
         <div class="col-md-10 offset-md-1">
             <h3 class="text-center mb-4">Bewerk menu</h3>
             <form action="{{ route('admin.menu.update') }}" method="POST">
+                @csrf
                 <table id="table" class="table table-bordered">
                     <thead>
                     <tr>
@@ -61,12 +62,7 @@
                     </tbody>
                 </table>
             </form>
-            <hr>
-            <div class="col-span-1 text-left">
-                <a href="{{ route('admin.menu.getIndex') }}" class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">
-                    Terug
-                </a>
-            </div>
+            <hr>1
         </div>
     </div>
 
@@ -74,46 +70,5 @@
         $("#tablecontents").sortable({
             revert: true
         });
-
-        {{--$(function () {--}}
-        {{--    $("#table").DataTable();--}}
-
-        {{--    $( "#tablecontents" ).sortable({--}}
-        {{--        items: "tr",--}}
-        {{--        cursor: 'move',--}}
-        {{--        opacity: 0.6,--}}
-        {{--        update: function() {--}}
-        {{--            sendOrderToServer();--}}
-        {{--        }--}}
-        {{--    });--}}
-
-        {{--    function sendOrderToServer() {--}}
-        {{--        var order = [];--}}
-        {{--        var token = $('meta[name="csrf-token"]').attr('content');--}}
-        {{--        $('tr.row1').each(function(index,element) {--}}
-        {{--            order.push({--}}
-        {{--                id: $(this).attr('data-id'),--}}
-        {{--                position: index+1--}}
-        {{--            });--}}
-        {{--        });--}}
-
-        {{--        $.ajax({--}}
-        {{--            type: "POST",--}}
-        {{--            dataType: "json",--}}
-        {{--            url: "{{ url('menu-sortable') }}",--}}
-        {{--            data: {--}}
-        {{--                order: order,--}}
-        {{--                _token: token--}}
-        {{--            },--}}
-        {{--            success: function(response) {--}}
-        {{--                if (response.status == "success") {--}}
-        {{--                    console.log(response);--}}
-        {{--                } else {--}}
-        {{--                    console.log(response);--}}
-        {{--                }--}}
-        {{--            }--}}
-        {{--        });--}}
-        {{--    }--}}
-        {{--});--}}
     </script>
 </x-app-layout>

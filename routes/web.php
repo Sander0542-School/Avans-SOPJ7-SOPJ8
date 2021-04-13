@@ -23,9 +23,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
     Route::get('', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('menu')->name('menu.')->group(function () {
-        Route::get('', [MenuController::class, 'index'])->name('getIndex');
-        Route::get('edit', [MenuController::class, 'edit'])->name('getEdit');
-
-
+        Route::get('', [MenuController::class, 'index'])->name('index');
+        Route::get('update', [MenuController::class, 'update'])->name('update');
     });
 });
