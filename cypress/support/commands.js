@@ -23,3 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('refreshDatabase', (seed = false) => {
+    cy.artisan(`migrate:fresh ${seed ? '--seed' : ''}`);
+    cy.artisan('cache:clear');
+})
