@@ -23,7 +23,7 @@ class DomainFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'color' => '15941f'
+            'color' => substr($this->faker->hexColor, 1, 6)
         ];
     }
 }
