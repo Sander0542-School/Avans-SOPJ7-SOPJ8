@@ -146,9 +146,10 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    cursor: auto;
 }
 
-.markerButton {
+.marker-button {
     text-align: center;
     max-width: 100px;
 }
