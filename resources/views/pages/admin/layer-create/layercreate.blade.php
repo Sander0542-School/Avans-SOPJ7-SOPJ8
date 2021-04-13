@@ -6,28 +6,28 @@
     </x-slot>
     {{--    MOET NOG GECHECKED WORDEN OP ADMIN ROL--}}
     <div class="layer-container">
-        <form method="post" action="">
+        <form method="POST" action="/admin/layers/">
             @csrf
             <label>Wat is de titel van de nieuwe laag?</label>
-            <input required class="form-control" type="text" name="layerTitle" placeholder="Titel">
+            <input required class="form-control" type="text" name="title" placeholder="Titel">
             <label>Selecteer de voorgaande laag:</label>
-            <select class="form-control" class="selectpicker" id="previousSelectList" data-live-search="true">
+            <select class="form-control" class="selectpicker" id="previousSelectList" data-live-search="true" name="parent">
                 @if($layers->isEmpty() && $subjects->isEmpty())
                     <option selected>Geen bestaande lagen gevonden</option>
                 @else
                     <optgroup label="Onderwerpen">
                         @foreach($subjects as $subject)
-                            <option data-tokens="{{$subject->name}}" value="subject{{$subject->id}}" name="subject{{$subject->id}}">{{$subject->name}}</option>
+                            <option data-tokens="{{$subject->name}}" value="subject-{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>
                         @endforeach
                     </optgroup>
                     <optgroup label="Lagen">
                         @foreach($layers as $layer)
-                            <option data-tokens="{{$layer->name}}" value="layer{{$layer->id}}" name="layer{{$layer->id}}">{{$layer->name}}</option>
+                            <option data-tokens="{{$layer->slug}}" value="layer-{{$layer->id}}" name="layer-{{$layer->id}}">{{$layer->name}}</option>
                         @endforeach
                     </optgroup>
                 @endif
             </select>
-            <div id="editor" class="text-editor" name="editor1">
+            <textarea id="editor" class="text-editor" name="editor1">
                 <h1>
                     Sample text
                 </h1>
@@ -35,7 +35,7 @@
                     Bottom text
                 </p>
 
-            </div>
+            </textarea>
             <input type="submit" value="Bevestigen" class="btn btn-success">
             <form>
                 <input type="submit" value="Annuleren" class="btn btn-danger">

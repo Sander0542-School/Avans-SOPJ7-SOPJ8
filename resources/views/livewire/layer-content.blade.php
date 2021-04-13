@@ -12,7 +12,7 @@
 
         <h1>{{ $layer->name }}</h1>
 
-        <div class="layer-content-text">{{ $layer->content }}</div>
+        <div class="layer-content-text">{!! $layer->content !!}</div>
         <br/>
 
         <div class="row">

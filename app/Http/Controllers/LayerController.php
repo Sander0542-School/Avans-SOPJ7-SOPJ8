@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\LayerResource;
 use App\Models\Layer;
+use App\Models\LayerChoice;
 use App\Models\Subject;
+use App\Models\SubjectChoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +21,11 @@ class LayerController extends Controller
 
     public function create()
     {
-        return view('pages.admin.layers.create');
+
+        return view('pages.admin.layer-create.layercreate', [
+            'layers' => Layer::all(),
+            'subjects' => Subject::all(),
+            ]);
     }
     /**
      * Store a newly created resource in storage.
@@ -36,8 +42,8 @@ class LayerController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:layers,name',
-            'body' => 'required',
+            'title' => 'required|unique:layers,name',
+            'editor1' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -45,12 +51,37 @@ class LayerController extends Controller
         }
 
         $newLayerObject = Layer::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name, '-'),
-            'content' => $request->body,
+            'name' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+            'content' => $request->editor1,
         ]);
 
         if ($newLayerObject->save()) {
+            $parentArray;
+            $parentType = '';
+            $parentId = 0;
+            if ($request->parent != null) {
+                $parentArray = explode('-',(string) $request->parent);
+                $parentType = $parentArray[0];
+                $parentId = $parentArray[1];
+            }
+
+            if ($parentType != '') {
+                if ($parentType == 'subject') {
+                    SubjectChoice::create([
+                        'name' => $newLayerObject->name,
+                        'description' => $newLayerObject->name,
+                        'icon' => 'fas fa-brain',
+                        'subject_id' => $parentId,
+                        'layer_id' => $newLayerObject->id
+                    ])->save();
+                } else if ($parentType == 'layer') {
+                    LayerChoice::create([
+                        'parent_layer_id' => $parentId,
+                        'child_layer_id' => $newLayerObject->id
+                    ])->save();
+                }
+            }
             return new LayerResource($newLayerObject);
         } else {
             return response()->json(['error' => 'Layer "'.$request->name.'" could not be created.'])->setStatusCode(500);
