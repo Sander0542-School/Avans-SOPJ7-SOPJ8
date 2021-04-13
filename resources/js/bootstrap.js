@@ -52,5 +52,5 @@ $( document ).ready(function() {
 });
 
 //jquery ui
-import 'jquery-ui/ui/widgets/autocomplete.js';
-import 'jquery-ui/ui/widgets/sortable.js';
+require('jquery-ui/ui/widgets/autocomplete.js');
+require('jquery-ui/ui/widgets/sortable.js');
