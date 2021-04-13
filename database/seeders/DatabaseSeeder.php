@@ -7,9 +7,7 @@ use App\Models\Layer;
 use App\Models\LayerChoice;
 use App\Models\Subject;
 use App\Models\SubjectChoice;
-use App\Models\User;
 use Faker\Generator;
-use Hash;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
