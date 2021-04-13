@@ -25,6 +25,6 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::get('', [MenuController::class, 'index'])->name('getIndex');
         Route::get('edit', [MenuController::class, 'edit'])->name('getEdit');
 
-        Route::post('update', [MenuController::class, 'update'])->name('postUpdate');
+        Route::post('menu-sortable','MenuController@update')->name('update');;
     });
 });
