@@ -26,10 +26,10 @@ class MapController extends Controller
             $subject->save();
 
             if ($subject == null) {
-                return response()->json(['error' => 'Subject "' . $request->name . '" could not be set.'])->setStatusCode(500);
+                return response()->json(['error' => 'Het onderwerp "' . $request->name . '" kon niet verplaatst worden.'])->setStatusCode(500);
             }
         }
 
-        return redirect()->route('admin.map.index')->with('success', 'The subject has been set successfully!');
+        return redirect()->route('admin.map.index')->with('success', 'Het onderwerp is  succesvol verplaatst!');
     }
 }

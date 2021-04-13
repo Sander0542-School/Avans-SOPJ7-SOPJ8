@@ -48,20 +48,20 @@ class UpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'subjects.*.id.required' => 'An id is required',
-            'subjects.*.id.distinct' => 'An id must be distinct',
-            'subjects.*.id.integer' => 'An id must be an integer',
-            'subjects.*.id.exists' => 'An id must exist',
+            'subjects.*.id.required' => 'Een id is vereist',
+            'subjects.*.id.distinct' => 'Een id moet onderscheiden zijn van anderen',
+            'subjects.*.id.integer' => 'Een id moet wel een getal zijn',
+            'subjects.*.id.exists' => 'Een id moet wel bestaan',
 
-            'subjects.*.lat.required' => 'A latitude is required',
-            'subjects.*.lat.distinct' => 'An id must be distinct',
-            'subjects.*.lat.numeric' => 'A latitude is numeric',
-            'subjects.*.lat.regex' => 'A latitude must match the regex',
+            'subjects.*.lat.required' => 'Een breedtegraad is vereist',
+            'subjects.*.lat.distinct' => 'Een breedtegraad moet onderscheiden zijn van anderen',
+            'subjects.*.lat.numeric' => 'Een breedtegraad is numeriek',
+            'subjects.*.lat.regex' => 'Een breedtegraad moet overeenkomen met de reguliere expressie',
 
-            'subjects.*.lon.required' => 'A longitude is required',
-            'subjects.*.lon.distinct' => 'An id must be distinct',
-            'subjects.*.lon.numeric' => 'A longitude is numeric',
-            'subjects.*.lon.regex' => 'A longitude must match the regex',
+            'subjects.*.lon.required' => 'Een lengtegraad is vereist',
+            'subjects.*.lon.distinct' => 'Een lengtegraad moet onderscheiden zijn van anderen',
+            'subjects.*.lon.numeric' => 'Een lengtegraad is numeriek',
+            'subjects.*.lon.regex' => 'Een lengtegraad moet overeenkomen met de reguliere expressie',
         ];
     }
 }
