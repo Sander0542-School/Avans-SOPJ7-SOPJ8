@@ -82,7 +82,11 @@ class LayerController extends Controller
                     ])->save();
                 }
             }
-            return new LayerResource($newLayerObject);
+
+            return view('pages.admin.layer-create.layercreate', [
+                'layers' => Layer::all(),
+                'subjects' => Subject::all(),
+            ]);
         } else {
             return response()->json(['error' => 'Layer "'.$request->name.'" could not be created.'])->setStatusCode(500);
         }
