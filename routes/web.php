@@ -32,3 +32,4 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::post('update', [MapController::class, 'update'])->name('update');
     });
 });
+
