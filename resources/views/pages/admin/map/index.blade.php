@@ -4,6 +4,15 @@
             {{ __('Map') }}
             <button onclick="saveLocations()" class="btn btn-primary float-right">{{ __('Save Locations') }}</button>
         </h2>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form id="subjectsForm" method="post" action="{{ route('admin.map.update') }}">
             @csrf
         </form>
