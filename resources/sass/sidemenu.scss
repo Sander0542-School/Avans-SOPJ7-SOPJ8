@@ -14,7 +14,7 @@
     min-width: $sidemenu-width;
     max-width: $sidemenu-width;
     background: $sidemenu-color;
-    color: #fff;
+    color: $sidemenu-color-text;
     transition: all 0.3s;
     margin-left: -$sidemenu-width;
     height: 100vh;
@@ -22,7 +22,7 @@
 
     .sidemenu-header {
         padding: 20px;
-        background: $sidemenu-color-active;
+        background: $sidemenu-color;
     }
 
     .menu-item,
@@ -46,6 +46,7 @@
         &[aria-expanded="true"] {
             > i:before {
                 content: '\f146';
+                font-weight: 900;
             }
         }
     }
@@ -59,12 +60,12 @@
     }
 
     ul.show {
-        background: $sidemenu-color-active;
+        background: $sidemenu-color;
     }
 
     ul {
         p {
-            color: #fff;
+            color: $sidemenu-color-text;
             padding: 10px;
         }
 
@@ -78,8 +79,8 @@
                 }
 
                 &:hover {
-                    color: #7386D5;
-                    background: #fff;
+                    color: $sidemenu-color-text-active;
+                    background: $sidemenu-color-active;
                 }
 
                 &.single > a {
@@ -88,25 +89,19 @@
             }
         }
 
-        li.active {
-            > .menu-item {
-                color: #fff;
-                background: $sidemenu-color-active;
-            }
-        }
-
         ul {
             padding-left: 18px !important;
 
             .menu-item {
                 font-size: 0.9em !important;
-                background: $sidemenu-color-active;
+                background: $sidemenu-color;
             }
         }
     }
 
     &.active {
         margin-left: 0;
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4), 0 0 20px 0 rgba(0, 0, 0, 0.2);
     }
 }
 
