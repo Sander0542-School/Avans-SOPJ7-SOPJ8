@@ -33,4 +33,4 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
     });
 });
 
-Route::get('/admintest',[\App\Http\Controllers\LayerController::class,'layerCreateTest']);
+//Route::get('/admintest',[\App\Http\Controllers\LayerController::class,'layerCreateTest']);

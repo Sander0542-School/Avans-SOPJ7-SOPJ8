@@ -17,11 +17,11 @@ class LayerController extends Controller
         return Layer::all();
     }
 
-    public function layerCreateTest() {
-        $layers = Layer::all();
-        $subjects = Subject::all();
-        return view('pages.admin.layer-create.layercreate',['layers'=>$layers,'subjects'=>$subjects]);
-    }
+    //public function layerCreateTest() {
+    //    $layers = Layer::all();
+    //    $subjects = Subject::all();
+    //    return view('pages.admin.layer-create.layercreate',['layers'=>$layers,'subjects'=>$subjects]);
+    //}
 
     /**
      * Store a newly created resource in storage.
