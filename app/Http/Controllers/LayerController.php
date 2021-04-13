@@ -46,7 +46,10 @@ class LayerController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()])->setStatusCode(400);
+            return view('pages.admin.layer-create.layercreate', [
+                'layers' => Layer::all(),
+                'subjects' => Subject::all(),
+            ])->withErrors($validator->errors());
         }
 
         $newLayerObject = Layer::create([
@@ -88,7 +91,10 @@ class LayerController extends Controller
                 'subjects' => Subject::all(),
             ]);
         } else {
-            return response()->json(['error' => 'Layer "'.$request->name.'" could not be created.'])->setStatusCode(500);
+            return view('pages.admin.layer-create.layercreate', [
+                'layers' => Layer::all(),
+                'subjects' => Subject::all(),
+            ])->withErrors(['error' => 'Layer "'.$request->name.'" could not be created.']);
         }
     }
 
