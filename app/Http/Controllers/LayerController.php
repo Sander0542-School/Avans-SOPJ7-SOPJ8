@@ -30,7 +30,7 @@ class LayerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Illuminate\Http\Request $request
-     * @return LayerResource
+     * @return \Illuminate\View\View
      */
     public function store(Request $request)
     {
