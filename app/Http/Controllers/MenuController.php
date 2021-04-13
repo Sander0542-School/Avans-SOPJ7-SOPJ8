@@ -6,8 +6,6 @@ use App\Http\Requests\Admin\Menu\UpdateRequest;
 use App\Models\Domain;
 use App\Models\Subject;
 use Cache;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class MenuController extends Controller
 {
