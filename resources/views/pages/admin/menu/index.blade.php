@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="row">
-        <form class="col" action="{{ route('admin.menu.update') }}">
+        <form class="col" action="{{ route('admin.menu.update') }}" method="post">
             @csrf
 
             <div class="sortable">
@@ -35,6 +35,11 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="col-span-1 text-right">
+                <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">
+                    Opslaan
+                </button>
             </div>
         </form>
     </div>

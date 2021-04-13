@@ -7,6 +7,7 @@ use App\Models\Domain;
 use App\Models\Subject;
 use Cache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MenuController extends Controller
 {
@@ -27,7 +28,7 @@ class MenuController extends Controller
 
         foreach ($formSubjects as $formSubject) {
             $subject = Subject::updateOrCreate([
-                'id' => $formSubject['id'],
+                'id' => $formSubject['subject_id'],
             ], [
                 'domain_id' => $formSubject['domain_id'],
                 'name' => $formSubject['name'],

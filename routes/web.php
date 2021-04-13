@@ -25,7 +25,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
 
     Route::prefix('menu')->name('menu.')->group(function () {
         Route::get('', [MenuController::class, 'index'])->name('index');
-        Route::get('update', [MenuController::class, 'update'])->name('update');
+        Route::post('update', [MenuController::class, 'update'])->name('update');
     });
 
     Route::prefix('map')->name('map.')->group(function () {
