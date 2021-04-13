@@ -17478,6 +17478,18 @@ readers do not read off random characters that represent icons */
   height: 100vh;
 }
 
+.marker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: auto;
+}
+
+.marker-button {
+  text-align: center;
+  max-width: 100px;
+}
+
 .wrapper {
   display: flex;
   width: 100%;
