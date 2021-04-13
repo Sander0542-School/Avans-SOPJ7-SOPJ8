@@ -6,13 +6,12 @@ window.Layer = {
             window.Swapper.loadContent();
             window.SideMenu.close();
         }
+    },
+    loadHash: () => {
+        if (window.location.hash) {
+            const layerSlug = window.location.hash.substr(1);
+            window.Layer.load(layerSlug);
+        }
     }
 }
 
-if (window.location.hash) {
-    const layerSlug = window.location.hash.substr(1);
-    window.Swapper.loadContent();
-    document.addEventListener("DOMContentLoaded", () => {
-        window.Layer.load(layerSlug);
-    });
-}

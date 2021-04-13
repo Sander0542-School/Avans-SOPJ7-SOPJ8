@@ -1,4 +1,4 @@
-<nav class="sidemenu active">
+<nav class="sidemenu">
     <div class="sidemenu-header">
         <h3>Expeditiekaart</h3>
         <h4>Bedrijfsovername</h4>

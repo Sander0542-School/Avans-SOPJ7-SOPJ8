@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LayerController;
@@ -28,4 +29,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
     });
 
     Route::resource('layers', LayerController::class)->only(['store', 'update','destroy', 'create']);
+
+    Route::prefix('map')->name('map.')->group(function () {
+        Route::get('', [MapController::class, 'index'])->name('index');
+        Route::post('update', [MapController::class, 'update'])->name('update');
+    });
 });
