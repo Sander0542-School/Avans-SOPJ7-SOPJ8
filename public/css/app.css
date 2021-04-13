@@ -17093,8 +17093,8 @@ readers do not read off random characters that represent icons */
   z-index: 1001;
   min-width: 300px;
   max-width: 300px;
-  background: #388e3c;
-  color: #fff;
+  background: #EEEEEE;
+  color: #2E7D32;
   transition: all 0.3s;
   margin-left: -300px;
   height: 100vh;
@@ -17102,7 +17102,7 @@ readers do not read off random characters that represent icons */
 }
 .sidemenu .sidemenu-header {
   padding: 20px;
-  background: #2E7D32;
+  background: #EEEEEE;
 }
 .sidemenu .menu-item,
 .sidemenu .menu-item:hover,
@@ -17123,6 +17123,7 @@ readers do not read off random characters that represent icons */
 }
 .sidemenu a.sidemenu-toggle[aria-expanded=true] > i:before {
   content: "";
+  font-weight: 900;
 }
 .sidemenu a[data-toggle=collapse] {
   position: relative;
@@ -17131,10 +17132,10 @@ readers do not read off random characters that represent icons */
   padding: 20px 0;
 }
 .sidemenu ul.show {
-  background: #2E7D32;
+  background: #EEEEEE;
 }
 .sidemenu ul p {
-  color: #fff;
+  color: #2E7D32;
   padding: 10px;
 }
 .sidemenu ul li > .menu-item {
@@ -17145,25 +17146,22 @@ readers do not read off random characters that represent icons */
   padding: 8px 14px;
 }
 .sidemenu ul li > .menu-item:hover {
-  color: #7386D5;
-  background: #fff;
+  color: #1B5E20;
+  background: #E0E0E0;
 }
 .sidemenu ul li > .menu-item.single > a {
   margin-left: 40px;
-}
-.sidemenu ul li.active > .menu-item {
-  color: #fff;
-  background: #2E7D32;
 }
 .sidemenu ul ul {
   padding-left: 18px !important;
 }
 .sidemenu ul ul .menu-item {
   font-size: 0.9em !important;
-  background: #2E7D32;
+  background: #EEEEEE;
 }
 .sidemenu.active {
   margin-left: 0;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4), 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .content {
