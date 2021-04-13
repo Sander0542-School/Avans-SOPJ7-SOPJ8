@@ -21,7 +21,6 @@ class LayerController extends Controller
 
     public function create()
     {
-
         return view('pages.admin.layer-create.layercreate', [
             'layers' => Layer::all(),
             'subjects' => Subject::all(),
@@ -57,9 +56,10 @@ class LayerController extends Controller
         ]);
 
         if ($newLayerObject->save()) {
-            $parentArray;
+            $parentArray = [];
             $parentType = '';
             $parentId = 0;
+
             if ($request->parent != null) {
                 $parentArray = explode('-',(string) $request->parent);
                 $parentType = $parentArray[0];
