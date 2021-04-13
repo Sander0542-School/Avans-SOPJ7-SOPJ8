@@ -24,6 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'subject' => ['required', 'array'],
             'subject.*.id' => ['required', 'nullable', 'integer'],
             'subject.*.domain_id' => ['required', 'integer', 'exists:domains,id'],
             'subject.*.name' => ['required', 'string', 'max:255'],
