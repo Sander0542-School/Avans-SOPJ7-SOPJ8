@@ -3,18 +3,16 @@
 namespace Database\Factories;
 
 use App\Models\Domain;
-use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class SubjectFactory extends Factory
+class DomainFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Subject::class;
+    protected $model = Domain::class;
 
     /**
      * Define the model's default state.
@@ -25,10 +23,7 @@ class SubjectFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'domain_id' => Domain::inRandomOrder()->first()->id,
-            'lat' => 52.113462,
-            'lon' => 6.611401,
-            'order' => 1
+            'color' => '15941f'
         ];
     }
 }

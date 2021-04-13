@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Domain;
 use App\Models\Subject;
 use App\Models\User;
 use Database\Factories\SubjectFactory;
@@ -36,6 +37,7 @@ class MapTest extends TestCase
 
     public function test_map_can_be_updated()
     {
+        Domain::factory()->create();
         $subject = Subject::factory()->create();
 
         $response = $this->post(route('admin.map.update'), [
