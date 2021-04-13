@@ -50,4 +50,3 @@ window.Leaflet = require('leaflet');
 $( document ).ready(function() {
     $('select').selectpicker();
 });
-

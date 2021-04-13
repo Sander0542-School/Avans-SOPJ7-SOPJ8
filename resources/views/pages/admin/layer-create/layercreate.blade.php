@@ -4,7 +4,7 @@
             {{ __('Menu') }}
         </h2>
     </x-slot>
-{{--    MOET NOG GECHECKED WORDEN OP ADMIN ROL--}}
+    {{--    MOET NOG GECHECKED WORDEN OP ADMIN ROL--}}
     <div class="layer-container">
         <form method="post" action="">
             @csrf
@@ -42,8 +42,10 @@
             </form>
         </form>
     </div>
-    <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
-    <script>CKEDITOR.replace('editor1');</script>
+    @push('scripts')
+        <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
+        <script>CKEDITOR.replace('editor1');</script>
+    @endpush
 </x-app-layout>
 
 
