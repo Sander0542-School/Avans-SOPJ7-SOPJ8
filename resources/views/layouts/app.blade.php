@@ -19,7 +19,6 @@
         @livewireScripts
 
         <script src="{{ mix('js/app.js') }}"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
     </head>
     <body class="font-sans antialiased bg-light {{ $bodyClasses }}">

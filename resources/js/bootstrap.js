@@ -50,3 +50,9 @@ window.Leaflet = require('leaflet');
 $( document ).ready(function() {
     $('select').selectpicker();
 });
+
+//jquery ui
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import 'jquery-ui/ui/widgets/autocomplete.js';
+import 'jquery-ui/ui/widgets/sortable.js';
