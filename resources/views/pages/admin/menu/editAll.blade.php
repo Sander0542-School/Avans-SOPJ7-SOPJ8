@@ -33,15 +33,15 @@
                                     @endif>
                             </td>
                             <td class="form-group">
-                                <input type="number" name="domainId" class="form-control w-full"
-                                       @if(old('domain_id') != null)
-                                       value="{{ old('domain_id') }}"
+                                <input type="text" name="domain_name" class="form-control w-full"
+                                       @if(old('domain_name') != null)
+                                       value="{{ old('domain_name') }}"
                                        @else
-                                       value="{{ $subject->domain_id }}"
+                                       value="{{ $subject->domain_name }}"
                                     @endif>
                             </td>
                             <td class="form-group">
-                                <input type="string" name="lon" class="form-control w-full"
+                                <input type="text" name="lon" class="form-control w-full"
                                        @if(old('lon') != null)
                                        value="{{ old('lon') }}"
                                        @else

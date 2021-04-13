@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('menu-sortable','MenuController@update');
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
@@ -25,6 +26,6 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::get('', [MenuController::class, 'index'])->name('getIndex');
         Route::get('edit', [MenuController::class, 'edit'])->name('getEdit');
 
-        Route::post('menu-sortable','MenuController@update')->name('update');;
+
     });
 });
