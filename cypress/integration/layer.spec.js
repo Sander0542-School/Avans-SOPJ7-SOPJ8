@@ -1,11 +1,13 @@
 describe('Layer', () => {
+    beforeEach(() => cy.refreshDatabase(true));
+
     it('Side Menu', () => {
         cy.visit('/');
 
-        cy.get('.sidemenu-control button').should('be.visible').click();
-        cy.get('nav.sidemenu > ul > li:first > .menu-item a[data-toggle="collapse"]').should('be.visible').click();
+        cy.get('.sidemenu-control #toggleSidemenu').should('be.visible').click();
+        cy.get('nav.sidemenu > ul > li:first > .menu-item a[data-toggle="collapse"]').first().should('be.visible').click();
 
-        cy.get('nav.sidemenu > ul > li:first > ul.show > li > .menu-item > a[onclick]').should('be.visible').click().then(($elem) => {
+        cy.get('nav.sidemenu > ul > li:first > ul.show > li > .menu-item > a[onclick]').first().should('be.visible').click().then(($elem) => {
             const title = $elem.text();
 
             cy.get('nav.sidemenu').should('not.have.class', 'active');
@@ -24,7 +26,7 @@ describe('Layer', () => {
     it('URL', () => {
         cy.visit('/');
 
-        cy.get('nav.sidemenu > ul > li:first > ul > li > .menu-item > a[onclick]').then(($elem) => {
+        cy.get('nav.sidemenu > ul > li:first > ul > li > .menu-item > a[onclick]').first().then(($elem) => {
             const title = $elem.text();
             const href = $elem.attr('href');
 
