@@ -19,6 +19,8 @@
         "bootstrap": "^4.6.0",
         "cy2": "^1.0.4",
         "cypress": "^7.0.1",
+        "cypress-intellij-reporter": "^0.0.6",
+        "cypress-laravel": "^0.2.0",
         "jquery": "^3.5.1",
         "laravel-mix": "^6.0.6",
         "leaflet": "^1.7.1",
