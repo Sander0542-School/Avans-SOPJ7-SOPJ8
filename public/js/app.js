@@ -3986,11 +3986,14 @@ window.SubjectMap = {
     var draggable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (window.SubjectMap.map == null) return;
     subjects.forEach(function (item) {
-      var marker = new Leaflet.marker([item.lon, item.lat], {
+      var marker = new Leaflet.marker({
+        lat: item.lat,
+        lon: item.lon
+      }, {
         draggable: draggable,
         icon: new Leaflet.DivIcon({
           className: 'my-div-icon',
-          html: '<div>' + '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' + '<button class="btn btn-primary" style="text-align: center;">' + item.name + '</button>' + '</div>'
+          html: '<div class="marker-container">' + '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' + "<button class=\"btn btn-primary\" class=\"marker-button\" style=\"background-color:#".concat(item.domain.color, ";border-color:#").concat(item.domain.color, "\">").concat(item.name, "</button>") + '</div>'
         }),
         subjectId: item.id
       });

@@ -19,7 +19,7 @@ class Subject extends Model
 
     public function domain()
     {
-        return $this->hasOne(Domain::class);
+        return $this->hasOne(Domain::class, 'id', 'domain_id');
     }
 
     public function layers() {
