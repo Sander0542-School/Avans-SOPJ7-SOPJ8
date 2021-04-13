@@ -12,11 +12,15 @@ use function React\Promise\all;
 
 class LayerControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     public $user;
 
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->seed();
 
         $this->user = User::create([
             'name' => 'fakeadmin',
