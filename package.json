@@ -18,7 +18,6 @@
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
         "bootstrap-select": "^1.13.18",
-        "cy2": "^1.0.4",
         "cypress": "^7.0.1",
         "cypress-intellij-reporter": "^0.0.6",
         "cypress-laravel": "^0.2.0",
