@@ -1,21 +1,19 @@
 <?php
 
-namespace Database\Seeders;
-
-use App\Models\User;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Seeder;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class PermissionsSeeder extends Seeder
+class FillPermissionsTables extends Migration
 {
     /**
-     * Run the database seeds.
+     * Run the migrations.
      *
      * @return void
      */
-    public function run()
+    public function up()
     {
         Permission::create(['name' => 'domains.*']);
         Permission::create(['name' => 'layers.*']);
@@ -25,13 +23,15 @@ class PermissionsSeeder extends Seeder
         $admin->givePermissionTo('domains.*');
         $admin->givePermissionTo('layers.*');
         $admin->givePermissionTo('subjects.*');
+    }
 
-        $user = User::create([
-            'name' => 'admin',
-            'email' => 'admin@expeditiekaart.nl',
-            'password' => \Hash::make('password')
-        ]);
-
-        $user->assignRole($admin);
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
     }
 }

@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\FakerServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\CypressServiceProvider::class,
     ],
 
     /*

@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Admin\Map;
 
-use App\Models\Subject;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -26,17 +24,24 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'subjects.*.id' => ['required', 'distinct', 'integer', 'exists:\App\Models\Subject,id'],
+            'subjects.*.id' => [
+                'required',
+                'distinct',
+                'integer',
+                'exists:\App\Models\Subject,id',
+            ],
             'subjects.*.lat' => [
                 'required',
                 'distinct',
                 'numeric',
-                'regex:/^[+-]?((90\.?0*$)|(([0-8]?[0-9])\.?[0-9]*$))/'],
+                'regex:/^[+-]?((90\.?0*$)|(([0-8]?[0-9])\.?[0-9]*$))/',
+            ],
             'subjects.*.lon' => [
                 'required',
                 'distinct',
                 'numeric',
-                'regex:/^[+-]?((180\.?0*$)|(((1[0-7][0-9])|([0-9]{0,2}))\.?[0-9]*$))/']
+                'regex:/^[+-]?((180\.?0*$)|(((1[0-7][0-9])|([0-9]{0,2}))\.?[0-9]*$))/',
+            ],
         ];
     }
 
