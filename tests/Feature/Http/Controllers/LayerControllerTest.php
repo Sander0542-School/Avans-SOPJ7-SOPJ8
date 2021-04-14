@@ -42,9 +42,9 @@ class LayerControllerTest extends TestCase
     public function test_storing_layer_parent_subject()
     {
         $response = $this->post(route('admin.layers.store'), [
-            'title' => 'Testing with subject',
+            'name' => 'Testing with subject',
             'parent' => 'subject-1',
-            'editor1' => "<h1>This is content</h1>",
+            'content' => "<h1>This is content</h1>",
         ]);
 
         $this->assertDatabaseHas('layers', ['slug' => 'testing-with-subject']);
@@ -52,11 +52,10 @@ class LayerControllerTest extends TestCase
 
     public function test_storing_layer_parent_layer()
     {
-
         $response = $this->post(route('admin.layers.store'), [
-            'title' => 'Testing-with-layer',
+            'name' => 'Testing-with-layer',
             'parent' => 'layer-1',
-            'editor1' => "<h1>This is content</h1>",
+            'content' => "<h1>This is content</h1>",
         ]);
 
         $this->assertDatabaseHas('layers', ['slug' => 'testing-with-layer']);
@@ -64,11 +63,10 @@ class LayerControllerTest extends TestCase
 
     public function test_storing_layer_duplicate()
     {
-
         $this->post(route('admin.layers.store'), [
-            'title' => 'Testing-with-layer',
+            'name' => 'Testing-with-layer',
             'parent' => 'layer-1',
-            'editor1' => "<h1>This is content</h1>",
+            'content' => "<h1>This is content</h1>",
         ]);
 
         $count = Layer::all()->count();
