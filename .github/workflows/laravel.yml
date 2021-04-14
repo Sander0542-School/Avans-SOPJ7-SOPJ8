@@ -46,9 +46,9 @@ jobs:
       run: vendor/bin/phpunit
 #    - name: 'Run Laravel Server'
 #      run: php artisan serve &
-    - name: 'Get current date'
-      id: date
-      run: echo "::set-output name=date::$(date +'%Y%m%d%H%I%S')"
+#    - name: 'Get current date'
+#      id: date
+#      run: echo "::set-output name=date::$(date +'%Y%m%d%H%I%S')"
 #    - name: 'Run Cypress Tests'
 #      run: npx cy2 run --parallel --record --key ${{ secrets.CYPRESS_KEY }} --ci-build-id ${{ github.run_id }}-${{ steps.date.outputs.date }}
 #      env:
@@ -61,7 +61,7 @@ jobs:
         start: php artisan serve
         record: true
         parallel: true
-        ci-build-id: ${{ github.run_id }}-${{ steps.date.outputs.date }}
+#        ci-build-id: ${{ github.run_id }}-${{ steps.date.outputs.date }}
       env:
         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
         CYPRESS_API_URL: ${{ secrets.CYPRESS_API_URL }}
