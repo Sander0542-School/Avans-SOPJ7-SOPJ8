@@ -20,6 +20,9 @@
                 <x-jet-nav-link href="{{ route('admin.layers.create') }}" :active="request()->routeIs('admin.layers.create')">
                     {{ __('Laag aanmaken') }}
                 </x-jet-nav-link>
+                <x-jet-nav-link href="{{ route('admin.map.index') }}" :active="request()->routeIs('admin.map.index')">
+                    {{ __('Map') }}
+                </x-jet-nav-link>
             </ul>
 
             <!-- Right Side Of Navbar -->
