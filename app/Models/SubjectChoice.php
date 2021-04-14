@@ -10,9 +10,6 @@ class SubjectChoice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
-        'icon',
         'subject_id',
         'layer_id',
     ];

@@ -13,7 +13,7 @@ class Layer extends Model
 
     public function subject()
     {
-        return $this->hasOneThrough(Subject::class, SubjectChoice::class);
+        return $this->hasOneThrough(Subject::class, SubjectChoice::class, 'layer_id', 'id','id','subject_id');
     }
 
     public function childLayers()

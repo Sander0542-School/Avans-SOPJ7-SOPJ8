@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\LayerController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\LayerController;
+use App\Http\Controllers\Api\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::apiResources([
-    'layers' => LayerController::class,
-    'subjects' => SubjectController::class
-]);
+Route::apiResource('layers', LayerController::class)->only(['index', 'show']);
+Route::apiResource('subjects', SubjectController::class)->only(['index', 'show']);

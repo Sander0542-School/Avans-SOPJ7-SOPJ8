@@ -12,13 +12,14 @@ class Subject extends Model
     protected $fillable = [
         'domain_id',
         'name',
+        'order',
         'lon',
         'lat',
     ];
 
     public function domain()
     {
-        return $this->hasOne(Domain::class);
+        return $this->hasOne(Domain::class, 'id', 'domain_id');
     }
 
     public function layers() {

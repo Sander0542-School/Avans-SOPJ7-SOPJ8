@@ -14,6 +14,13 @@ class SubjectResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'lat' => $this->lat,
+            'lon' => $this->lon,
+            'order' => $this->order,
+            'domain' => new DomainResource($this->domain)
+        ];
     }
 }

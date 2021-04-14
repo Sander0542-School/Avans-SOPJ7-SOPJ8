@@ -15,9 +15,6 @@ class CreateSubjectChoicesTable extends Migration
     {
         Schema::create('subject_choices', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('icon')->nullable();
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('layer_id')->unique();
             $table->timestamps();
