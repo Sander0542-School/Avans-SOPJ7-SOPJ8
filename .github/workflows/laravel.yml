@@ -33,11 +33,8 @@ jobs:
         npx cypress verify
         npx cypress info
         npx cypress version
-        npx cypress version --component package
-        npx cypress version --component binary
-        npx cypress version --component electron
-        npx cypress version --component node
-        "sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /*/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
+    - name: 'Set Cypress API'
+      run: "sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /home/runner/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
 #    - name: 'Run Laravel Mix'
 #      run: npm run production
     - name: 'Generate key'
