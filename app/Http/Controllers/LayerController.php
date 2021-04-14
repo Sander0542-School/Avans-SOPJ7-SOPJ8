@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\LayerResource;
 use App\Models\Layer;
+use App\Models\LayerChoice;
 use App\Models\Subject;
+use App\Models\SubjectChoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -17,33 +19,82 @@ class LayerController extends Controller
         return Layer::all();
     }
 
+    public function create()
+    {
+        return view('pages.admin.layer-create.layercreate', [
+            'layers' => Layer::all(),
+            'subjects' => Subject::all(),
+            ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param Illuminate\Http\Request $request
-     * @return LayerResource
+     * @return \Illuminate\View\View
      */
     public function store(Request $request)
     {
+        $user = \Auth::user();
+
+        if ($user == null || !$user->can('layers.store')) {
+            return response('Forbidden',403);
+        }
+
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:layers,name',
-            'body' => 'required',
+            'title' => 'required|unique:layers,name',
+            'editor1' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()])->setStatusCode(400);
+            return view('pages.admin.layer-create.layercreate', [
+                'layers' => Layer::all(),
+                'subjects' => Subject::all(),
+            ])->withErrors($validator->errors());
         }
 
         $newLayerObject = Layer::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name, '-'),
-            'content' => $request->body,
+            'name' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+            'content' => $request->editor1,
         ]);
 
         if ($newLayerObject->save()) {
-            return new LayerResource($newLayerObject);
+            $parentType = '';
+            $parentId = 0;
+
+            if ($request->parent != null) {
+                $parentArray = explode('-',(string) $request->parent);
+                $parentType = $parentArray[0];
+                $parentId = $parentArray[1];
+            }
+
+            if ($parentType != '') {
+                if ($parentType == 'subject') {
+                    SubjectChoice::create([
+                        'name' => $newLayerObject->name,
+                        'description' => $newLayerObject->name,
+                        'icon' => 'fas fa-brain',
+                        'subject_id' => $parentId,
+                        'layer_id' => $newLayerObject->id
+                    ])->save();
+                } else if ($parentType == 'layer') {
+                    LayerChoice::create([
+                        'parent_layer_id' => $parentId,
+                        'child_layer_id' => $newLayerObject->id
+                    ])->save();
+                }
+            }
+
+            return view('pages.admin.layer-create.layercreate', [
+                'layers' => Layer::all(),
+                'subjects' => Subject::all(),
+                'success' => 'Laag "'. $request->title .'" is aangemaakt'
+            ]);
         } else {
-            return response()->json(['error' => 'Layer "'.$request->name.'" could not be created.'])->setStatusCode(500);
+            return view('pages.admin.layer-create.layercreate', [
+                'layers' => Layer::all(),
+                'subjects' => Subject::all(),
+            ])->withErrors(['error' => 'Layer "'.$request->name.'" could not be created.']);
         }
     }
 
@@ -68,16 +119,24 @@ class LayerController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string $slug
+     * @param int $id
      * @return LayerResource
      */
-    public function update(Request $request, $slug)
+    public function update(Request $request, $id)
     {
-        DB::table('layers')->where('slug', $slug)->update($request->all());
+        $user = \Auth::user();
 
-        $updatedLayer = Layer::where('slug', $slug)->first();
+        if ($user == null || !$user->can('layers.update')) {
+            return response('Forbidden',403);
+        }
 
-        return new LayerResource($updatedLayer);
+        Layer::where('id', $id)->update([
+            'name' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+            'content' => $request->editor1
+        ]);
+
+        return new LayerResource(Layer::where('id', $id)->first());
     }
 
     /**
@@ -88,6 +147,12 @@ class LayerController extends Controller
      */
     public function destroy(string $slug)
     {
+        $user = \Auth::user();
+
+        if ($user == null || !$user->can('layers.destroy')) {
+            return response('Forbidden',403);
+        }
+
         $layerToDestroy = Layer::where('slug', $slug)->firstOrFail();
 
         if ($layerToDestroy->delete()) {

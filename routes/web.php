@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LayerController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::get('', [MenuController::class, 'index'])->name('index');
         Route::post('update', [MenuController::class, 'update'])->name('update');
     });
+
+    Route::resource('layers', LayerController::class)->only(['store', 'update','destroy', 'create']);
 
     Route::prefix('map')->name('map.')->group(function () {
         Route::get('', [MapController::class, 'index'])->name('index');

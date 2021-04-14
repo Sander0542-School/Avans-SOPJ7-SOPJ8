@@ -21,6 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
-    'layers' => LayerController::class,
     'subjects' => SubjectController::class
+]);
+
+Route::apiResource('layers', LayerController::class)->only([
+    'index',
+    'show'
 ]);
