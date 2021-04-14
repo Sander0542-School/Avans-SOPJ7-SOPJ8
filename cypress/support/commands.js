@@ -28,3 +28,7 @@ Cypress.Commands.add('refreshDatabase', (seed = false) => {
     cy.artisan(`migrate:fresh ${seed ? '--seed' : ''}`);
     cy.artisan('cache:clear');
 })
+
+Cypress.Commands.add('loginAdmin', () => {
+    cy.getAdmin().then(admin => cy.login(admin.id));
+})

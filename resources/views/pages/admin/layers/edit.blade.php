@@ -22,7 +22,7 @@
         <div class="form-group">
             <label for="inputParent">Bovenliggend onderwerp of laag</label>
             <select required class="form-control @error('parent') is-invalid @enderror" class="selectpicker" id="inputParent" data-live-search="true" name="parent">
-                <option selected disabled>Kies een onderwerp of loog</option>
+                <option selected disabled>Kies een onderwerp of laag</option>
 
                 <optgroup label="Onderwerpen">
                     @foreach($subjects as $subject)
