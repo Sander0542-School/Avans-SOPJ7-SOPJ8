@@ -12,8 +12,8 @@
             <div class="sortable">
                 @foreach($subjects as $subject)
                     <div id="subjectItem{{ $subject->id }}" class="sortable-item card my-2 w-100">
-                        <input type="hidden" name="subjects[{{ $subject->id }}][subject_id]" value="{{ $subject->id }}">
-                        <input type="hidden" class="subject-order" name="subjects[{{ $subject->id }}][order]" value="{{ $subject->order }}">
+                        <input type="hidden" data-name="subject_id" name="subjects[{{ $subject->id }}][subject_id]" value="{{ $subject->id }}">
+                        <input type="hidden" data-name="order" class="subject-order" name="subjects[{{ $subject->id }}][order]" value="{{ $subject->order }}">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-1">
@@ -22,10 +22,10 @@
                                     </span>
                                 </div>
                                 <div class="col">
-                                    <input name="subjects[{{ $subject->id }}][name]" type="text" class="form-control" value="{{ $subject->name }}" placeholder="Onderwerp naam">
+                                    <input name="subjects[{{ $subject->id }}][name]" data-name="name" type="text" class="form-control" value="{{ $subject->name }}" placeholder="Onderwerp naam">
                                 </div>
                                 <div class="col">
-                                    <select name="subjects[{{ $subject->id }}][domain_id]" class="form-control">
+                                    <select name="subjects[{{ $subject->id }}][domain_id]" data-name="domain_id" class="form-control">
                                         @foreach($domains as $domain)
                                             <option @if($subject->domain_id == $domain->id) selected @endif value="{{ $domain->id }}">{{ $domain->name }}</option>
                                         @endforeach
@@ -52,6 +52,8 @@
                 listOrderInputs();
             }
         });
+
+        listOrderInputs();
 
         function listOrderInputs() {
             const subjectElems = document.querySelectorAll('.sortable > .sortable-item');
