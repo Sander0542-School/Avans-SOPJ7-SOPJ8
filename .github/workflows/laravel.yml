@@ -58,7 +58,7 @@ jobs:
       with:
         install: false
         build: npm run production
-        start: artisan serve
+        start: php artisan serve
         record: true
         parallel: true
         ci-build-id: ${{ github.run_id }}-${{ steps.date.outputs.date }}
