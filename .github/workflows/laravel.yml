@@ -27,17 +27,17 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 #    - name: 'Install Node Dependencies'
 #      run: npm ci
-#    - name: 'Setup Cypress'
-#      run: |
-#        npx cypress install
-#        npx cypress verify
-#        npx cypress info
-#        npx cypress version
-#        npx cypress version --component package
-#        npx cypress version --component binary
-#        npx cypress version --component electron
-#        npx cypress version --component node
-##        "sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /*/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
+    - name: 'Setup Cypress'
+      run: |
+        npx cypress install
+        npx cypress verify
+        npx cypress info
+        npx cypress version
+        npx cypress version --component package
+        npx cypress version --component binary
+        npx cypress version --component electron
+        npx cypress version --component node
+        "sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /*/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
 #    - name: 'Run Laravel Mix'
 #      run: npm run production
     - name: 'Generate key'
@@ -60,7 +60,7 @@ jobs:
     - name: 'Run Cypress Tests'
       uses: cypress-io/github-action@v2
       with:
-        build: "npm run production, sed -i -e 's|api_url:.*$|api_url: \"${{ secrets.CYPRESS_API_URL }}\"|g' /*/.cache/Cypress/*/Cypress/resources/app/packages/server/config/app.yml'"
+        build: npm run production
         start: artisan serve
         record: true
         parallel: true
