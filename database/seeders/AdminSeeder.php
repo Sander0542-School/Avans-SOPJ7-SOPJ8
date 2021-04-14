@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class PermissionsSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,21 +17,12 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'domains.*']);
-        Permission::create(['name' => 'layers.*']);
-        Permission::create(['name' => 'subjects.*']);
-
-        $admin = Role::create(['name' => 'admin']);
-        $admin->givePermissionTo('domains.*');
-        $admin->givePermissionTo('layers.*');
-        $admin->givePermissionTo('subjects.*');
-
         $user = User::create([
             'name' => 'admin',
             'email' => 'admin@expeditiekaart.nl',
             'password' => \Hash::make('password')
         ]);
 
-        $user->assignRole($admin);
+        $user->assignRole('admin');
     }
 }

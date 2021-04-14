@@ -98,7 +98,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call([
-            PermissionsSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }
