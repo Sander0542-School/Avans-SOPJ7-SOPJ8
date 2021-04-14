@@ -54,4 +54,9 @@ jobs:
       env:
         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload Cypress Recordings # TEMP
+      uses: actions/upload-artifact@v2.2.1
+      with:
+        name: Cypress Recordings
+        path: cypress/videos
 
