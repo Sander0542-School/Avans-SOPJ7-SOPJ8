@@ -67,7 +67,6 @@ describe('Manage Layers', () => {
         cy.create('App\\Models\\Layer', 5);
 
         cy.visit('/admin/layers');
-        cy.get('#layerTable > tbody > tr').should('have.length', 5);
 
         cy.get('#layerTable > tbody > tr').then($rows => {
             cy.wrap($rows).should('have.length', 5);
