@@ -19,6 +19,7 @@
         @livewireScripts
 
         <script src="{{ mix('js/app.js') }}"></script>
+
     </head>
     <body class="font-sans antialiased bg-light {{ $bodyClasses }}">
         <x-jet-banner />

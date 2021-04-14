@@ -22,6 +22,7 @@
         "cypress-intellij-reporter": "^0.0.6",
         "cypress-laravel": "^0.2.0",
         "jquery": "^3.5.1",
+        "jquery-ui": "^1.12.1",
         "laravel-mix": "^6.0.6",
         "leaflet": "^1.7.1",
         "lodash": "^4.17.19",

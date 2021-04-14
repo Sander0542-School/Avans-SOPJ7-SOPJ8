@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Admin\Menu\UpdateRequest;
+use App\Models\Domain;
 use App\Models\Subject;
 use Cache;
 
@@ -10,9 +11,12 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $subjects = Subject::orderBy('order');
+        $subjects = Subject::orderBy('order','ASC')->get();
+        $domains = Domain::orderBy('name')->get();
 
-        return view('pages.admin.menu.index')->with('subjects', $subjects);
+        return view('pages.admin.menu.index')
+            ->with('subjects', $subjects)
+            ->with('domains', $domains);
     }
 
     public function update(UpdateRequest $request)
@@ -22,7 +26,7 @@ class MenuController extends Controller
 
         foreach ($formSubjects as $formSubject) {
             $subject = Subject::updateOrCreate([
-                'id' => $formSubject['id'],
+                'id' => $formSubject['subject_id'],
             ], [
                 'domain_id' => $formSubject['domain_id'],
                 'name' => $formSubject['name'],
