@@ -119,10 +119,10 @@ class LayerController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string $slug
+     * @param int $id
      * @return LayerResource
      */
-    public function update(Request $request, $slug)
+    public function update(Request $request, $id)
     {
         $user = \Auth::user();
 
@@ -130,9 +130,13 @@ class LayerController extends Controller
             return response('Forbidden',403);
         }
 
-        DB::table('layers')->where('slug', $slug)->update($request->all());
+        Layer::where('id', $id)->update([
+            'name' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
+            'content' => $request->editor1
+        ]);
 
-        return new LayerResource(Layer::where('slug', $slug)->first());
+        return new LayerResource(Layer::where('id', $id)->first());
     }
 
     /**

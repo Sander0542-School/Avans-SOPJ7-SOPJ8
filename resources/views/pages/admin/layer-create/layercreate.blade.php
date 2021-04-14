@@ -6,7 +6,7 @@
     </x-slot>
     {{--    MOET NOG GECHECKED WORDEN OP ADMIN ROL--}}
     <div class="layer-container">
-        <form method="POST" action="/admin/layers/">
+        <form method="POST" action="{{ route('admin.layers.store') }}">
             @csrf
             <label>Wat is de titel van de nieuwe laag?</label>
             <input required class="form-control" type="text" name="title" placeholder="Titel" id="titleInput">
