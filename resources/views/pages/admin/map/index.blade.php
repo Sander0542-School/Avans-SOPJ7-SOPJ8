@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
             {{ __('Map') }}
-            <button onclick="saveLocations()" class="btn btn-primary float-right">{{ __('Save Locations') }}</button>
+            <button id="saveLocations" onclick="saveLocations()" class="btn btn-primary float-right">{{ __('Locaties opslaan') }}</button>
         </h2>
         @if ($errors->any())
             <div class="alert alert-danger">
