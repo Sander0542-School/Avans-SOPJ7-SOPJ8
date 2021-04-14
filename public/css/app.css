@@ -17453,16 +17453,6 @@ readers do not read off random characters that represent icons */
   font-size: 0.875rem !important;
 }
 
-.layer-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  text-align: center;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
 .buttonsDiv {
   display: flex;
   flex-direction: row;
