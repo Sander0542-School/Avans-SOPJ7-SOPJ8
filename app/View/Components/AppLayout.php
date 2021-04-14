@@ -38,8 +38,8 @@ class AppLayout extends Component
             $mainClasses[] = 'my-5';
         }
 
-        return view('layouts.app')
-            ->with('mainClasses', implode(' ', $mainClasses))
-            ->with('bodyClasses', $this->bodyClasses);
+        $this->mainClasses = implode(' ', $mainClasses);
+
+        return view('layouts.app');
     }
 }

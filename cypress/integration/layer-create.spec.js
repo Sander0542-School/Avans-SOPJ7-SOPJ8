@@ -7,11 +7,10 @@ describe('Layer', () => {
         cy.get('button').click();
 
         cy.visit('/admin/layers/create');
-        cy.get('#titleInput').should('be.visible').type('Test Titel');
-        cy.get('button[data-id=previousSelectList]').click();
+        cy.get('#inputName').should('be.visible').type('Test Titel');
+        cy.get('button[data-id=inputParent]').click();
         cy.get('input[type=search]').type('koude kant');
-        cy.get('#bs-select-1-1').should('be.visible').click();
-        cy.get('#confirmLayer').should('be.visible').click();
-        cy.get('#successAlert').should('be.visible');
+        cy.get('#bs-select-1-3').should('be.visible').click();
+        cy.get('button[type="submit"]').should('be.visible').click();
     });
 });

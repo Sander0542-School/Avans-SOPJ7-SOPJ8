@@ -76,9 +76,6 @@ class DatabaseSeeder extends Seeder
 
                 Layer::factory($faker->numberBetween(1, 3))->afterCreating(function (Layer $layer2) use ($faker, $subject) {
                     SubjectChoice::create([
-                        'name' => $faker->word,
-                        'description' => $faker->text(10),
-                        'icon' => $faker->fontAwesomeIcon(),
                         'subject_id' => $subject->id,
                         'layer_id' => $layer2->id,
                     ]);
