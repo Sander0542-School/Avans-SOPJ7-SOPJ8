@@ -1,31 +1,29 @@
 const layerTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const southWest = L.latLng(52.109024, 6.573585),
-    northEast = L.latLng(52.123450, 6.616385),
-    bounds = L.latLngBounds(southWest, northEast);
+const southWest = Leaflet.latLng(52.108672, 6.573487),
+    northEast = Leaflet.latLng(52.120610, 6.614364),
+    bounds = Leaflet.latLngBounds(southWest, northEast);
 
 window.SubjectMap = {
     map: null,
     renderMap: (adminMap = false) => {
-        const adminZoom = 15;
-        const maxZoom = adminMap ? adminZoom : 19;
-        const minZoom = adminMap ? adminZoom : 16;
-
         const map = Leaflet.map('subjectmap', {
-            minZoom: minZoom,
-            maxZoom: maxZoom,
+            minZoom: 15,
+            maxZoom: 19,
             zoomControl: false,
             maxBounds: bounds,
-            attributionControl: false
-        }).setView([52.115329, 6.596776], 16);
+            attributionControl: false,
+            doubleClickZoom: false,
+            zoomSnap: 0,
+            center: bounds.getCenter()
+        });
+
+        Leaflet.tileLayer(layerTemplate).addTo(map);
+        map.fitBounds(bounds);
 
         if (adminMap) {
             Leaflet.rectangle(bounds, {color: "rgba(0, 0, 0, 0.8)", weight: 1}).addTo(map);
+            map.fitBounds(bounds.pad(0.1));
         }
-
-        Leaflet.tileLayer(layerTemplate, {
-            maxZoom: maxZoom,
-            minZoom: minZoom
-        }).addTo(map);
 
         window.SubjectMap.map = map;
     },
