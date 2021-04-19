@@ -18,13 +18,13 @@ RUN a2enmod rewrite
 
 # Source
 COPY . /var/www
-COPY .env.example .env
+COPY .env.example /var/www.env
 RUN chown -R www-data:www-data /var/www
 
 WORKDIR /var/www
 
 # Depedencies
-RUN composer install --no-ansi --no-interaction --no-scripts --prefer-dist
+RUN composer install --no-dev --no-ansi --no-interaction --no-scripts --prefer-dist
 RUN npm ci --production && npm run production && rm -r node_modules
 
 CMD ["apache2-foreground"]
