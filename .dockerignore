@@ -1,0 +1,12 @@
+**/.dockerignore
+**/.env
+**/.gitignore
+**/.idea
+**/bin
+**/docker-compose*
+**/Dockerfile*
+**/node_modules
+**/vendor
+**/npm-debug.log
+LICENSE
+README.md
