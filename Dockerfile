@@ -24,7 +24,7 @@ RUN chown -R www-data:www-data /var/www
 WORKDIR /var/www
 
 # Depedencies
-RUN composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+RUN composer install -q --no-ansi --no-interaction --no-scripts --prefer-dist
 RUN npm ci --production && npm run production && rm -r node_modules
 
 CMD ["apache2-foreground"]
