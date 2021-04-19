@@ -2,7 +2,9 @@ FROM php:8-apache
 
 # NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get update && apt-get install -y nodejs
+
+# Packages
+RUN apt-get update && apt-get install -y nodejs git
 
 # PHP Extensions
 RUN docker-php-ext-install mysqli pdo pdo_mysql
