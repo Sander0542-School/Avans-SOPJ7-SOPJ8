@@ -16,6 +16,7 @@ RUN a2enmod rewrite
 
 # Source
 COPY . /var/www
+COPY .env.example .env
 RUN chown -R www-data:www-data /var/www
 
 WORKDIR /var/www
