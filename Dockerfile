@@ -4,10 +4,10 @@ FROM php:8-apache
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 # Packages
-RUN apt-get update && apt-get install -y nodejs git
+RUN apt-get update && apt-get install -y nodejs git libzip-dev zip
 
 # PHP Extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql zip
 
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
