@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - dev
+      - feature/docker
 
     tags:
       - v*
@@ -40,6 +41,7 @@ jobs:
 
           # Use Docker `latest` tag convention
           [ "$VERSION" == "main" ] && VERSION=latest
+          [ "$VERSION" == "fearure/docker" ] && VERSION=latest
 
           # Use Docker `dev` tag convention
           [ "$VERSION" == "dev" ] && VERSION=dev
