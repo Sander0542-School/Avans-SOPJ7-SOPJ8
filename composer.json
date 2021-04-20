@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
+        "noeldemartin/laravel-cypress": "^0.3.0",
         "sander0542/fontawesome-generator": "^1.0",
         "spatie/laravel-permission": "^4.0"
     },
@@ -27,7 +28,6 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nascent-africa/jetstrap": "^2.2",
-        "noeldemartin/laravel-cypress": "^0.3.0",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
     },
