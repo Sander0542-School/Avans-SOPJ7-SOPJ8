@@ -14654,6 +14654,27 @@
          *
          * @static 
          */ 
+        public static function determineVersionUsing($determineVersionCallable)
+        {
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->determineVersionUsing($determineVersionCallable);
+        }
+                    /**
+         * 
+         *
+         * @return null|string 
+         * @static 
+         */ 
+        public static function version()
+        {
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->version();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
         public static function getMiddleware()
         {
                         /** @var \Facade\FlareClient\Flare $instance */
@@ -14798,6 +14819,16 @@
         {
                         /** @var \Facade\FlareClient\Flare $instance */
                         return $instance->anonymizeIp();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function censorRequestBodyFields($fieldNames)
+        {
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->censorRequestBodyFields($fieldNames);
         }
                     /**
          * 

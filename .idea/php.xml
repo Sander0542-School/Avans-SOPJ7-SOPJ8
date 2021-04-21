@@ -138,8 +138,8 @@
       <path value="$PROJECT_DIR$/vendor/noeldemartin/laravel-cypress" />
       <path value="$PROJECT_DIR$/vendor/laravel/dusk" />
       <path value="$PROJECT_DIR$/vendor/php-webdriver/webdriver" />
-      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

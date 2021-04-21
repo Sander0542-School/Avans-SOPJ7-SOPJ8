@@ -144,8 +144,8 @@
       <excludeFolder url="file://$MODULE_DIR$/public/fonts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-permission" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/noeldemartin/laravel-cypress" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/facade/ignition" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/facade/flare-client-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/facade/ignition" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
