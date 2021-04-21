@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Models\User;
 use Hash;
 use Illuminate\Support\ServiceProvider;
-use NoelDeMartin\LaravelCypress\Facades\Cypress;
 
 class CypressServiceProvider extends ServiceProvider
 {
@@ -26,8 +25,8 @@ class CypressServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->environment('local')) {
-            Cypress::command('getAdmin', function () {
+        if ($this->app->environment('local') && class_exists('\NoelDeMartin\LaravelCypress\Facades\Cypress')) {
+            \NoelDeMartin\LaravelCypress\Facades\Cypress::command('getAdmin', function () {
                 $user = User::updateOrCreate([
                     'email' => 'admin@cypress.test',
                 ], [
