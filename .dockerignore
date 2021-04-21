@@ -5,8 +5,8 @@
 **/bin
 **/docker-compose*
 **/Dockerfile*
-**/node_modules
-**/vendor
 **/npm-debug.log
+node_modules
+vendor
 LICENSE
 README.md
