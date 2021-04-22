@@ -19,7 +19,7 @@ class FillPermissionsTables extends Migration
         Permission::create(['name' => 'layers.*']);
         Permission::create(['name' => 'subjects.*']);
 
-        Role::create(['name' => 'superadmin']);
+        Role::create(['name' => 'Super Admin']);
     }
 
     /**

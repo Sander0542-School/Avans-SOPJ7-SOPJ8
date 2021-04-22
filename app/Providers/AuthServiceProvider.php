@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         //
 
         Gate::before(function(User $user, $ability) {
-           return $user->hasRole('superadmin') ? true : null;
+           return $user->hasRole('Super Admin') ? true : null;
         });
     }
 }
