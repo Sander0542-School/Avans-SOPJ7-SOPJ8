@@ -28,7 +28,7 @@ class LayerControllerTest extends TestCase
             'password' => \Hash::make('password'),
         ]);
 
-        $this->user->assignRole('admin');
+        $this->user->assignRole('superadmin');
 
         $this->actingAs($this->user);
     }
