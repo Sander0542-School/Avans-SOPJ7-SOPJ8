@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Manager\StoreRequest;
 use App\Http\Requests\Admin\Manager\UpdateRequest;
 use App\Models\User;
 use Hash;
+use Laravel\Fortify\Fortify;
 use Password;
 use Spatie\Permission\Models\Role;
 use Str;
@@ -53,7 +54,7 @@ class ManagerController extends Controller
             'password' => Hash::make(Str::random(12))
         ]);
 
-        $manager->assignRole(Role::findById($data['role']));
+        $manager->assignRole(Role::findById($data['role'], config('fortify.guard')));
 
         $status = Password::sendResetLink($manager->only('email'));
 

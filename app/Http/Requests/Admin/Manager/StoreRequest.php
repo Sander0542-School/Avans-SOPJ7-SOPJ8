@@ -40,7 +40,7 @@ class StoreRequest extends FormRequest
             'role' => [
                 'required',
                 'integer',
-                Rule::exists(Role::class, 'id'),
+                Rule::exists(Role::class, 'id')->where('guard_name', config('fortify.guard'))
             ],
         ];
     }
