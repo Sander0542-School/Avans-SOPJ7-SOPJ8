@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Manager;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -24,7 +26,16 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            ''
+            'name' => [
+                'required',
+                'max:255',
+            ],
+            'email' => [
+                'required',
+                'max:255',
+                'email',
+                Rule::unique(User::class, 'email')
+            ]
         ];
     }
 }
