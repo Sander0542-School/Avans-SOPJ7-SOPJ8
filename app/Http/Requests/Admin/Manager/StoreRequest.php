@@ -13,7 +13,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasRole('superadmin');
+        return $this->user()->hasRole('Super Admin');
     }
 
     /**
@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            ''
         ];
     }
 }
