@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin\Manager;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class StoreRequest extends FormRequest
 {
@@ -34,8 +35,13 @@ class StoreRequest extends FormRequest
                 'required',
                 'max:255',
                 'email',
-                Rule::unique(User::class, 'email')
-            ]
+                Rule::unique(User::class, 'email'),
+            ],
+            'role' => [
+                'required',
+                'integer',
+                Rule::exists(Role::class, 'id'),
+            ],
         ];
     }
 }
