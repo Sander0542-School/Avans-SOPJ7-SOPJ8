@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Manager\StoreRequest;
 use App\Http\Requests\Admin\Manager\UpdateRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
@@ -37,16 +38,16 @@ class ManagerController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
     }
@@ -54,10 +55,10 @@ class ManagerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
     }
@@ -66,21 +67,21 @@ class ManagerController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\Admin\Manager\UpdateRequest $request
-     * @param int $id
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
     }
