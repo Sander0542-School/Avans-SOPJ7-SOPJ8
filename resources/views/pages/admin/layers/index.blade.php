@@ -16,7 +16,7 @@
     <br/>
 
     <div class="card">
-        <table id="layerTable" class="table">
+        <table id="layerTable" class="table m-0">
             <thead>
             <tr>
                 <th class="border-0">Naam</th>
@@ -35,7 +35,7 @@
                             {{ $layer->parentLayer->name }}
                         @endif
                     </td>
-                    <td>
+                    <td class="text-right">
                         <a class="btn btn-warning" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
