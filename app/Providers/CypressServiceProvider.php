@@ -34,7 +34,7 @@ class CypressServiceProvider extends ServiceProvider
                     'password' => Hash::make('password'),
                 ]);
 
-                $user->assignRole('admin');
+                $user->assignRole('Super Admin');
 
                 return $user;
             });
