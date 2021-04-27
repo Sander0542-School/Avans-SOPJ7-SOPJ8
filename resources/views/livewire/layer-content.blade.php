@@ -1,4 +1,4 @@
-<div class="container py-5 layer-content">
+<div class="container py-5 layer-content" data-simplebar>
     @if($layer != null)
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
