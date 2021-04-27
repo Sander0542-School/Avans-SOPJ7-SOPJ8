@@ -3881,10 +3881,13 @@ __webpack_require__(/*! jquery-ui/ui/widgets/sortable.js */ "./node_modules/jque
 
 window.Layer = {
   load: function load(layerSlug) {
+    var subjectId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
     if (document.querySelector('.layer-content')) {
       window.location.hash = layerSlug;
       Livewire.emit('layerChanged', layerSlug);
       window.Swapper.loadContent();
+      window.SubjectMap.zoomMarker(subjectId);
       window.SideMenu.close();
     }
   },
@@ -3941,38 +3944,59 @@ var southWest = Leaflet.latLng(52.108672, 6.573487),
     bounds = Leaflet.latLngBounds(southWest, northEast);
 window.SubjectMap = {
   map: null,
+  adminMap: false,
   renderMap: function renderMap() {
     var adminMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    window.SubjectMap.adminMap = adminMap;
     var map = Leaflet.map('subjectmap', {
       minZoom: 15,
-      maxZoom: 19,
+      maxZoom: 18,
       zoomControl: false,
       maxBounds: bounds,
       attributionControl: false,
       doubleClickZoom: false,
+      scrollWheelZoom: false,
+      touchZoom: false,
       zoomSnap: 0,
       center: bounds.getCenter()
     });
     Leaflet.tileLayer(layerTemplate).addTo(map);
-    map.fitBounds(bounds);
-
-    if (adminMap) {
-      Leaflet.rectangle(bounds, {
-        color: "rgba(0, 0, 0, 0.8)",
-        weight: 1
-      }).addTo(map);
-      map.fitBounds(bounds.pad(0.1));
-    }
-
     window.SubjectMap.map = map;
+    window.SubjectMap.loadSubjects();
+    window.SubjectMap.zoomMap();
   },
   loadSubjects: function loadSubjects() {
-    var draggable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
     fetch('/api/subjects').then(function (response) {
       return response.json();
     }).then(function (response) {
-      window.SubjectMap.placeMarkers(response.data, draggable);
+      window.SubjectMap.placeMarkers(response.data, window.SubjectMap.adminMap);
     });
+  },
+  zoomMap: function zoomMap() {
+    window.SubjectMap.center = bounds.getCenter();
+
+    if (window.SubjectMap.adminMap) {
+      Leaflet.rectangle(bounds, {
+        color: "rgba(0, 0, 0, 0.8)",
+        weight: 1
+      }).addTo(window.SubjectMap.map);
+      window.SubjectMap.map.fitBounds(bounds.pad(0.1));
+    } else {
+      window.SubjectMap.map.fitBounds(bounds);
+    }
+  },
+  zoomMarker: function zoomMarker() {
+    var subjectId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var marker = window.SubjectMap.getMarker(subjectId);
+
+    if (marker) {
+      var map = window.SubjectMap.map;
+      map.setView(marker.getLatLng(), map.options.maxZoom);
+      window.SubjectMap.setMarkerVisibility(false);
+    } else {
+      window.SubjectMap.zoomMap();
+      window.SubjectMap.setMarkerVisibility(true);
+    }
   },
   placeMarkers: function placeMarkers(subjects) {
     var draggable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -3984,13 +4008,31 @@ window.SubjectMap = {
       }, {
         draggable: draggable,
         icon: new Leaflet.DivIcon({
-          className: 'my-div-icon',
-          html: '<div class="marker-container">' + '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' + "<button class=\"btn btn-primary\" class=\"marker-button\" style=\"background-color:#".concat(item.domain.color, ";border-color:#").concat(item.domain.color, "\">").concat(item.name, "</button>") + '</div>'
+          className: 'marker-subject',
+          html: '<div class="marker-container">' + '<img width="65" height="80" src="/images/MarkerImage.png"/>' + "<button class=\"btn btn-primary\" class=\"marker-button\" style=\"background-color:#".concat(item.domain.color, ";border-color:#").concat(item.domain.color, "\">").concat(item.name, "</button>") + '</div>'
         }),
         subjectId: item.id
       });
       marker.addTo(window.SubjectMap.map);
     });
+  },
+  setMarkerVisibility: function setMarkerVisibility(visible) {
+    document.querySelectorAll('#subjectmap .marker-subject').forEach(function (marker) {
+      marker.style.display = visible ? '' : 'none';
+    });
+  },
+  getMarker: function getMarker(subjectId) {
+    if (isNaN(subjectId)) {
+      return;
+    }
+
+    var layer = null;
+    window.SubjectMap.map.eachLayer(function (mapLayer) {
+      if (mapLayer.options.subjectId === subjectId) {
+        layer = mapLayer;
+      }
+    });
+    return layer;
   },
   getSubjects: function getSubjects() {
     var subjects = [];

@@ -8,6 +8,7 @@ use Livewire\Component;
 class LayerContent extends Component
 {
     public $layerSlug;
+    public $subjectId;
 
     protected $listeners = [
         'layerChanged' => 'layerChanged'
@@ -32,6 +33,7 @@ class LayerContent extends Component
         if ($layer != null) {
             $parentLayer = $layer->parentLayer;
             while($parentLayer != null) {
+                $this->subjectId = $parentLayer->id;
                 array_unshift($parentLayers, $parentLayer);
                 $parentLayer = $parentLayer->parentLayer;
             }

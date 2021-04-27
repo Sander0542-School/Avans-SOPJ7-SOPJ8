@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a onclick="window.Swapper.loadMap();" href="#">Home</a></li>
                 @foreach($parentLayers as $parentLayer)
-                    <li class="breadcrumb-item"><a onclick="window.Layer.load('{{ $parentLayer->slug }}');" href="#{{ $parentLayer->slug }}">{{ $parentLayer->name }}</a></li>
+                    <li class="breadcrumb-item"><a onclick="window.Layer.load('{{ $parentLayer->slug }}', {{ $subjectId }});" href="#{{ $parentLayer->slug }}">{{ $parentLayer->name }}</a></li>
                 @endforeach
                 <li class="breadcrumb-item active" aria-current="page">{{ $layer->name }}</li>
             </ol>
@@ -18,7 +18,7 @@
         <div class="row">
             @foreach($layer->childLayers as $childLayer)
                 <div class="col">
-                    <button onclick="window.Layer.load('{{ $childLayer->slug }}');" class="btn btn-outline-primary btn-layer">{{ $childLayer->name }}</button>
+                    <button onclick="window.Layer.load('{{ $childLayer->slug }}, {{ $subjectId }}');" class="btn btn-outline-primary btn-layer">{{ $childLayer->name }}</button>
                 </div>
             @endforeach
         </div>

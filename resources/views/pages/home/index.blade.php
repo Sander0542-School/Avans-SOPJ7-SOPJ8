@@ -9,7 +9,6 @@
     @push('scripts')
         <script defer>
             window.SubjectMap.renderMap();
-            window.SubjectMap.loadSubjects();
 
             document.addEventListener("DOMContentLoaded", () => {
                 window.Layer.loadHash();
