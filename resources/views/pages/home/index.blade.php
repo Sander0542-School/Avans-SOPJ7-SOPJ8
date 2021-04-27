@@ -1,9 +1,10 @@
 <x-map-layout>
     <div class="swapper">
         <div class="swapper-content">
-            <livewire:layer-content/>
+            <livewire:layer-content>
+                <div id="subjectmap" class="swapper-map swapper-active"></div>
+                </livewire:layer-content>
         </div>
-        <div id="subjectmap" class="swapper-map swapper-active"></div>
     </div>
 
     @push('scripts')

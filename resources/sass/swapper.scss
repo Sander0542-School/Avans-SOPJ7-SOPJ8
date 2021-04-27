@@ -9,15 +9,64 @@ $swapper-transition: all 1s;
     > .swapper-content, > .swapper-map {
         width: 100%;
         height: 100%;
+        //position: absolute;
+        //transition: $swapper-transition;
+
+        //opacity: 0;
+        //transform: $swapper-transform-off;
+
+        //&.swapper-active {
+        //    transform: $swapper-transform-on;
+        //    opacity: 1;
+        //}
+    }
+}
+
+.swapper-map {
+    z-index: 0;
+    position: absolute;
+    bottom: 0px;
+}
+
+.swapper-content.swapper-active {
+    display: block;
+    position: absolute;
+    z-index: 1;
+}
+
+//.inner-layer-container {
+//    background-color: #e9ecef;
+//    width:100%;
+//    height:100%;
+//}
+
+$blur: blur(9px);
+$rect: inset(0);
+$b: 1.1em;
+.container.py-5.layer-content {
+    background-color: #e9ecef;
+    overflow-x: hidden;
+    height:900px;
+    top: 30px;
+    z-index: 1;
+    width:50%;
+    place-content: center;
+    position: relative;
+    border: solid $b rgba(#000, .03);
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgba(#000, .2),
+    2px 2px 17px rgba(#000, .35),
+    2px 2px 25px rgba(#000, .5);
+    &:before {
         position: absolute;
-        transition: $swapper-transition;
-
-        opacity: 0;
-        transform: $swapper-transform-off;
-
-        &.swapper-active {
-            transform: $swapper-transform-on;
-            opacity: 1;
-        }
+        top: -$b; right: -$b; bottom: -$b; left: -$b;
+        border: inherit;
+        border-color: transparent;
+        background: inherit;
+        background-clip: border-box;
+        -webkit-filter: $blur;
+        filter: $blur;
+        -webkit-clip-path: $rect;
+        clip-path: $rect;
     }
 }
