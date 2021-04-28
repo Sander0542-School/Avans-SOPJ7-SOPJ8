@@ -17478,6 +17478,10 @@ readers do not read off random characters that represent icons */
   max-width: 100px;
 }
 
+.overflow-y {
+  overflow-y: auto;
+}
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -17489,7 +17493,7 @@ readers do not read off random characters that represent icons */
 }
 
 .sidemenu {
-  z-index: 1001;
+  z-index: 1002;
   min-width: 300px;
   max-width: 300px;
   background: #EEEEEE;
@@ -17571,7 +17575,7 @@ readers do not read off random characters that represent icons */
 }
 .content .sidemenu-control {
   position: relative;
-  z-index: 1001;
+  z-index: 1002;
   transition: all 0.3s;
 }
 .content .sidemenu-control.active {
@@ -17590,16 +17594,23 @@ readers do not read off random characters that represent icons */
 .swapper {
   width: 100%;
   height: 100%;
+  position: relative;
 }
-.swapper > .swapper-content, .swapper > .swapper-map {
+.swapper > * {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+.swapper > .swapper-back {
+  z-index: 400;
+}
+.swapper > .swapper-content {
   transition: all 1s;
+  z-index: 1001;
   opacity: 0;
   transform: scale(0);
 }
-.swapper > .swapper-content.swapper-active, .swapper > .swapper-map.swapper-active {
+.swapper > .swapper-content.swapper-active {
   transform: scale(1);
   opacity: 1;
 }

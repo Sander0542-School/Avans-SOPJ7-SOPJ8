@@ -56,6 +56,6 @@ require('jquery-ui/ui/widgets/autocomplete.js');
 require('jquery-ui/ui/widgets/sortable.js');
 
 //simplebar
-require('simplebar');
-require('simplebar/dist/simplebar.css');
-require('simplebar/dist/simplebar');
+// require('simplebar');
+// require('simplebar/dist/simplebar.css');
+// require('simplebar/dist/simplebar');

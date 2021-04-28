@@ -1,4 +1,4 @@
-<div class="container py-5 layer-content" data-simplebar>
+<div class="p-4 layer-content">
     @if($layer != null)
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -18,7 +18,7 @@
         <div class="row">
             @foreach($layer->childLayers as $childLayer)
                 <div class="col">
-                    <button onclick="window.Layer.load('{{ $childLayer->slug }}, {{ $subjectId }}');" class="btn btn-outline-primary btn-layer">{{ $childLayer->name }}</button>
+                    <button onclick="window.Layer.load('{{ $childLayer->slug }}', {{ $subjectId }});" class="btn btn-outline-primary btn-layer">{{ $childLayer->name }}</button>
                 </div>
             @endforeach
         </div>

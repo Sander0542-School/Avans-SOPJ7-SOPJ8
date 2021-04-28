@@ -1,9 +1,14 @@
 <x-map-layout>
     <div class="swapper">
+        <div class="swapper-back">
+            <div id="subjectmap"></div>
+        </div>
         <div class="swapper-content">
-            <livewire:layer-content>
-                <div id="subjectmap" class="swapper-map swapper-active"></div>
-                </livewire:layer-content>
+            <div class="container py-4 h-100">
+                <div class="card h-100 overflow-y">
+                    <livewire:layer-content/>
+                </div>
+            </div>
         </div>
     </div>
 

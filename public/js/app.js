@@ -3869,7 +3869,10 @@ $(document).ready(function () {
 
 __webpack_require__(/*! jquery-ui/ui/widgets/autocomplete.js */ "./node_modules/jquery-ui/ui/widgets/autocomplete.js");
 
-__webpack_require__(/*! jquery-ui/ui/widgets/sortable.js */ "./node_modules/jquery-ui/ui/widgets/sortable.js");
+__webpack_require__(/*! jquery-ui/ui/widgets/sortable.js */ "./node_modules/jquery-ui/ui/widgets/sortable.js"); //simplebar
+// require('simplebar');
+// require('simplebar/dist/simplebar.css');
+// require('simplebar/dist/simplebar');
 
 /***/ }),
 
@@ -4058,31 +4061,26 @@ window.SubjectMap = {
 /***/ (() => {
 
 window.Swapper = {
-  get map() {
-    return document.querySelector(".swapper .swapper-map");
-  },
-
   get content() {
     return document.querySelector(".swapper .swapper-content");
   },
 
   toggle: function toggle() {
-    if (window.Swapper.content && window.Swapper.map) {
-      window.Swapper.map.classList.toggle('swapper-active');
+    if (window.Swapper.content) {
       window.Swapper.content.classList.toggle('swapper-active');
     }
   },
   loadContent: function loadContent() {
-    if (window.Swapper.content && window.Swapper.map) {
-      window.Swapper.map.classList.remove('swapper-active');
+    if (window.Swapper.content) {
       window.Swapper.content.classList.add('swapper-active');
     }
   },
   loadMap: function loadMap() {
-    if (window.Swapper.content && window.Swapper.map) {
-      window.Swapper.map.classList.add('swapper-active');
+    if (window.Swapper.content) {
       window.Swapper.content.classList.remove('swapper-active');
     }
+
+    window.SubjectMap.zoomMarker();
   }
 };
 
