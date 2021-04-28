@@ -40,8 +40,16 @@ window.SubjectMap = {
         if (window.SubjectMap.adminMap) {
             Leaflet.rectangle(bounds, {color: "rgba(0, 0, 0, 0.8)", weight: 1}).addTo(window.SubjectMap.map);
             window.SubjectMap.map.fitBounds(bounds.pad(0.1));
+            window.SubjectMap.map.flyToBounds(bounds.pad(0.1),{
+                animate: true,
+                duration: 1.4
+            });
         } else {
             window.SubjectMap.map.fitBounds(bounds);
+            window.SubjectMap.map.flyToBounds(bounds,{
+                animate: true,
+                duration: 1.4
+            });
         }
     },
     zoomMarker: (subjectId = null) => {
@@ -52,7 +60,7 @@ window.SubjectMap = {
 
             map.flyTo(marker.getLatLng(), map.options.maxZoom, {
                 animate: true,
-                duration: 1.5
+                duration: 1.4
             });
             window.SubjectMap.setMarkerVisibility(false);
         } else {
