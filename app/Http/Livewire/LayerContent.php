@@ -8,7 +8,6 @@ use Livewire\Component;
 class LayerContent extends Component
 {
     public $layerSlug;
-    public $subjectId;
 
     protected $listeners = [
         'layerChanged' => 'layerChanged'
@@ -17,10 +16,19 @@ class LayerContent extends Component
     public function render()
     {
         $layer = Layer::firstWhere('slug', $this->layerSlug);
+        $parentLayers = $this->getParentLayers($layer);
+        $subjectId = 0;
+
+        if (sizeof($parentLayers) > 0 && $parentLayers[0]->subject != null) {
+            $subjectId = $parentLayers[0]->subject->id;
+        } else if ($layer != null && $layer->subject != null) {
+            $subjectId = $layer->subject->id;
+        }
 
         return view('livewire.layer-content')
             ->with('layer', $layer)
-            ->with('parentLayers', $this->getParentLayers($layer));
+            ->with('parentLayers', $parentLayers)
+            ->with('subjectId', $subjectId);
     }
 
     public function layerChanged($layerSlug) {
@@ -33,7 +41,6 @@ class LayerContent extends Component
         if ($layer != null) {
             $parentLayer = $layer->parentLayer;
             while($parentLayer != null) {
-                $this->subjectId = $parentLayer->id;
                 array_unshift($parentLayers, $parentLayer);
                 $parentLayer = $parentLayer->parentLayer;
             }
