@@ -12,6 +12,7 @@ window.SubjectMap = {
         const map = Leaflet.map('subjectmap', {
             minZoom: 15,
             maxZoom: 18,
+            zoom: 15,
             zoomControl: false,
             maxBounds: bounds,
             attributionControl: false,
@@ -37,20 +38,17 @@ window.SubjectMap = {
     },
     zoomMap: () => {
         window.SubjectMap.center = bounds.getCenter();
+        let newBounds = bounds;
         if (window.SubjectMap.adminMap) {
             Leaflet.rectangle(bounds, {color: "rgba(0, 0, 0, 0.8)", weight: 1}).addTo(window.SubjectMap.map);
-            window.SubjectMap.map.fitBounds(bounds.pad(0.1));
-            window.SubjectMap.map.flyToBounds(bounds.pad(0.1),{
-                animate: true,
-                duration: 1.4
-            });
-        } else {
-            window.SubjectMap.map.fitBounds(bounds);
-            window.SubjectMap.map.flyToBounds(bounds,{
-                animate: true,
-                duration: 1.4
-            });
+            newBounds = bounds.pad(0.1);
         }
+
+        const target = window.SubjectMap.map._getBoundsCenterZoom(newBounds);
+        window.SubjectMap.map.flyTo(target.center, target.zoom, {
+            animate: true,
+            duration: 1.4
+        });
     },
     zoomMarker: (subjectId = null) => {
         const marker = window.SubjectMap.getMarker(subjectId);

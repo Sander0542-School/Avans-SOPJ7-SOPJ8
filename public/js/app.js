@@ -3954,6 +3954,7 @@ window.SubjectMap = {
     var map = Leaflet.map('subjectmap', {
       minZoom: 15,
       maxZoom: 18,
+      zoom: 15,
       zoomControl: false,
       maxBounds: bounds,
       attributionControl: false,
@@ -3977,16 +3978,22 @@ window.SubjectMap = {
   },
   zoomMap: function zoomMap() {
     window.SubjectMap.center = bounds.getCenter();
+    var newBounds = bounds;
 
     if (window.SubjectMap.adminMap) {
       Leaflet.rectangle(bounds, {
         color: "rgba(0, 0, 0, 0.8)",
         weight: 1
       }).addTo(window.SubjectMap.map);
-      window.SubjectMap.map.fitBounds(bounds.pad(0.1));
-    } else {
-      window.SubjectMap.map.fitBounds(bounds);
+      newBounds = bounds.pad(0.1);
     }
+
+    var target = window.SubjectMap.map._getBoundsCenterZoom(newBounds);
+
+    window.SubjectMap.map.flyTo(target.center, target.zoom, {
+      animate: true,
+      duration: 1.4
+    });
   },
   zoomMarker: function zoomMarker() {
     var subjectId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -3994,7 +4001,10 @@ window.SubjectMap = {
 
     if (marker) {
       var map = window.SubjectMap.map;
-      map.setView(marker.getLatLng(), map.options.maxZoom);
+      map.flyTo(marker.getLatLng(), map.options.maxZoom, {
+        animate: true,
+        duration: 1.4
+      });
       window.SubjectMap.setMarkerVisibility(false);
     } else {
       window.SubjectMap.zoomMap();

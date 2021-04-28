@@ -17605,7 +17605,7 @@ readers do not read off random characters that represent icons */
   z-index: 400;
 }
 .swapper > .swapper-content {
-  transition: all 1s;
+  transition: all 1.8s;
   z-index: 1001;
   opacity: 0;
   transform: scale(0);
