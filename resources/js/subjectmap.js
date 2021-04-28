@@ -50,7 +50,10 @@ window.SubjectMap = {
         if (marker) {
             const map = window.SubjectMap.map;
 
-            map.setView(marker.getLatLng(), map.options.maxZoom);
+            map.flyTo(marker.getLatLng(), map.options.maxZoom, {
+                animate: true,
+                duration: 1.5
+            });
             window.SubjectMap.setMarkerVisibility(false);
         } else {
             window.SubjectMap.zoomMap();
