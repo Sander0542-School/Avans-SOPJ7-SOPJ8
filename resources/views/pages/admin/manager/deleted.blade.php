@@ -2,8 +2,7 @@
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
             {{ __('Beheerder') }}
-            <a id="newManager" href="{{ route('admin.managers.create') }}" class="btn btn-primary float-right">{{ __('Beheerder toevoegen') }}</a>
-            <a id="newArchive" href="{{ route('admin.managers.deleted') }}" class="btn btn-primary float-right">{{ __('Archief') }}</a>
+            <a id="listManager" href="{{ route('admin.managers.index') }}" class="btn btn-primary float-right">{{ __('Terug naar de lijst') }}</a>
         </h2>
     </x-slot>
 
@@ -34,10 +33,9 @@
                     <td>{{ $manager->roles[0]['name'] }}</td>
                     <td class="text-right">
                         <a class="btn btn-success" href="{{ route('admin.managers.show', ['manager' => $manager]) }}"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-warning" href="{{ route('admin.managers.edit', ['manager' => $manager]) }}"><i class="fas fa-edit"></i></a>
                         @if(auth()->user()->id != $manager->id && !$manager->hasRole('Super Admin'))
-                            <button class="btn btn-danger" onclick="deleteManager({{ $manager->id }}, '{{ $manager->name }}', '{{ route('admin.managers.destroy', ['manager' => $manager]) }}')">
-                                <i class="fas fa-trash"></i>
+                            <button class="btn btn-danger" onclick="restoreManager({{ $manager->id }}, '{{ $manager->name }}', '{{ route('admin.managers.restore', ['manager' => $manager]) }}')">
+                                <i class="fas fa-file-export"></i>
                             </button>
                         @endif
                     </td>
@@ -47,24 +45,24 @@
         </table>
     </div>
 
-    <div class="modal" id="managerDeleteModal" tabindex="-1" role="dialog" aria-labelledby="managerDeleteModalLabel" aria-hidden="true">
+    <div class="modal" id="managerRestoreModal" tabindex="-1" role="dialog" aria-labelledby="managerRestoreModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="managerDeleteModalLabel" class="modal-title">Beheerder verwijderen</h5>
+                    <h5 id="managerRestoreModalLabel" class="modal-title">Beheerder Herstellen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Weet je zeker dat je <span id="modalManagerName"></span> wil verwijderen?</p>
+                    <p>Weet je zeker dat je <span id="modalManagerName"></span> wil herstellen?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
                     <form id="modalManagerForm" method="post">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Verwijderen</button>
+                        @method('POST')
+                        <button type="submit" class="btn btn-danger">Herstellen</button>
                     </form>
                 </div>
             </div>
@@ -73,11 +71,11 @@
 
     @push('scripts')
         <script>
-            function deleteManager(id, name, action) {
+            function restoreManager(id, name, action) {
                 document.getElementById('modalManagerName').innerText = name;
                 document.getElementById('modalManagerForm').action = action;
 
-                $('#managerDeleteModal').modal('show');
+                $('#managerRestoreModal').modal('show');
             }
 
             function filterLayers() {
