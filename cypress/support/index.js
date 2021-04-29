@@ -18,11 +18,11 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-
-import { useCypressLaravel } from 'cypress-laravel';
+import {useCypressLaravel} from 'cypress-laravel';
 
 useCypressLaravel({
     commands: [
-        'getAdmin'
+        'getAdmin',
+        'tempAdmin'
     ]
 });
