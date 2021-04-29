@@ -103,10 +103,34 @@ class ManagerController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Models\User $manager
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $manager)
     {
-        //
+        $manager->delete();
+
+        return redirect()->route('admin.managers.index')
+            ->with('success', 'De gebruiker is succesvol gearchiveerd.');
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param \App\Models\User $manager
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore(User $manager)
+    {
+        $manager->withTrashed()->find($manager->id)->restore();
+
+        return redirect()->route('admin.managers.index')
+            ->with('success', 'De gebruiker is met succes uit het archief gehaald.');
+    }
+
+    public function deleted()
+    {
+        $managers = User::onlyTrashed()->paginate(10);
+
+        return view('pages.admin.manager.deleted')->with('managers', $managers);
     }
 }
