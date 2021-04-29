@@ -80,11 +80,12 @@ class ManagerController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\User $manager
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(User $manager)
     {
-        //
+        $roles = Role::all();
+        return view('pages.admin.manager.edit')->with('manager', $manager)->with('roles', $roles);
     }
 
     /**
@@ -97,6 +98,17 @@ class ManagerController extends Controller
     public function update(UpdateRequest $request, User $manager)
     {
         $data = $request->validated();
+
+        dd($data);
+
+        if (!$manager->update([
+            'name' => $data['name'],
+            'email' => $data['email']
+        ])) {
+            return redirect()->back()->withErrors(['error' => 'Beheerder kon niet worden bijgewerkt.']);
+        }
+
+
     }
 
     /**
