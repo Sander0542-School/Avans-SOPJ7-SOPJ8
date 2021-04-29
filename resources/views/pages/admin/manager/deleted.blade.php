@@ -34,7 +34,7 @@
                     <td class="text-right">
                         <a class="btn btn-success" href="{{ route('admin.managers.show', ['manager' => $manager]) }}"><i class="fas fa-eye"></i></a>
                         @if(auth()->user()->id != $manager->id && !$manager->hasRole('Super Admin'))
-                            <button class="btn btn-danger" onclick="restoreManager({{ $manager->id }}, '{{ $manager->name }}', '{{ route('admin.managers.restore', ['manager' => $manager]) }}')">
+                            <button class="btn btn-danger" onclick="modalShow('{{ route('admin.managers.restore', ['manager' => $manager]) }}', '{{ $manager->name }}')">
                                 <i class="fas fa-file-export"></i>
                             </button>
                         @endif
@@ -59,11 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
-                    <form id="modalManagerForm" method="post">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" class="btn btn-danger">Herstellen</button>
-                    </form>
+                    <a class="btn btn-danger" id ='modalSubmit'>Herstellen</a>
                 </div>
             </div>
         </div>
@@ -74,6 +70,13 @@
             function restoreManager(id, name, action) {
                 document.getElementById('modalManagerName').innerText = name;
                 document.getElementById('modalManagerForm').action = action;
+
+                $('#managerRestoreModal').modal('show');
+            }
+
+            function modalShow(url, name) {
+                document.getElementById('modalManagerName').innerText = name;
+                document.getElementById('modalSubmit').href = url;
 
                 $('#managerRestoreModal').modal('show');
             }

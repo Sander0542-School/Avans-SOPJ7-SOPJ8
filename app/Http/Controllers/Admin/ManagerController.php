@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Manager\StoreRequest;
 use App\Http\Requests\Admin\Manager\UpdateRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Hash;
 use Laravel\Fortify\Fortify;
 use Password;
@@ -107,6 +108,10 @@ class ManagerController extends Controller
      */
     public function destroy(User $manager)
     {
+        if ($manager == null){
+            return redirect()->back()->withErrors(['error' => 'De admin kan niet verwijderd worden']);
+        }
+
         $manager->delete();
 
         return redirect()->route('admin.managers.index')
@@ -116,12 +121,18 @@ class ManagerController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param \App\Models\User $manager
+     * @param \App\Models\User $managerId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function restore(User $manager)
+    public function restore($managerId)
     {
-        $manager->withTrashed()->find($manager->id)->restore();
+        $manager = User::withTrashed()->find($managerId);
+
+        if ($manager == null){
+            return redirect()->back()->withErrors(['error' => 'De admin kan niet hersteld worden']);
+        }
+
+        $manager->restore();
 
         return redirect()->route('admin.managers.index')
             ->with('success', 'De gebruiker is met succes uit het archief gehaald.');

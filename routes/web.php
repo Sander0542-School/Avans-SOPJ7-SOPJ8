@@ -34,12 +34,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
 
     Route::prefix('managers')->name('managers.')->group(function () {
         Route::get('deleted', [ManagerController::class, 'deleted'])->name('deleted');
-        Route::post('restore', [ManagerController::class, 'restore'])->name('restore');
+        Route::get('restore/{manager}', [ManagerController::class, 'restore'])->name('restore');
     });
-
-    //Route::get('/managers/trashed-index', [ManagerController::class, 'trashedIndex'])->name('trashedIndex');
-    //Route::post('/managers/restore/{manager}', function(User $manager){dd('hoi', $manager);})
-    //Route::post('/managers/restore/{manager}',[ManagerController::class, 'restore'])->name('restore');
 
     Route::resource('managers', ManagerController::class);
 
