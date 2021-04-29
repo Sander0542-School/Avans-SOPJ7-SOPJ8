@@ -99,8 +99,6 @@ class ManagerController extends Controller
     {
         $data = $request->validated();
 
-        dd($data);
-
         if (!$manager->update([
             'name' => $data['name'],
             'email' => $data['email']
@@ -108,7 +106,9 @@ class ManagerController extends Controller
             return redirect()->back()->withErrors(['error' => 'Beheerder kon niet worden bijgewerkt.']);
         }
 
+        $this->handleRole($manager, $data['role']);
 
+        return redirect()->route('admin.managers.index')->with('message', 'De beheerder is successvol aangemaakt!');
     }
 
     /**
@@ -120,5 +120,18 @@ class ManagerController extends Controller
     public function destroy(User $manager)
     {
         //
+    }
+
+    private function handleRole(User $manager, $roleId) {
+        $currentRoleId = $manager->roles[0]->id;
+        $currentRole = Role::findById($currentRoleId);
+        dd($currentRole);
+
+        if ($roleId != $currentRoleId) {
+            $manager->removeRole($currentRole);
+
+            $newRole = Role::findById($roleId);
+            $manager->assignRole($newRole->name);
+        }
     }
 }
