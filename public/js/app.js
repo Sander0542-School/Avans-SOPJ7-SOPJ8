@@ -3869,10 +3869,7 @@ $(document).ready(function () {
 
 __webpack_require__(/*! jquery-ui/ui/widgets/autocomplete.js */ "./node_modules/jquery-ui/ui/widgets/autocomplete.js");
 
-__webpack_require__(/*! jquery-ui/ui/widgets/sortable.js */ "./node_modules/jquery-ui/ui/widgets/sortable.js"); //simplebar
-// require('simplebar');
-// require('simplebar/dist/simplebar.css');
-// require('simplebar/dist/simplebar');
+__webpack_require__(/*! jquery-ui/ui/widgets/sortable.js */ "./node_modules/jquery-ui/ui/widgets/sortable.js");
 
 /***/ }),
 
