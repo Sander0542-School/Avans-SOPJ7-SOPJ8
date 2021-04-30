@@ -22,7 +22,6 @@
     @push('scripts')
         <script defer>
             window.SubjectMap.renderMap(true);
-            window.SubjectMap.loadSubjects(true);
         </script>
 
         <script>

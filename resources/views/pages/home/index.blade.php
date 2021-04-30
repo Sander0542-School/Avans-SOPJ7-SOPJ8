@@ -1,15 +1,20 @@
 <x-map-layout>
     <div class="swapper">
-        <div class="swapper-content">
-            <livewire:layer-content/>
+        <div class="swapper-back">
+            <div id="subjectmap"></div>
         </div>
-        <div id="subjectmap" class="swapper-map swapper-active"></div>
+        <div class="swapper-content">
+            <div class="container py-4 h-100">
+                <div class="card h-100 overflow-y">
+                    <livewire:layer-content/>
+                </div>
+            </div>
+        </div>
     </div>
 
     @push('scripts')
         <script defer>
             window.SubjectMap.renderMap();
-            window.SubjectMap.loadSubjects();
 
             document.addEventListener("DOMContentLoaded", () => {
                 window.Layer.loadHash();
