@@ -97,6 +97,7 @@ class ManagerController extends Controller
      */
     public function update(UpdateRequest $request, User $manager)
     {
+
         $data = $request->validated();
 
         if (!$manager->update([
@@ -108,7 +109,7 @@ class ManagerController extends Controller
 
         $this->handleRoleChange($manager, $data['role']);
 
-        return redirect()->route('admin.managers.index')->with('message', 'De beheerder is successvol aangemaakt!');
+        return redirect()->route('admin.managers.index')->with('message', 'De beheerder is successvol aangepast!');
     }
 
     /**
