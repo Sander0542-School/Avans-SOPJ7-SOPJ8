@@ -48,6 +48,7 @@ class SideMenu extends Component
 
         foreach (Subject::orderBy('order')->get() as $subject) {
             $subMenu = [
+                'id' => $subject->id,
                 'name' => $subject->name,
                 'slug' => Str::slug($subject->name),
                 'children' => $this->getChildren($subject->layers),
