@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Manager\StoreRequest;
 use App\Http\Requests\Admin\Manager\UpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Hash;
 use Laravel\Fortify\Fortify;
 use Password;
@@ -60,7 +59,7 @@ class ManagerController extends Controller
         $status = Password::sendResetLink($manager->only('email'));
 
         if ($status === Password::RESET_LINK_SENT) {
-            return redirect()->route('admin.manager.index')->with(['status' => __($status)]);
+            return redirect()->route('admin.managers.index')->with(['status' => __($status)]);
         }
 
         return redirect()->back()->withErrors(['email' => __($status)]);

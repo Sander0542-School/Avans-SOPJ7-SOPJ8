@@ -3,7 +3,7 @@
         <h2 class="h4 font-weight-bold">
             {{ __('Beheerder') }}
             <a id="newManager" href="{{ route('admin.managers.create') }}" class="btn btn-primary float-right">{{ __('Beheerder toevoegen') }}</a>
-            <a id="newArchive" href="{{ route('admin.managers.deleted') }}" class="btn btn-primary float-right">{{ __('Archief') }}</a>
+            <a id="newArchive" href="{{ route('admin.managers.deleted') }}" class="btn btn-primary float-right my-1">{{ __('Verwijderde beheerders') }}</a>
         </h2>
     </x-slot>
 

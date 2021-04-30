@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Http\Controllers;
 
 use App\Models\Domain;
 use App\Models\Subject;
@@ -10,7 +10,7 @@ use Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class MapTest extends TestCase
+class MapControllerTest extends TestCase
 {
     use RefreshDatabase;
 

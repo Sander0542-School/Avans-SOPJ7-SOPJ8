@@ -32,10 +32,9 @@
                     <td>{{ $manager->email }}</td>
                     <td>{{ $manager->roles[0]['name'] }}</td>
                     <td class="text-right">
-                        <a class="btn btn-success" href="{{ route('admin.managers.show', ['manager' => $manager]) }}"><i class="fas fa-eye"></i></a>
                         @if(auth()->user()->id != $manager->id && !$manager->hasRole('Super Admin'))
                             <button class="btn btn-danger" onclick="modalShow('{{ route('admin.managers.restore', ['manager' => $manager]) }}', '{{ $manager->name }}')">
-                                <i class="fas fa-file-export"></i>
+                                <i class="fas fa-trash-restore"></i>
                             </button>
                         @endif
                     </td>
@@ -67,13 +66,6 @@
 
     @push('scripts')
         <script>
-            function restoreManager(id, name, action) {
-                document.getElementById('modalManagerName').innerText = name;
-                document.getElementById('modalManagerForm').action = action;
-
-                $('#managerRestoreModal').modal('show');
-            }
-
             function modalShow(url, name) {
                 document.getElementById('modalManagerName').innerText = name;
                 document.getElementById('modalSubmit').href = url;
