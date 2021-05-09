@@ -5,6 +5,25 @@
         </h2>
     </x-slot>
 
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Beheerder uitleg</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>- Alle velden zijn verplicht. </p>
+                    <p>- “Super Admin” betekend dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</p>
+                    <p>- “Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”. </p>
+                </div>
+            </div>
+        </div>
+        <button id="myBtn" class="information info-tooltip">
+            <i class="fa fa-info-circle my-float" ></i>
+        </button>
+    </div>
+
     <form method="POST" action="{{ route('admin.managers.store') }}">
         @csrf
 
@@ -46,6 +65,26 @@
         <button class="btn btn-success float-right" type="submit">Toevoegen</button>
         <a class="btn btn-danger" href="{{ route('admin.managers.index') }}">Annuleren</a>
     </form>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </x-app-layout>
 
 

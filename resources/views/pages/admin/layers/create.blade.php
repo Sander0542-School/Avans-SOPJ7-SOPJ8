@@ -5,6 +5,25 @@
         </h2>
     </x-slot>
 
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Lagen uitleg</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>- Alle velden zijn verplicht. </p>
+                    <p>- Gebruik de Rich Text Editor om afbeeldingen, linkjes en tekst toevoegen en/of editen. </p>
+                    <p>- Het gebruik van iedere functionaliteit van de Rich Text Editor wordt in diepte besproken in de gebruikshandleiding onder het kopje “Tekst editor”. </p>
+                </div>
+            </div>
+        </div>
+        <button id="myBtn" class="information info-tooltip">
+            <i class="fa fa-info-circle my-float" ></i>
+        </button>
+    </div>
+
     <form method="POST" action="{{ route('admin.layers.store') }}">
         @csrf
 
@@ -61,6 +80,27 @@
         <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
         <script>CKEDITOR.replace('content');</script>
     @endpush
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
 </x-app-layout>
 
 

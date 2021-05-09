@@ -5,14 +5,24 @@
         </h2>
     </x-slot>
 
-    <div class="information info-tooltip">
-        <i class="fa fa-info-circle my-float" ></i>
-        <span class="info-tooltiptext">
-            - Gebruik de blauwe pijltoetsen om de onderwerpen te verslepen. Dit past het navigatie menu volgorde aan op de hoofdpagina.
-            - Vergeet niet op de "Opslaan" knop te drukken onderaan de pagina, om de wijzingen door te voeren.
-            - Het linkere veld is de naam van de topic.
-            - Het rechtere veld is het gebied waarmee de topic is geassocieerd.
-        </span>
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Menu uitleg</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>- Gebruik de blauwe pijltoetsen om de onderwerpen te verslepen. Dit past de navigatie menu volgorde aan op de hoofdpagina.</p>
+                    <p>- Vergeet niet op de "Opslaan" knop te drukken onderaan de pagina, om de wijzingen door te voeren.</p>
+                    <p>- Het linkere veld is de naam van de topic.</p>
+                    <p>- Het rechtere veld is het gebied waarmee de topic is geassocieerd.</p>
+                </div>
+            </div>
+        </div>
+        <button id="myBtn" class="information info-tooltip">
+            <i class="fa fa-info-circle my-float" ></i>
+        </button>
     </div>
 
     <div class="row">
@@ -76,4 +86,25 @@
             });
         }
     </script>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
 </x-app-layout>

@@ -6,6 +6,24 @@
         </h2>
     </x-slot>
 
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Lagen uitleg</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>-Klik op de knop Nieuwe laag om een nieuwe laag toevoegen.</p>
+                    <p>- Klik op de gele knop op het rij van een laag die je wilt aanpassen.</p>
+                </div>
+            </div>
+        </div>
+        <button id="myBtn" class="information info-tooltip">
+            <i class="fa fa-info-circle my-float" ></i>
+        </button>
+    </div>
+
     <div class="card">
         <div class="card-body">
             <div class="form-group m-0">
@@ -63,4 +81,25 @@
             }
         </script>
     @endpush
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
 </x-app-layout>
