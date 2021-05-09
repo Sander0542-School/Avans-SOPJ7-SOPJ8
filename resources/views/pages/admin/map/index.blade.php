@@ -17,6 +17,10 @@
             @csrf
         </form>
     </x-slot>
+    <div  class="information" >
+        <i class="fa fa-info-circle my-float" ></i>
+    </div>
+
     <div id="subjectmap"></div>
 
     @push('scripts')

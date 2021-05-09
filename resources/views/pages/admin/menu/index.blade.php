@@ -5,6 +5,16 @@
         </h2>
     </x-slot>
 
+    <div class="information info-tooltip">
+        <i class="fa fa-info-circle my-float" ></i>
+        <span class="info-tooltiptext">
+            - Gebruik de blauwe pijltoetsen om de onderwerpen te verslepen. Dit past het navigatie menu volgorde aan op de hoofdpagina.
+            - Vergeet niet op de "Opslaan" knop te drukken onderaan de pagina, om de wijzingen door te voeren.
+            - Het linkere veld is de naam van de topic.
+            - Het rechtere veld is het gebied waarmee de topic is geassocieerd.
+        </span>
+    </div>
+
     <div class="row">
         <form class="col" action="{{ route('admin.menu.update') }}" method="post">
             @csrf
@@ -18,7 +28,9 @@
                             <div class="row">
                                 <div class="col-1">
                                     <span class="btn btn-link" style="cursor: grab">
-                                        <i class="fas fa-2x fa-sort"></i>
+                                        <i class="fas fa-2x fa-sort" title=
+                                            "Sleep het onderwerp in de gewenste volgorde"
+                                        ></i>
                                     </span>
                                 </div>
                                 <div class="col">

@@ -1,0 +1,43 @@
+.information {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 50px;
+    background-color: #786cf4;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 40px;
+    box-shadow: 3px 4px 3px #999;
+    right: 80px;
+    z-index: 100;
+}
+
+.my-float {
+    margin-top: 10px;
+}
+
+.info-tooltip .info-tooltiptext {
+    visibility: hidden;
+    width: 200px;
+
+    background-color: #FFFFFF;
+    color: black;
+
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+
+    top: -5px;
+    right: 110%;
+
+    font-size: 12px;
+}
+
+.info-tooltip:hover .info-tooltiptext {
+    visibility: visible;
+}
+

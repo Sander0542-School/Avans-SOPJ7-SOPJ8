@@ -21,6 +21,7 @@ class SubjectResource extends JsonResource
             'lon' => $this->lon,
             'order' => $this->order,
             'domain' => new DomainResource($this->domain)
+            //layercollection toevoegen
         ];
     }
 }
