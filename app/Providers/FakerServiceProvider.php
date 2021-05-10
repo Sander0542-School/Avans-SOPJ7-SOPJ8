@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Faker\Factory;
 use Faker\Generator;
-use faker\provider\FontAwesomeGeneratorProvider;
+//use faker\provider\FontAwesomeGeneratorProvider;
 use Illuminate\Support\ServiceProvider;
 
 class FakerServiceProvider extends ServiceProvider
@@ -18,7 +18,7 @@ class FakerServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Generator::class, function($app) {
             $faker = Factory::create();
-            $faker->addProvider(new FontAwesomeGeneratorProvider($faker));
+//            $faker->addProvider(new FontAwesomeGeneratorProvider($faker));
             return $faker;
         });
     }
