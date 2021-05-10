@@ -17705,3 +17705,22 @@ readers do not read off random characters that represent icons */
 .navbar-light .navbar-nav .nav-link {
   color: #000000;
 }
+
+.text-muted {
+  color: #000000 !important;
+}
+
+.text-success {
+  color: #227745 !important;
+}
+
+.btn-danger {
+  background-color: #a92823;
+  border-color: #a92823;
+}
+
+.btn-danger:hover {
+  color: #fff;
+  background-color: #d0211c;
+  border-color: #c51f1a;
+}
