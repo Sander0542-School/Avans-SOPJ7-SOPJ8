@@ -59,7 +59,7 @@ class ManagerController extends Controller
         $status = Password::sendResetLink($manager->only('email'));
 
         if ($status === Password::RESET_LINK_SENT) {
-            return redirect()->route('admin.manager.index')->with(['status' => __($status)]);
+            return redirect()->route('admin.managers.index')->with(['status' => __($status)]);
         }
 
         return redirect()->back()->withErrors(['email' => __($status)]);
@@ -103,10 +103,44 @@ class ManagerController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Models\User $manager
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $manager)
     {
-        //
+        if ($manager == null){
+            return redirect()->back()->withErrors(['error' => 'De admin kan niet verwijderd worden']);
+        }
+
+        $manager->delete();
+
+        return redirect()->route('admin.managers.index')
+            ->with('success', 'De gebruiker is succesvol gearchiveerd.');
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param \App\Models\User $managerId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($managerId)
+    {
+        $manager = User::withTrashed()->find($managerId);
+
+        if ($manager == null){
+            return redirect()->back()->withErrors(['error' => 'De admin kan niet hersteld worden']);
+        }
+
+        $manager->restore();
+
+        return redirect()->route('admin.managers.index')
+            ->with('success', 'De gebruiker is met succes uit het archief gehaald.');
+    }
+
+    public function deleted()
+    {
+        $managers = User::onlyTrashed()->paginate(10);
+
+        return view('pages.admin.manager.deleted')->with('managers', $managers);
     }
 }
