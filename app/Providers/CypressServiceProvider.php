@@ -38,6 +38,19 @@ class CypressServiceProvider extends ServiceProvider
 
                 return $user;
             });
+
+            \NoelDeMartin\LaravelCypress\Facades\Cypress::command('tempAdmin', function () {
+                $user = User::updateOrCreate([
+                    'email' => 'temp-admin@cypress.test',
+                ], [
+                    'name' => 'Temp Admin',
+                    'password' => Hash::make('password'),
+                ]);
+
+                $user->assignRole('Admin');
+
+                return $user;
+            });
         }
     }
 }

@@ -1,0 +1,5 @@
+{
+    "name": "Test Admin",
+    "email": "test-admin@cypress.test",
+    "role": 2
+}
