@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin\Manager;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class UpdateRequest extends FormRequest
 {
@@ -34,7 +35,7 @@ class UpdateRequest extends FormRequest
                 'required',
                 'max:255',
                 'email',
-                Rule::unique(User::class, 'email')->ignore($this->route('user')->id),
+                Rule::unique(User::class, 'email')->ignore($this->route('manager')->id),
             ],
             'role' => [
                 'required',
