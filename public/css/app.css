@@ -17724,3 +17724,15 @@ readers do not read off random characters that represent icons */
   background-color: #d0211c;
   border-color: #c51f1a;
 }
+
+.btn-success {
+  color: #fff;
+  background-color: #2b985a;
+  border-color: #2b985a;
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #2fa060;
+  border-color: #2fa060;
+}
