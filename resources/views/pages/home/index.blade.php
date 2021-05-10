@@ -1,4 +1,5 @@
 <x-map-layout>
+    <h1 style="display: none;">Expeditiekaart Bedrijfsovername home pagina</h1>
     <div class="swapper">
         <div class="swapper-content">
             <livewire:layer-content/>
