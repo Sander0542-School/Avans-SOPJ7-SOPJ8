@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <button id="myBtn" class="information info-tooltip map-z">
+        <button id="myBtn" class="information">
             <i class="fa fa-info-circle my-float" ></i>
         </button>
     </div>

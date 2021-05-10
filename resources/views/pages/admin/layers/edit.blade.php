@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <button id="myBtn" class="information info-tooltip">
+        <button id="myBtn" class="information">
             <i class="fa fa-info-circle my-float" ></i>
         </button>
     </div>
@@ -40,6 +40,12 @@
 
         <div class="form-group">
             <label for="inputParent">Bovenliggend onderwerp of laag</label>
+            <i class="fa fa-info-circle my-float info-tooltip" >
+                <span class="info-tooltiptext">
+                    <p>Kies hier het onderwerp of laag, waar deze nieuwe laag onder valt.</p>
+                    <p>Deze nieuwe laag zal vervolgens te zien zijn wanneer je de bovenliggende laag uitklapt in het menu.</p>
+                </span>
+            </i>
             <select required class="form-control @error('parent') is-invalid @enderror" class="selectpicker" id="inputParent" data-live-search="true" name="parent">
                 <option selected disabled>Kies een onderwerp of laag</option>
 

@@ -112,3 +112,28 @@
     border-color: #2fa060;
 }
 
+.info-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.info-tooltip .info-tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #786cf4;
+    color: #fff;
+    padding: 5px 5px;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.info-tooltip:hover .info-tooltiptext {
+    visibility: visible;
+}
+
+.info-tooltip .info-tooltiptext {
+    top: -5px;
+    left: 105%;
+}
