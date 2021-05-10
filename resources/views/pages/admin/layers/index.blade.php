@@ -14,8 +14,8 @@
                     <span class="close">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <p>-Klik op de knop Nieuwe laag om een nieuwe laag toevoegen.</p>
-                    <p>- Klik op de gele knop op het rij van een laag die je wilt aanpassen.</p>
+                    <p>-Klik op de knop "Nieuwe laag" om een nieuwe laag toe te voegen.</p>
+                    <p>- Klik op de gele knop op de rij van een laag die je wilt aanpassen.</p>
                 </div>
             </div>
         </div>

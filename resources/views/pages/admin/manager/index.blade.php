@@ -14,9 +14,9 @@
                     <span class="close">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <p>- Klik op de knop "Beheerder toevoegen" om een nieuwe beheerder toevoegen.</p>
-                    <p>- Klik op de gele knop op het rij van een beheerder om zijn gegevens aanpassen.</p>
-                    <p>- Zoeken op beheerders kan zowel als op Naam als op Email.</p>
+                    <p>- Klik op de knop "Beheerder toevoegen" om een nieuwe beheerder toe te voegen.</p>
+                    <p>- Klik op de gele knop op de rij van een beheerder om zijn gegevens aan te passen.</p>
+                    <p>- Zoeken op beheerders kan zowel op Naam als op Email.</p>
                 </div>
             </div>
         </div>

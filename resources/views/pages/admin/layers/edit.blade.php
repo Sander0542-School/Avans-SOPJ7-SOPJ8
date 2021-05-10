@@ -14,8 +14,8 @@
                 </div>
                 <div class="modal-body">
                     <p>- Alle velden zijn verplicht. </p>
-                    <p>- Gebruik de Rich Text Editor om afbeeldingen, linkjes en tekst toevoegen en/of editen. </p>
-                    <p>- Het gebruik van iedere functionaliteit van de Rich Text Editor wordt in diepte besproken in de gebruikshandleiding onder het kopje “Tekst editor”. </p>
+                    <p>- Gebruik de Rich Text Editor om afbeeldingen, linkjes en tekst toe te voegen en/of te editen. </p>
+                    <p>- Het gebruik van iedere functionaliteit van de Rich Text Editor wordt besproken in de gebruikshandleiding onder het kopje “Tekst editor”. </p>
                 </div>
             </div>
         </div>

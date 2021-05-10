@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-body">
                     <p>- Alle velden zijn verplicht. </p>
-                    <p>- “Super Admin” betekend dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</p>
+                    <p>- “Super Admin” betekent dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</p>
                     <p>- “Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”. </p>
                 </div>
             </div>

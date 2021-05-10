@@ -18,6 +18,24 @@
         </form>
     </x-slot>
 
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Map uitleg</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>- Sleep de poppetjes om hen van locatie te veranderen.</p>
+                    <p>- Vergeet niet op de "Locaties opslaan" knop te drukken om de wijzingen door te voeren.</p>
+                </div>
+            </div>
+        </div>
+        <button id="myBtn" class="information info-tooltip map-z">
+            <i class="fa fa-info-circle my-float" ></i>
+        </button>
+    </div>
+
     <div id="subjectmap"></div>
 
     @push('scripts')
@@ -57,4 +75,25 @@
             }
         </script>
     @endpush
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
 </x-app-layout>

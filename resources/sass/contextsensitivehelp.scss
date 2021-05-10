@@ -9,7 +9,7 @@
     text-align: center;
     font-size: 40px;
     right: 80px;
-    z-index: 100;
+    z-index: 1100;
 }
 
 .my-float {
@@ -19,7 +19,7 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1100;
     padding-top: 100px;
     left: 0;
     top: 0;
@@ -40,7 +40,7 @@
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
 }
 
 @-webkit-keyframes animatetop {
@@ -73,7 +73,9 @@
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+    padding: 2px 16px;
+}
 
 
 .breadcrumb-item.active {
@@ -109,3 +111,4 @@
     background-color: #2fa060;
     border-color: #2fa060;
 }
+

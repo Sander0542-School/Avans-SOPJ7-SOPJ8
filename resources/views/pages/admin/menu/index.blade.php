@@ -13,10 +13,10 @@
                     <span class="close">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <p>- Gebruik de blauwe pijltoetsen om de onderwerpen te verslepen. Dit past de navigatie menu volgorde aan op de hoofdpagina.</p>
-                    <p>- Vergeet niet op de "Opslaan" knop te drukken onderaan de pagina, om de wijzingen door te voeren.</p>
-                    <p>- Het linkere veld is de naam van de topic.</p>
-                    <p>- Het rechtere veld is het gebied waarmee de topic is geassocieerd.</p>
+                    <p>- Gebruik de blauwe pijltoetsen om de onderwerpen te verslepen. Dit past de volgorde van het menu aan op de hoofdpagina.</p>
+                    <p>- Vergeet niet om op de "Opslaan" knop te drukken onderaan de pagina om de wijzingen door te voeren.</p>
+                    <p>- Het linker veld is de naam van het onderwerp.</p>
+                    <p>- Het rechter veld is het gebied waarmee het onderwerp is geassocieerd.</p>
                 </div>
             </div>
         </div>
