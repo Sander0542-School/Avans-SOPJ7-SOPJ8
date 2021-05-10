@@ -1522,7 +1522,7 @@
       // event listeners are registered (the mutation observer will take care of them)
 
 
-      this.initializeElements(this.$el, () => {}, componentForClone ? false : true); // Use mutation observer to detect new elements being added within this component at run-time.
+      this.initializeElements(this.$el, () => {}, componentForClone); // Use mutation observer to detect new elements being added within this component at run-time.
       // Alpine's just so darn flexible amirite?
 
       this.listenForNewElementsToInitialize();
@@ -1611,15 +1611,15 @@
       });
     }
 
-    initializeElements(rootEl, extraVars = () => {}, shouldRegisterListeners = true) {
+    initializeElements(rootEl, extraVars = () => {}, componentForClone = false) {
       this.walkAndSkipNestedComponents(rootEl, el => {
         // Don't touch spawns from for loop
         if (el.__x_for_key !== undefined) return false; // Don't touch spawns from if directives
 
         if (el.__x_inserted_me !== undefined) return false;
-        this.initializeElement(el, extraVars, shouldRegisterListeners);
+        this.initializeElement(el, extraVars, componentForClone ? false : true);
       }, el => {
-        el.__x = new Component(el);
+        if (!componentForClone) el.__x = new Component(el);
       });
       this.executeAndClearRemainingShowDirectiveStack();
       this.executeAndClearNextTickStack(rootEl);
@@ -1849,7 +1849,7 @@
   }
 
   const Alpine = {
-    version: "2.8.1",
+    version: "2.8.2",
     pauseMutationObserver: false,
     magicProperties: {},
     onComponentInitializeds: [],
@@ -3881,10 +3881,13 @@ __webpack_require__(/*! jquery-ui/ui/widgets/sortable.js */ "./node_modules/jque
 
 window.Layer = {
   load: function load(layerSlug) {
+    var subjectId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
     if (document.querySelector('.layer-content')) {
       window.location.hash = layerSlug;
       Livewire.emit('layerChanged', layerSlug);
       window.Swapper.loadContent();
+      window.SubjectMap.zoomMarker(subjectId);
       window.SideMenu.close();
     }
   },
@@ -3941,38 +3944,69 @@ var southWest = Leaflet.latLng(52.108672, 6.573487),
     bounds = Leaflet.latLngBounds(southWest, northEast);
 window.SubjectMap = {
   map: null,
+  adminMap: false,
   renderMap: function renderMap() {
     var adminMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    window.SubjectMap.adminMap = adminMap;
     var map = Leaflet.map('subjectmap', {
       minZoom: 15,
-      maxZoom: 19,
+      maxZoom: 18,
+      zoom: 15,
       zoomControl: false,
       maxBounds: bounds,
       attributionControl: false,
       doubleClickZoom: false,
+      scrollWheelZoom: false,
+      touchZoom: false,
       zoomSnap: 0,
       center: bounds.getCenter()
     });
     Leaflet.tileLayer(layerTemplate).addTo(map);
-    map.fitBounds(bounds);
-
-    if (adminMap) {
-      Leaflet.rectangle(bounds, {
-        color: "rgba(0, 0, 0, 0.8)",
-        weight: 1
-      }).addTo(map);
-      map.fitBounds(bounds.pad(0.1));
-    }
-
     window.SubjectMap.map = map;
+    window.SubjectMap.loadSubjects();
+    window.SubjectMap.zoomMap();
   },
   loadSubjects: function loadSubjects() {
-    var draggable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
     fetch('/api/subjects').then(function (response) {
       return response.json();
     }).then(function (response) {
-      window.SubjectMap.placeMarkers(response.data, draggable);
+      window.SubjectMap.placeMarkers(response.data, window.SubjectMap.adminMap);
     });
+  },
+  zoomMap: function zoomMap() {
+    window.SubjectMap.center = bounds.getCenter();
+    var newBounds = bounds;
+
+    if (window.SubjectMap.adminMap) {
+      Leaflet.rectangle(bounds, {
+        color: "rgba(0, 0, 0, 0.8)",
+        weight: 1
+      }).addTo(window.SubjectMap.map);
+      newBounds = bounds.pad(0.1);
+    }
+
+    var target = window.SubjectMap.map._getBoundsCenterZoom(newBounds);
+
+    window.SubjectMap.map.flyTo(target.center, target.zoom, {
+      animate: true,
+      duration: 1.4
+    });
+  },
+  zoomMarker: function zoomMarker() {
+    var subjectId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var marker = window.SubjectMap.getMarker(subjectId);
+
+    if (marker) {
+      var map = window.SubjectMap.map;
+      map.flyTo(marker.getLatLng(), map.options.maxZoom, {
+        animate: true,
+        duration: 1.4
+      });
+      window.SubjectMap.setMarkerVisibility(false);
+    } else {
+      window.SubjectMap.zoomMap();
+      window.SubjectMap.setMarkerVisibility(true);
+    }
   },
   placeMarkers: function placeMarkers(subjects) {
     var draggable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -3984,13 +4018,31 @@ window.SubjectMap = {
       }, {
         draggable: draggable,
         icon: new Leaflet.DivIcon({
-          className: 'my-div-icon',
-          html: '<div class="marker-container">' + '<img class="my-div-image" width="65" height="80" src="/images/MarkerImage.png"/>' + "<button class=\"btn btn-primary\" class=\"marker-button\" style=\"background-color:#".concat(item.domain.color, ";border-color:#").concat(item.domain.color, "\">").concat(item.name, "</button>") + '</div>'
+          className: 'marker-subject',
+          html: '<div class="marker-container">' + '<img width="65" height="80" src="/images/MarkerImage.png"/>' + "<button class=\"btn btn-primary\" class=\"marker-button\" style=\"background-color:#".concat(item.domain.color, ";border-color:#").concat(item.domain.color, "\">").concat(item.name, "</button>") + '</div>'
         }),
         subjectId: item.id
       });
       marker.addTo(window.SubjectMap.map);
     });
+  },
+  setMarkerVisibility: function setMarkerVisibility(visible) {
+    document.querySelectorAll('#subjectmap .marker-subject').forEach(function (marker) {
+      marker.style.display = visible ? '' : 'none';
+    });
+  },
+  getMarker: function getMarker(subjectId) {
+    if (isNaN(subjectId)) {
+      return;
+    }
+
+    var layer = null;
+    window.SubjectMap.map.eachLayer(function (mapLayer) {
+      if (mapLayer.options.subjectId === subjectId) {
+        layer = mapLayer;
+      }
+    });
+    return layer;
   },
   getSubjects: function getSubjects() {
     var subjects = [];
@@ -4016,31 +4068,26 @@ window.SubjectMap = {
 /***/ (() => {
 
 window.Swapper = {
-  get map() {
-    return document.querySelector(".swapper .swapper-map");
-  },
-
   get content() {
     return document.querySelector(".swapper .swapper-content");
   },
 
   toggle: function toggle() {
-    if (window.Swapper.content && window.Swapper.map) {
-      window.Swapper.map.classList.toggle('swapper-active');
+    if (window.Swapper.content) {
       window.Swapper.content.classList.toggle('swapper-active');
     }
   },
   loadContent: function loadContent() {
-    if (window.Swapper.content && window.Swapper.map) {
-      window.Swapper.map.classList.remove('swapper-active');
+    if (window.Swapper.content) {
       window.Swapper.content.classList.add('swapper-active');
     }
   },
   loadMap: function loadMap() {
-    if (window.Swapper.content && window.Swapper.map) {
-      window.Swapper.map.classList.add('swapper-active');
+    if (window.Swapper.content) {
       window.Swapper.content.classList.remove('swapper-active');
     }
+
+    window.SubjectMap.zoomMarker();
   }
 };
 
@@ -61492,8 +61539,9 @@ process.umask = function() { return 0; };
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
-/******/ 		if(__webpack_module_cache__[moduleId]) {
-/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
@@ -61515,10 +61563,38 @@ process.umask = function() { return 0; };
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
-/******/ 	// the startup function
-/******/ 	// It's empty as some runtime module handles the default behavior
-/******/ 	__webpack_require__.x = x => {};
 /************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					result = fn();
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -61586,15 +61662,12 @@ process.umask = function() { return 0; };
 /******/ 		
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// Promise = chunk loading, 0 = chunk loaded
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"/js/app": 0
+/******/ 			"/js/app": 0,
+/******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
-/******/ 		var deferredModules = [
-/******/ 			["./resources/js/app.js"],
-/******/ 			["./resources/sass/app.scss"]
-/******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		
 /******/ 		// no prefetching
@@ -61605,21 +61678,14 @@ process.umask = function() { return 0; };
 /******/ 		
 /******/ 		// no HMR manifest
 /******/ 		
-/******/ 		var checkDeferredModules = x => {};
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime, executeModules] = data;
+/******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add "moreModules" to the modules object,
 /******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0, resolves = [];
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					resolves.push(installedChunks[chunkId][0]);
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
+/******/ 			var moduleId, chunkId, i = 0;
 /******/ 			for(moduleId in moreModules) {
 /******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
 /******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
@@ -61627,53 +61693,29 @@ process.umask = function() { return 0; };
 /******/ 			}
 /******/ 			if(runtime) runtime(__webpack_require__);
 /******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			while(resolves.length) {
-/******/ 				resolves.shift()();
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkIds[i]] = 0;
 /******/ 			}
-/******/ 		
-/******/ 			// add entry modules from loaded chunk to deferred list
-/******/ 			if(executeModules) deferredModules.push.apply(deferredModules, executeModules);
-/******/ 		
-/******/ 			// run deferred modules when all chunks ready
-/******/ 			return checkDeferredModules();
+/******/ 			__webpack_require__.O();
 /******/ 		}
 /******/ 		
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 		
-/******/ 		function checkDeferredModulesImpl() {
-/******/ 			var result;
-/******/ 			for(var i = 0; i < deferredModules.length; i++) {
-/******/ 				var deferredModule = deferredModules[i];
-/******/ 				var fulfilled = true;
-/******/ 				for(var j = 1; j < deferredModule.length; j++) {
-/******/ 					var depId = deferredModule[j];
-/******/ 					if(installedChunks[depId] !== 0) fulfilled = false;
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferredModules.splice(i--, 1);
-/******/ 					result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
-/******/ 				}
-/******/ 			}
-/******/ 			if(deferredModules.length === 0) {
-/******/ 				__webpack_require__.x();
-/******/ 				__webpack_require__.x = x => {};
-/******/ 			}
-/******/ 			return result;
-/******/ 		}
-/******/ 		var startup = __webpack_require__.x;
-/******/ 		__webpack_require__.x = () => {
-/******/ 			// reset startup function so it can be called again when more startup code is added
-/******/ 			__webpack_require__.x = startup || (x => {});
-/******/ 			return (checkDeferredModules = checkDeferredModulesImpl)();
-/******/ 		};
 /******/ 	})();
 /******/ 	
 /************************************************************************/
 /******/ 	
-/******/ 	// run startup
-/******/ 	var __webpack_exports__ = __webpack_require__.x();
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;

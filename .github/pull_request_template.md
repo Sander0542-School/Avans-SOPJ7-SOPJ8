@@ -2,7 +2,17 @@
 A clear and concise description of what the request adds to the tool.
 
 ## Task(s)
-- [e.g. #10 Wireframe maken]
+- US-{id}
+- TASK-{id}
+
+## DoD Checlist
+- [ ] Acceptance Criteria
+- [ ] Manual Tests
+- [ ] Cypress Tests
+- [ ] Laravel Tests
+- [ ] Context Sensetive Help
+- [ ] User Manual
+- [ ] Installation Manual
 
 ## Affected code
 

@@ -11,7 +11,7 @@
 
     <ul class="list-unstyled components">
         @foreach($menu as $menuItem)
-            <x-navigation.side-menu-item :menu-item="$menuItem" :first-layer="true"/>
+            <x-navigation.side-menu-item :menu-item="$menuItem" :subject-id="$menuItem['id']" :first-layer="true"/>
         @endforeach
     </ul>
 </nav>
