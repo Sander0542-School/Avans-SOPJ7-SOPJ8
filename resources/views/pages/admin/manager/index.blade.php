@@ -3,16 +3,22 @@
         <h2 class="h4 font-weight-bold">
             {{ __('Beheerder') }}
             <a id="newManager" href="{{ route('admin.managers.create') }}" class="btn btn-primary float-right">{{ __('Beheerder toevoegen') }}</a>
-            <a id="newArchive" href="{{ route('admin.managers.deleted') }}" class="btn btn-primary float-right my-1">{{ __('Verwijderde beheerders') }}</a>
+            <a id="newArchive" href="{{ route('admin.managers.deleted') }}" class="btn btn-primary float-right mx-1">{{ __('Verwijderde beheerders') }}</a>
         </h2>
     </x-slot>
 
-    <div>
-        <div id="myModal" class="modal">
+    <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
+        <i class="fa fa-info-circle my-float" ></i>
+    </button>
+
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Beheerder uitleg</h2>
-                    <span class="close">&times;</span>
+                    <h5 class="modal-title" id="exampleModalLabel">Beheerders uitleg</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <p>- Klik op de knop "Beheerder toevoegen" om een nieuwe beheerder toe te voegen.</p>
@@ -21,9 +27,6 @@
                 </div>
             </div>
         </div>
-        <button id="myBtn" class="information">
-            <i class="fa fa-info-circle my-float" ></i>
-        </button>
     </div>
 
     <div class="card">
@@ -116,25 +119,5 @@
             }
         </script>
     @endpush
-
-    <script>
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("myBtn");
-        var span = document.getElementsByClassName("close")[0];
-
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 
 </x-app-layout>
