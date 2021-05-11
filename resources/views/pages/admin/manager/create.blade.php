@@ -70,8 +70,8 @@
             @enderror
         </div>
 
-        <button class="btn btn-success float-right" type="submit">Toevoegen</button>
-        <a class="btn btn-danger" href="{{ route('admin.managers.index') }}">Annuleren</a>
+        <button class="btn btn-success btn-success-axe float-right" type="submit">Toevoegen</button>
+        <a class="btn btn-danger btn-danger-axe" href="{{ route('admin.managers.index') }}">Annuleren</a>
     </form>
 
     <script>

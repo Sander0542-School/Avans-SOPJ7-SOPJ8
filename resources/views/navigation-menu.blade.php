@@ -11,21 +11,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <x-jet-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                <x-jet-nav-link class="navbar-axe"  href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
                     {{ __('Dashboard') }}
                 </x-jet-nav-link>
                 @role('Super Admin')
-                    <x-jet-nav-link href="{{ route('admin.managers.index') }}" :active="request()->routeIs('admin.managers.index')">
+                    <x-jet-nav-link class="navbar-axe"  href="{{ route('admin.managers.index') }}" :active="request()->routeIs('admin.managers.index')">
                         {{ __('Beheerders') }}
                     </x-jet-nav-link>
                 @endrole
-                <x-jet-nav-link href="{{ route('admin.menu.index') }}" :active="request()->routeIs('admin.menu.index')">
+                <x-jet-nav-link  class="navbar-axe" href="{{ route('admin.menu.index') }}" :active="request()->routeIs('admin.menu.index')">
                     {{ __('Menu') }}
                 </x-jet-nav-link>
-                <x-jet-nav-link href="{{ route('admin.map.index') }}" :active="request()->routeIs('admin.map.index')">
+                <x-jet-nav-link class="navbar-axe" href="{{ route('admin.map.index') }}" :active="request()->routeIs('admin.map.index')">
                     {{ __('Map') }}
                 </x-jet-nav-link>
-                <x-jet-nav-link href="{{ route('admin.layers.index') }}" :active="request()->routeIs('admin.layers.index')">
+                <x-jet-nav-link class="navbar-axe" href="{{ route('admin.layers.index') }}" :active="request()->routeIs('admin.layers.index')">
                     {{ __('Lagen') }}
                 </x-jet-nav-link>
             </ul>
@@ -76,7 +76,7 @@
 
             <!-- Settings Dropdown -->
                 @auth
-                    <x-jet-dropdown id="settingsDropdown">
+                    <x-jet-dropdown id="settingsDropdown" class="navbar-axe">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <img class="rounded-circle" width="32" height="32" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>

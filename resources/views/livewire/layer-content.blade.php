@@ -6,7 +6,7 @@
                 @foreach($parentLayers as $parentLayer)
                     <li class="breadcrumb-item"><a onclick="window.Layer.load('{{ $parentLayer->slug }}', {{ $subjectId }});" href="#{{ $parentLayer->slug }}">{{ $parentLayer->name }}</a></li>
                 @endforeach
-                <li class="breadcrumb-item active" aria-current="page">{{ $layer->name }}</li>
+                <li class="breadcrumb-item active breadcrumb-item-active-axe" aria-current="page">{{ $layer->name }}</li>
             </ol>
         </nav>
 
