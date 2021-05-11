@@ -12,17 +12,19 @@
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Beheerders uitleg</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header admin-modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close close-admin" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>- Gebruik de blauwe pijltoetsen om de onderwerpen te verslepen. Dit past de volgorde van het menu aan op de hoofdpagina.</p>
-                    <p>- Vergeet niet om op de "Opslaan" knop te drukken onderaan de pagina om de wijzingen door te voeren.</p>
-                    <p>- Het linker veld is de naam van het onderwerp.</p>
-                    <p>- Het rechter veld is het gebied waarmee het onderwerp is geassocieerd.</p>
+                    <ul>
+                        <li>Gebruik de blauwe pijltoetsen om de onderwerpen te verslepen. Dit past de volgorde van het menu aan op de hoofdpagina.</li>
+                        <li>Vergeet niet om op de "Opslaan" knop te drukken onderaan de pagina om de wijzingen door te voeren.</li>
+                        <li>Het linker veld is de naam van het onderwerp.</li>
+                        <li>Het rechter veld is het gebied waarmee het onderwerp is geassocieerd.</li>
+                    </ul>
                 </div>
             </div>
         </div>

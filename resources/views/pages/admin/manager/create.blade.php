@@ -12,16 +12,18 @@
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Beheerders uitleg</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header admin-modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close close-admin" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>- Alle velden zijn verplicht. </p>
-                    <p>- “Super Admin” betekent dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</p>
-                    <p>- “Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”. </p>
+                    <ul>
+                        <li>Alle velden zijn verplicht. </li>
+                        <li>“Super Admin” betekent dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</li>
+                        <li>“Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”. </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -52,12 +54,9 @@
 
         <div class="form-group">
             <label for="inputName">Rol</label>
-            <i class="fa fa-info-circle my-float info-tooltip" >
-                <span class="info-tooltiptext">
-                    <p>Super Admin: kan wel andere beheerders beheren.</p>
-                    <p>Admin: kan geen andere beheerders beheren.</p>
-                </span>
-            </i>
+            <span data-toggle="tooltip" data-placement="right" title="Een Super Admin kan wel andere beheerders beheren, maar een normale Admin kan geen andere beheerders beheren.">
+                <i class="fa fa-info-circle my-float"></i>
+            </span>
             <select required name="role" class="form-control @error('email') is-invalid @enderror" id="inputRole">
                 <option selected disabled>Kies een rol</option>
                 @foreach($roles as $role)
@@ -74,6 +73,12 @@
         <button class="btn btn-success float-right" type="submit">Toevoegen</button>
         <a class="btn btn-danger" href="{{ route('admin.managers.index') }}">Annuleren</a>
     </form>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 
 </x-app-layout>
 

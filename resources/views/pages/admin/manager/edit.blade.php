@@ -12,16 +12,18 @@
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Beheerders uitleg</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header admin-modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close close-admin" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>- Alle velden zijn verplicht. </p>
-                    <p>- “Super Admin” betekent dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</p>
-                    <p>- “Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”. </p>
+                    <ul>
+                        <li>Alle velden zijn verplicht. </li>
+                        <li>“Super Admin” betekent dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</li>
+                        <li>“Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”. </li>
+                    </ul>
                 </div>
             </div>
         </div>

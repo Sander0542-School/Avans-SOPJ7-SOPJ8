@@ -24,16 +24,18 @@
 
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content admin-modal-header">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Beheerders uitleg</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close close-admin" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>- Sleep de poppetjes om hen van locatie te veranderen.</p>
-                    <p>- Vergeet niet op de "Locaties opslaan" knop te drukken om de wijzingen door te voeren.</p>
+                    <ul>
+                        <li>- Sleep de poppetjes om hen van locatie te veranderen.</li>
+                        <li>- Vergeet niet op de "Locaties opslaan" knop te drukken om de wijzingen door te voeren.</li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -12,16 +12,18 @@
 
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content admin-modal-header">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Beheerders uitleg</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close close-admin" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Op deze pagina zijn alle verwijderde beheerders te vinden. </p>
-                    <p>Gebruik de zoekfunctie om te zoeken op naam, email of rol. </p>
+                    <ul>
+                        <li>Op deze pagina zijn alle verwijderde beheerders te vinden. </li>
+                        <li>Gebruik de zoekfunctie om te zoeken op naam, email of rol. </li>
+                    </ul>
                 </div>
             </div>
         </div>

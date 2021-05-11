@@ -14,16 +14,18 @@
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Beheerders uitleg</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header admin-modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close close-admin" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>- Klik op de knop "Beheerder toevoegen" om een nieuwe beheerder toe te voegen.</p>
-                    <p>- Klik op de gele knop op de rij van een beheerder om zijn gegevens aan te passen.</p>
-                    <p>- Zoeken op beheerders kan zowel op Naam als op Email.</p>
+                    <ul>
+                        <li>Klik op de knop "Beheerder toevoegen" om een nieuwe beheerder toe te voegen.</li>
+                        <li>Klik op de gele knop op de rij van een beheerder om zijn gegevens aan te passen.</li>
+                        <li>Zoeken op beheerders kan zowel op Naam als op Email.</li>
+                    </ul>
                 </div>
             </div>
         </div>
