@@ -6,6 +6,24 @@
         </h2>
     </x-slot>
 
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Beheerder uitleg</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Op deze pagina zijn alle verwijderde beheerders te vinden. </p>
+                    <p>Gebruik de zoekfunctie om te zoeken op naam, email of rol. </p>
+                </div>
+            </div>
+        </div>
+        <button id="myBtn" class="information">
+            <i class="fa fa-info-circle my-float" ></i>
+        </button>
+    </div>
+
     <div class="card">
         <div class="card-body">
             <div class="form-group m-0">
@@ -90,4 +108,25 @@
             }
         </script>
     @endpush
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
 </x-app-layout>

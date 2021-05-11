@@ -49,6 +49,12 @@
 
         <div class="form-group">
             <label for="inputName">Rol</label>
+            <i class="fa fa-info-circle my-float info-tooltip" >
+                <span class="info-tooltiptext">
+                    <p>Super Admin: kan wel andere beheerders beheren.</p>
+                    <p>Admin: kan geen andere beheerders beheren.</p>
+                </span>
+            </i>
             <select required name="role" class="form-control @error('email') is-invalid @enderror" id="inputRole">
                 <option selected disabled>Kies een rol</option>
                 @foreach($roles as $role)
