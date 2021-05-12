@@ -10,7 +10,7 @@
         <i class="fa fa-info-circle my-float" ></i>
     </button>
 
-    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content admin-modal-header">
                 <div class="modal-header">

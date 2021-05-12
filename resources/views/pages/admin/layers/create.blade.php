@@ -9,7 +9,7 @@
         <i class="fa fa-info-circle my-float" ></i>
     </button>
 
-    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header admin-modal-header">
@@ -89,11 +89,6 @@
     @push('scripts')
         <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
         <script>CKEDITOR.replace('content');</script>
-        <script>
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-        </script>
     @endpush
 
 </x-app-layout>

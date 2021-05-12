@@ -54,3 +54,8 @@ $( document ).ready(function() {
 //jquery ui
 require('jquery-ui/ui/widgets/autocomplete.js');
 require('jquery-ui/ui/widgets/sortable.js');
+
+//bootstrap tooltips
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

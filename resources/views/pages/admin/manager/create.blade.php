@@ -9,7 +9,7 @@
         <i class="fa fa-info-circle my-float" ></i>
     </button>
 
-    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header admin-modal-header">
@@ -73,12 +73,6 @@
         <button class="btn btn-success btn-success-axe float-right" type="submit">Toevoegen</button>
         <a class="btn btn-danger btn-danger-axe" href="{{ route('admin.managers.index') }}">Annuleren</a>
     </form>
-
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
 
 </x-app-layout>
 
