@@ -12,9 +12,9 @@
     <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header admin-modal-header">
+                <div class="modal-header">
                     <h5 class="modal-title">Beheerders uitleg</h5>
-                    <button type="button" class="close close-admin" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
