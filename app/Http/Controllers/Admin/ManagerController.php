@@ -9,6 +9,7 @@ use App\Models\User;
 use Hash;
 use Laravel\Fortify\Fortify;
 use Password;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Str;
 
@@ -51,7 +52,7 @@ class ManagerController extends Controller
         $manager = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make(Str::random(12))
+            'password' => Hash::make(Str::random(12)),
         ]);
 
         $manager->assignRole(Role::findById($data['role'], config('fortify.guard')));
@@ -85,6 +86,7 @@ class ManagerController extends Controller
     public function edit(User $manager)
     {
         $roles = Role::all();
+
         return view('pages.admin.manager.edit')->with('manager', $manager)->with('roles', $roles);
     }
 
@@ -97,17 +99,23 @@ class ManagerController extends Controller
      */
     public function update(UpdateRequest $request, User $manager)
     {
-
         $data = $request->validated();
 
-        if (!$manager->update([
+        if (! $manager->update([
             'name' => $data['name'],
-            'email' => $data['email']
+            'email' => $data['email'],
         ])) {
             return redirect()->back()->withErrors(['error' => 'Beheerder kon niet worden bijgewerkt.']);
         }
 
         $this->handleRoleChange($manager, $data['role']);
+
+
+        $userPermissions = $manager->permissions;
+
+        foreach ($data['layers'] as $layerId) {
+            $manager->givePermissionTo('layers.*.'.$layerId);
+        }
 
         return redirect()->route('admin.managers.index')->with('message', 'De beheerder is successvol aangepast!');
     }
@@ -120,7 +128,7 @@ class ManagerController extends Controller
      */
     public function destroy(User $manager)
     {
-        if ($manager == null){
+        if ($manager == null) {
             return redirect()->back()->withErrors(['error' => 'De admin kan niet verwijderd worden']);
         }
 
@@ -140,7 +148,7 @@ class ManagerController extends Controller
     {
         $manager = User::withTrashed()->find($managerId);
 
-        if ($manager == null){
+        if ($manager == null) {
             return redirect()->back()->withErrors(['error' => 'De admin kan niet hersteld worden']);
         }
 
@@ -157,7 +165,8 @@ class ManagerController extends Controller
         return view('pages.admin.manager.deleted')->with('managers', $managers);
     }
 
-    private function handleRoleChange(User $manager, $roleId) {
+    private function handleRoleChange(User $manager, $roleId)
+    {
         $currentRoleId = $manager->roles[0]->id;
         $currentRole = Role::all()->where('id', $currentRoleId)->first();
 
