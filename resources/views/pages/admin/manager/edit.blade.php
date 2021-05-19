@@ -53,12 +53,12 @@
             @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="roleForm">
             <label for="inputName">Rol</label>
             <span data-toggle="tooltip" data-placement="right" title="Een Super Admin kan wel andere beheerders beheren, maar een normale Admin kan geen andere beheerders beheren.">
                 <i class="fa fa-info-circle my-float"></i>
             </span>
-            <select required name="role" class="form-control @error('email') is-invalid @enderror" id="inputRole">
+            <select required name="role" class="form-control @error('email') is-invalid @enderror" id="inputRole" onchange="checkDropdown()">
                 <option disabled>Kies een rol</option>
                 @foreach($roles as $role)
                     @if(auth()->user()->hasRole('Super Admin') && $role->name == 'Super Admin')
@@ -78,7 +78,6 @@
         <button class="btn btn-success float-right" type="submit">Opslaan</button>
         <a class="btn btn-danger" href="{{ route('admin.managers.index') }}">Annuleren</a>
     </form>
-
 </x-app-layout>
 
 
