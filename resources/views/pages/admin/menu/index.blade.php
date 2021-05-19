@@ -5,6 +5,31 @@
         </h2>
     </x-slot>
 
+    <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
+        <i class="fa fa-info-circle my-float" ></i>
+    </button>
+
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Gebruik de blauwe pijltoetsen om de onderwerpen te verslepen. Dit past de volgorde van het menu aan op de hoofdpagina.</li>
+                        <li>Vergeet niet om op de "Opslaan" knop te drukken onderaan de pagina om de wijzingen door te voeren.</li>
+                        <li>Het linker veld is de naam van het onderwerp.</li>
+                        <li>Het rechter veld is het gebied waarmee het onderwerp is geassocieerd.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <form class="col" action="{{ route('admin.menu.update') }}" method="post">
             @csrf
@@ -18,7 +43,9 @@
                             <div class="row">
                                 <div class="col-1">
                                     <span class="btn btn-link" style="cursor: grab">
-                                        <i class="fas fa-2x fa-sort"></i>
+                                        <i class="fas fa-2x fa-sort" title=
+                                            "Sleep het onderwerp in de gewenste volgorde"
+                                        ></i>
                                     </span>
                                 </div>
                                 <div class="col">
@@ -64,4 +91,5 @@
             });
         }
     </script>
+
 </x-app-layout>

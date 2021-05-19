@@ -15,7 +15,7 @@
                     {{ __('Dashboard') }}
                 </x-jet-nav-link>
                 @role('Super Admin')
-                    <x-jet-nav-link href="{{ route('admin.managers.index') }}" :active="request()->routeIs('admin.managers.index')">
+                    <x-jet-nav-link class="navbar"  href="{{ route('admin.managers.index') }}" :active="request()->routeIs('admin.managers.index')">
                         {{ __('Beheerders') }}
                     </x-jet-nav-link>
                 @endrole

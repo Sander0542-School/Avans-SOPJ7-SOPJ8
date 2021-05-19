@@ -3,9 +3,33 @@
         <h2 class="h4 font-weight-bold">
             {{ __('Beheerder') }}
             <a id="newManager" href="{{ route('admin.managers.create') }}" class="btn btn-primary float-right">{{ __('Beheerder toevoegen') }}</a>
-            <a id="newArchive" href="{{ route('admin.managers.deleted') }}" class="btn btn-primary float-right my-1">{{ __('Verwijderde beheerders') }}</a>
+            <a id="newArchive" href="{{ route('admin.managers.deleted') }}" class="btn btn-primary float-right mx-1">{{ __('Verwijderde beheerders') }}</a>
         </h2>
     </x-slot>
+
+    <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
+        <i class="fa fa-info-circle my-float" ></i>
+    </button>
+
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Klik op de knop "Beheerder toevoegen" om een nieuwe beheerder toe te voegen.</li>
+                        <li>Klik op de gele knop op de rij van een beheerder om zijn gegevens aan te passen.</li>
+                        <li>Zoeken op beheerders kan zowel op Naam als op Email.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="card">
         <div class="card-body">
@@ -97,4 +121,5 @@
             }
         </script>
     @endpush
+
 </x-app-layout>

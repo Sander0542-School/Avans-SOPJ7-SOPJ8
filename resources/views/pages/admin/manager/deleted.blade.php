@@ -6,6 +6,29 @@
         </h2>
     </x-slot>
 
+    <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
+        <i class="fa fa-info-circle my-float" ></i>
+    </button>
+
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Op deze pagina zijn alle verwijderde beheerders te vinden. </li>
+                        <li>Gebruik de zoekfunctie om te zoeken op naam, email of rol. </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-body">
             <div class="form-group m-0">
@@ -90,4 +113,5 @@
             }
         </script>
     @endpush
+
 </x-app-layout>

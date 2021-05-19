@@ -17,6 +17,30 @@
             @csrf
         </form>
     </x-slot>
+
+    <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
+        <i class="fa fa-info-circle my-float" ></i>
+    </button>
+
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>- Sleep de poppetjes om hen van locatie te veranderen.</li>
+                        <li>- Vergeet niet op de "Locaties opslaan" knop te drukken om de wijzingen door te voeren.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="subjectmap"></div>
 
     @push('scripts')
@@ -55,4 +79,5 @@
             }
         </script>
     @endpush
+
 </x-app-layout>
