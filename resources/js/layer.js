@@ -1,9 +1,10 @@
 window.Layer = {
-    load: (layerSlug) => {
+    load: (layerSlug, subjectId = null) => {
         if (document.querySelector('.layer-content')) {
             window.location.hash = layerSlug;
             Livewire.emit('layerChanged', layerSlug);
             window.Swapper.loadContent();
+            window.SubjectMap.zoomMarker(subjectId);
             window.SideMenu.close();
         }
     },

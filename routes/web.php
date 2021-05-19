@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\LayerController;
+use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +31,13 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
     });
 
     Route::resource('layers', LayerController::class)->only(['index', 'create', 'edit', 'store', 'update']);
+
+    Route::prefix('managers')->name('managers.')->group(function () {
+        Route::get('deleted', [ManagerController::class, 'deleted'])->name('deleted');
+        Route::get('restore/{manager}', [ManagerController::class, 'restore'])->name('restore');
+    });
+
+    Route::resource('managers', ManagerController::class);
 
     Route::prefix('map')->name('map.')->group(function () {
         Route::get('', [MapController::class, 'index'])->name('index');

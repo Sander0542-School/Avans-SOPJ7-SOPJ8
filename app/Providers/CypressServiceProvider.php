@@ -34,7 +34,20 @@ class CypressServiceProvider extends ServiceProvider
                     'password' => Hash::make('password'),
                 ]);
 
-                $user->assignRole('admin');
+                $user->assignRole('Super Admin');
+
+                return $user;
+            });
+
+            \NoelDeMartin\LaravelCypress\Facades\Cypress::command('tempAdmin', function () {
+                $user = User::updateOrCreate([
+                    'email' => 'temp-admin@cypress.test',
+                ], [
+                    'name' => 'Temp Admin',
+                    'password' => Hash::make('password'),
+                ]);
+
+                $user->assignRole('Admin');
 
                 return $user;
             });

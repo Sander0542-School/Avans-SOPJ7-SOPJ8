@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class SideMenuItem extends Component
 {
     public $menuItem;
+    public $subjectId;
 
     public $firstLayer = false;
 
@@ -15,9 +16,10 @@ class SideMenuItem extends Component
      *
      * @return void
      */
-    public function __construct($menuItem, $firstLayer = false)
+    public function __construct($menuItem, $subjectId, $firstLayer = false)
     {
         $this->menuItem = $menuItem;
+        $this->subjectId = $subjectId;
         $this->firstLayer = $firstLayer;
     }
 

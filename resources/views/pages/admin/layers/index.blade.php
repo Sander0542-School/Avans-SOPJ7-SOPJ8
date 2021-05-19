@@ -6,6 +6,29 @@
         </h2>
     </x-slot>
 
+    <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
+        <i class="fa fa-info-circle my-float" ></i>
+    </button>
+
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Beheerders uitleg</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>-Klik op de knop "Nieuwe laag" om een nieuwe laag toe te voegen.</li>
+                        <li>-Klik op de gele knop op de rij van een laag die je wilt aanpassen.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-body">
             <div class="form-group m-0">
@@ -16,7 +39,7 @@
     <br/>
 
     <div class="card">
-        <table id="layerTable" class="table">
+        <table id="layerTable" class="table m-0">
             <thead>
             <tr>
                 <th class="border-0">Naam</th>
@@ -35,7 +58,7 @@
                             {{ $layer->parentLayer->name }}
                         @endif
                     </td>
-                    <td>
+                    <td class="text-right">
                         <a class="btn btn-warning" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
@@ -63,4 +86,5 @@
             }
         </script>
     @endpush
+
 </x-app-layout>

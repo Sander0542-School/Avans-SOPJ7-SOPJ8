@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -19,10 +17,14 @@ class FillPermissionsTables extends Migration
         Permission::create(['name' => 'layers.*']);
         Permission::create(['name' => 'subjects.*']);
 
-        $admin = Role::create(['name' => 'admin']);
-        $admin->givePermissionTo('domains.*');
-        $admin->givePermissionTo('layers.*');
-        $admin->givePermissionTo('subjects.*');
+        Role::create([
+            'id' => 1,
+            'name' => 'Super Admin',
+        ]);
+        Role::create([
+            'id' => 2,
+            'name' => 'Admin',
+        ]);
     }
 
     /**
