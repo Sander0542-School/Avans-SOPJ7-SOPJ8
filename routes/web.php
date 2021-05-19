@@ -3,10 +3,9 @@
 use App\Http\Controllers\Admin\LayerController;
 use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\MapController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MenuController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
