@@ -1,9 +1,12 @@
 
-// let roleSelect = document.querySelector('#inputRole');
-// console.log(roleSelect);
-// roleSelect.addEventListener('changed.bs.select',()=>{
-//     checkDropdown();
-// });
+
+$(document).ready(()=>{
+    let roleSelect = document.querySelector('#inputRole');
+    roleSelect.addEventListener('changed.bs.select',()=>{
+        checkDropdown();
+    });
+})
+
 
 function checkDropdown() {
     let roleSelect = document.querySelector('#inputRole');
