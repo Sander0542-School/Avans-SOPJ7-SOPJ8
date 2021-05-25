@@ -84,18 +84,33 @@
         </div>
 
         <div id="selectPermissions" class="form-group" style="display: none;">
-            <label>Selecteer de lagen die deze beheerder mag beheren.</label>
-{{--            misschien een if die checkt of ja of nee is ingevuld, dan moet deze required zijn--}}
-            <select class="form-control" class="selectpicker" multiple data-live-search="true">
-                <optgroup label="Lagen">
-{{--                    @foreach($layer as $layers)--}}
-{{--                        <option data-tokens="{{$layer->slug}}" value="layer-{{$layer->id}}" name="layer-{{$layer->id}}">{{$layer->name}}</option>--}}
-{{--                    @endforeach--}}
-                    <option>Laag 1</option>
-                    <option>Laag 2</option>
-                    <option>Laag 3</option>
-                </optgroup>
-            </select>
+            <div>
+                <label>Selecteer de <span style="font-weight: bold">onderwerpen</span> die deze beheerder mag beheren</label>
+                <select class="form-control" class="selectpicker" multiple data-live-search="true" id="subjectPermission">
+                    <optgroup label="Onderwerpen">
+                        {{--                    @foreach($subject as $subjects)--}}
+                        {{--                        <option data-tokens="{{$subject->slug}}" value="subject-{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>--}}
+                        {{--                    @endforeach--}}
+                        <option>Onderwerp 1</option>
+                        <option>Onderwerp 2</option>
+                        <option>Onderwerp 3</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div style="margin-left: 30px">
+                <label>Selecteer de <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
+                <select class="form-control" class="selectpicker" multiple data-live-search="true" id="layerPermission">
+                    <optgroup label="Lagen">
+                        {{--                    @foreach($layer as $layers)--}}
+                        {{--                        <option data-tokens="{{$layer->slug}}" value="layer-{{$layer->id}}" name="layer-{{$layer->id}}">{{$layer->name}}</option>--}}
+                        {{--                    @endforeach--}}
+                        <option>Laag 1</option>
+                        <option>Laag 2</option>
+                        <option>Laag 3</option>
+                    </optgroup>
+                </select>
+            </div>
         </div>
 
         <button class="btn btn-success float-right" type="submit">Opslaan</button>

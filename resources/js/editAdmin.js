@@ -44,7 +44,8 @@ window.Admin = {
 
         showPermissionInterface:() => {
             let selectPermissions = document.querySelector('#selectPermissions');
-            selectPermissions.style.display = "block";
+            selectPermissions.style.display = "flex";
+            selectPermissions.style.flexDirection = "row";
         },
 
         hidePermissionInterface:() => {
