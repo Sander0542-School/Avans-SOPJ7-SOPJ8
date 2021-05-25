@@ -1,49 +1,55 @@
 
 
-$(document).ready(()=>{
-    let roleSelect = document.querySelector('#inputRole');
-    roleSelect.addEventListener('changed.bs.select',()=>{
-        checkDropdown();
-    });
-})
+window.Admin = {
+    ManagerEdit: {
+        initAdmin: () => {
+            let roleSelect = document.querySelector('#inputRole');
+            roleSelect.addEventListener('change', () => {
+                window.Admin.ManagerEdit.checkDropdown();
+            });
+        },
 
+        checkDropdown: () => {
+            let roleSelect = document.querySelector('#inputRole');
+            if (roleSelect.value === "2") {
+                window.Admin.ManagerEdit.showAllLayers();
+            } else {
+                if (document.querySelector('#allLayers').style.display === "block") {
+                    window.Admin.ManagerEdit.hideAllLayers();
+                }
+                if (document.querySelector('#selectPermissions').style.display === "block") {
+                    window.Admin.ManagerEdit.hidePermissionInterface();
+                }
+            }
+        },
 
-function checkDropdown() {
-    let roleSelect = document.querySelector('#inputRole');
-    if (roleSelect.innerText === 'admin') {
-        createDropdown();
-    } else {
-        if (document.querySelector('#adminAuthContainer')!=null) {
-            document.querySelector('#adminAuthContainer').innerHTML = "";
+        showAllLayers: () => {
+            let dropdown = document.querySelector('#allLayers');
+            dropdown.style.display = "block";
+            if (document.querySelector('#allLayersSelect').value === "false") {
+                window.Admin.ManagerEdit.showPermissionInterface();
+            }
+            dropdown.addEventListener('change', () => {
+                if (document.querySelector('#allLayersSelect').value === "false") {
+                    window.Admin.ManagerEdit.showPermissionInterface();
+                } else {
+                    window.Admin.ManagerEdit.hidePermissionInterface();
+                }
+            });
+        },
+
+        hideAllLayers:() => {
+            document.querySelector('#allLayers').style.display = "none";
+        },
+
+        showPermissionInterface:() => {
+            let selectPermissions = document.querySelector('#selectPermissions');
+            selectPermissions.style.display = "block";
+        },
+
+        hidePermissionInterface:() => {
+            document.querySelector('#selectPermissions').style.display = "none";
         }
-        //verwijder permission interface
+
     }
-}
-
-function createDropdown() {
-    let container = document.createElement('div');
-    container.id = 'adminAuthContainer';
-    let label = document.createElement('label');
-    label.innerText = "Heeft de beheerder het recht om alle lagen te beheren?";
-    let dropdown = document.createElement('select');
-    dropdown.className = "selectpicker";
-    let optionYes = document.createElement('option');
-    optionYes.selected = true;
-    optionYes.value = true;
-    let optionNo = document.createElement('option');
-    optionNo.value = false;
-    dropdown.addEventListener('change',()=>{
-        if (!dropdown.value) {
-            createPermissionInterface();
-        } else {
-            //verwijder permission interface
-        }
-    });
-    dropdown.appendChild(optionYes, optionNo);
-    container.appendChild(label,dropdown);
-    document.querySelector('#roleForm').appendChild(container);
-}
-
-function createPermissionInterface() {
-
 }

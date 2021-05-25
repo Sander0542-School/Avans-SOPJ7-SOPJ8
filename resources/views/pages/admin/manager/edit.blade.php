@@ -74,9 +74,37 @@
             </div>
             @enderror
         </div>
+
+        <div id="allLayers" class="form-group" style="display: none;">
+            <label>Heeft de beheerder het recht om alle bestaande lagen te beheren?</label>
+            <select class="form-control" id="allLayersSelect">
+                <option value="true">Ja</option>
+                <option value="false">Nee</option>
+            </select>
+        </div>
+
+        <div id="selectPermissions" class="form-group" style="display: none;">
+            <label>Selecteer de lagen die deze beheerder mag beheren.</label>
+{{--            misschien een if die checkt of ja of nee is ingevuld, dan moet deze required zijn--}}
+            <select class="form-control" class="selectpicker" multiple data-live-search="true">
+                <optgroup label="Lagen">
+{{--                    @foreach($layer as $layers)--}}
+{{--                        <option data-tokens="{{$layer->slug}}" value="layer-{{$layer->id}}" name="layer-{{$layer->id}}">{{$layer->name}}</option>--}}
+{{--                    @endforeach--}}
+                    <option>Laag 1</option>
+                    <option>Laag 2</option>
+                    <option>Laag 3</option>
+                </optgroup>
+            </select>
+        </div>
+
         <button class="btn btn-success float-right" type="submit">Opslaan</button>
         <a class="btn btn-danger" href="{{ route('admin.managers.index') }}">Annuleren</a>
     </form>
+
+    @push('scripts')
+        <script defer>window.Admin.ManagerEdit.initAdmin();</script>
+        @endpush
 </x-app-layout>
 
 
