@@ -3,10 +3,11 @@
 namespace App\Http\Requests\Admin\Manager;
 
 use App\Models\Layer;
+use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
-use App\Models\User;
 
 class UpdateRequest extends FormRequest
 {
@@ -43,12 +44,30 @@ class UpdateRequest extends FormRequest
                 'integer',
                 Rule::exists(Role::class, 'id')->where('guard_name', config('fortify.guard')),
             ],
+            'layers_custom' => [
+                'required_if,role,2',
+                'boolean',
+            ],
             'layers' => [
                 'required_if,role,2',
+                'required_if,layers_custom,true',
+                'array',
             ],
             'layers.*' => [
                 Rule::exists(Layer::class, 'id'),
-            ]
+            ],
+            'subjects_custom' => [
+                'required_if,role,2',
+                'boolean',
+            ],
+            'subjects' => [
+                'required_if,role,2',
+                'required_if,subjects_custom,true',
+                'array',
+            ],
+            'subjects.*' => [
+                Rule::exists(Subject::class, 'id'),
+            ],
         ];
     }
 }
