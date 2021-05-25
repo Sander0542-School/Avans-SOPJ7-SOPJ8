@@ -4024,7 +4024,7 @@ window.SubjectMap = {
         draggable: draggable,
         icon: new Leaflet.DivIcon({
           className: 'marker-subject',
-          html: '<div class="marker-container">' + '<img width="65" height="80" src="/images/MarkerImage.png"/>' + "<button class=\"btn btn-primary\" class=\"marker-button\" style=\"background-color:#".concat(item.domain.color, ";border-color:#").concat(item.domain.color, "\">").concat(item.name, "</button>") + '</div>'
+          html: '<div class="marker-container">' + '<img width="65" height="80" src="/images/MarkerImage.png"/>' + "<button class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\" class=\"marker-button\" style=\"background-color:#".concat(item.domain.color, ";border-color:#").concat(item.domain.color, "\">").concat(item.name, "</button>") + '</div>'
         }),
         subjectId: item.id
       });
