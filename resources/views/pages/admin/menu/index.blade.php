@@ -39,6 +39,7 @@
                     <div id="subjectItem{{ $subject->id }}" class="sortable-item card my-2 w-100">
                         <input type="hidden" data-name="subject_id" name="subjects[{{ $subject->id }}][subject_id]" value="{{ $subject->id }}">
                         <input type="hidden" data-name="order" class="subject-order" name="subjects[{{ $subject->id }}][order]" value="{{ $subject->order }}">
+                        <input type="hidden" data-name="description" class="subject-description" name="subjects[{{ $subject->id }}][description]" value="{{ $subject->description }}">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-1">
@@ -58,6 +59,9 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-span-1 float-right my-2 w-100">
+                                <input name="subjects[{{ $subject->id }}][description]" data-name="description" type="text" class="form-control" value="{{ $subject->description }}" placeholder="Beschrijving">
                             </div>
                         </div>
                     </div>
