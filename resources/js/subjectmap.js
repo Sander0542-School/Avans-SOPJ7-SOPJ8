@@ -73,9 +73,10 @@ window.SubjectMap = {
                 draggable: draggable,
                 icon: new Leaflet.DivIcon({
                     className: 'marker-subject',
-                    html: '<div class="marker-container">' +
+                    html:
+                        '<div class="marker-container">' +
                         '<img width="65" height="80" src="/images/MarkerImage.png"/>' +
-                        `<button class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Tooltip on right" class="marker-button" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</button>` +
+                        `<a class="btn btn-primary marker-button" onclick="window.Layer.load(${item.layers[0].slug}, ${item.id})" data-toggle="tooltip" data-placement="right" data-html="true" title="${item.description}" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</a>` +
                         '</div>'
                 }),
                 subjectId: item.id
@@ -83,6 +84,7 @@ window.SubjectMap = {
 
             marker.addTo(window.SubjectMap.map);
         });
+        $('[data-toggle="tooltip"]').tooltip()
     },
     setMarkerVisibility: (visible) => {
         document.querySelectorAll('#subjectmap .marker-subject').forEach((marker) => {

@@ -42,6 +42,7 @@ class SubjectController extends Controller
 
         $subject = Subject::create([
             'name' => $data['name'],
+            'description' => $data['description'],
             'lon' => 6.581911,
             'lat' => 52.121066,
             'domain_id' => $data['domain_id'],

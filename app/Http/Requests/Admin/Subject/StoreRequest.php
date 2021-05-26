@@ -13,8 +13,8 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        //return $this->user()->hasRole('Admin');
-        return true;
+        return $this->user()->hasRole('Super Admin');
+        //return true;
     }
 
     /**
@@ -26,6 +26,10 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => [
+                'required',
+                'max:255',
+            ],
+            'description' => [
                 'required',
                 'max:255',
             ],

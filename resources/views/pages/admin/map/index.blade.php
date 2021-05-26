@@ -66,6 +66,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="inputDescription">Beschrijving</label>
+                            <input required type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription">
+                            @error('description')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label for="inputDomain">Domein</label>
                             <select name="domain_id" class="form-control">
                                 @foreach($domains as $domain)
