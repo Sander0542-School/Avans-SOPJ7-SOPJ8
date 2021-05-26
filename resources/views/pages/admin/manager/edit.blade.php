@@ -23,6 +23,7 @@
                         <li>Alle velden zijn verplicht.</li>
                         <li>“Super Admin” betekent dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</li>
                         <li>“Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”.</li>
+                        <li>Je kunt onderwerpen en/of specifieke lagen toekennen aan een beheerder. Dit doe je door een onderwerp te kiezen, en vervolgens specifieke lagen te kiezen (optioneel). Wanneer een onderwerp gekozen wordt, worden de bijbehorende lagen automatisch geselecteerd. Uiteindelijk worden de geselecteerde lagen doorgevoerd wanneer je op opslaan drukt.</li>
                     </ul>
                 </div>
             </div>
