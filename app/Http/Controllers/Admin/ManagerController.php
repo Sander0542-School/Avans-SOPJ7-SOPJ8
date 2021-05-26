@@ -110,12 +110,7 @@ class ManagerController extends Controller
 
         $this->handleRoleChange($manager, $data['role']);
 
-
-        $userPermissions = $manager->permissions;
-
-        foreach ($data['layers'] as $layerId) {
-            $manager->givePermissionTo('layers.*.'.$layerId);
-        }
+        $this->handlePermissionChange($manager, $data);
 
         return redirect()->route('admin.managers.index')->with('message', 'De beheerder is successvol aangepast!');
     }
@@ -176,5 +171,18 @@ class ManagerController extends Controller
             $newRole = Role::all()->where('id', $roleId)->first();
             $manager->assignRole($newRole->name);
         }
+    }
+
+    private function handlePermissionChange(User $manager, $data) {
+        $permissionsArray = [];
+
+        foreach ($data['layers'] as $layerId) {
+            array_push($permissionsArray, 'layers.*.'.$layerId);
+        }
+        foreach ($data['subjects'] as $subjectId) {
+            array_push($permissionsArray, 'subjects.*.'.$subjectId);
+        }
+
+        $manager->syncPermissions($permissionsArray);
     }
 }
