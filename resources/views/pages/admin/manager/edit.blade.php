@@ -6,7 +6,7 @@
     </x-slot>
 
     <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
-        <i class="fa fa-info-circle my-float" ></i>
+        <i class="fa fa-info-circle my-float"></i>
     </button>
 
     <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
@@ -20,9 +20,9 @@
                 </div>
                 <div class="modal-body">
                     <ul>
-                        <li>Alle velden zijn verplicht. </li>
+                        <li>Alle velden zijn verplicht.</li>
                         <li>“Super Admin” betekent dat deze gebruiker absolute rechten heeft over alles en dus ook andere Super Admins kan editen en/of verwijderen.</li>
-                        <li>“Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”. </li>
+                        <li>“Admin” heeft gelimiteerde rechten vergeleken met een ”Super Admin”.</li>
                     </ul>
                 </div>
             </div>
@@ -83,34 +83,34 @@
             </select>
         </div>
 
-        <div id="selectPermissions" class="form-group" style="display: none;">
-            <div>
-                <label>Selecteer de <span style="font-weight: bold">onderwerpen</span> die deze beheerder mag beheren</label>
-                <select class="form-control" class="selectpicker" multiple data-live-search="true" id="subjectPermission">
-                    <optgroup label="Onderwerpen">
-                        {{--                    @foreach($subject as $subjects)--}}
-                        {{--                        <option data-tokens="{{$subject->slug}}" value="subject-{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>--}}
-                        {{--                    @endforeach--}}
-                        <option>Onderwerp 1</option>
-                        <option>Onderwerp 2</option>
-                        <option>Onderwerp 3</option>
-                    </optgroup>
-                </select>
-            </div>
+        <div id="subjectPermissionDiv" class="form-group" style="display: none;">
+            <label>
+                <span style="font-weight: bold">onderwerpen</span> die deze beheerder mag beheren</label>
+            <select class="form-control" class="selectpicker" multiple data-live-search="true" id="subjectPermission">
+                <optgroup label="Onderwerpen">
+                    {{--                    @foreach($subject as $subjects)--}}
+                    {{--                        <option data-tokens="{{$subject->slug}}" value="subject-{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>--}}
+                    {{--                    @endforeach--}}
+                    <option value="subject-1">Onderwerp 1</option>
+                    <option value="subject-2">Onderwerp 2</option>
+                    <option value="subject-3">Onderwerp 3</option>
+                </optgroup>
+            </select>
+            <a class="btn btn-secondary" style="margin-top:30px;" onclick="window.Admin.ManagerEdit.showLayerPermissions()" id="assignLayersButton">Wijs specifieke lagen toe</a>
+        </div>
 
-            <div style="margin-left: 30px">
-                <label>Selecteer de <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
-                <select class="form-control" class="selectpicker" multiple data-live-search="true" id="layerPermission">
-                    <optgroup label="Lagen">
-                        {{--                    @foreach($layer as $layers)--}}
-                        {{--                        <option data-tokens="{{$layer->slug}}" value="layer-{{$layer->id}}" name="layer-{{$layer->id}}">{{$layer->name}}</option>--}}
-                        {{--                    @endforeach--}}
-                        <option>Laag 1</option>
-                        <option>Laag 2</option>
-                        <option>Laag 3</option>
-                    </optgroup>
-                </select>
-            </div>
+        <div id="layerPermissionDiv" class="form-group" style="display: none;">
+            <label>Selecteer de <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
+            <select class="form-control" class="selectpicker" multiple data-live-search="true" id="layerPermission">
+                <optgroup label="Lagen">
+                    {{--                    @foreach($layer as $layers)--}}
+                    {{--                        <option data-tokens="{{$layer->slug}}" data-myval="subject-{{$subject->id}}" value="layer-{{$layer->id}}" name="layer-{{$layer->id}}">{{$layer->name}}</option>--}}
+                    {{--                    @endforeach--}}
+                    <option value="layer-1" data-myval="subject-1">Laag 1</option>
+                    <option value="layer-2" data-myval="subject-1">Laag 2</option>
+                    <option value="layer-3" data-myval="subject-2">Laag 3</option>
+                </optgroup>
+            </select>
         </div>
 
         <button class="btn btn-success float-right" type="submit">Opslaan</button>
@@ -119,7 +119,7 @@
 
     @push('scripts')
         <script defer>window.Admin.ManagerEdit.initAdmin();</script>
-        @endpush
+    @endpush
 </x-app-layout>
 
 
