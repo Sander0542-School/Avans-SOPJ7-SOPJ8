@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <x-jet-nav-link href="{{ route('admin.map.index') }}" :active="request()->routeIs('admin.map.index')">
+                <x-jet-nav-link class="navbar" href="{{ route('admin.map.index') }}" :active="request()->routeIs('admin.map.index')">
                     {{ __('Map') }}
                 </x-jet-nav-link>
                 @role('Super Admin')
@@ -19,11 +19,11 @@
                         {{ __('Beheerders') }}
                     </x-jet-nav-link>
                 @endrole
-                <x-jet-nav-link href="{{ route('admin.menu.index') }}" :active="request()->routeIs('admin.menu.index')">
+                <x-jet-nav-link class="navbar" href="{{ route('admin.menu.index') }}" :active="request()->routeIs('admin.menu.index')">
                     {{ __('Menu') }}
                 </x-jet-nav-link>
 
-                <x-jet-nav-link href="{{ route('admin.layers.index') }}" :active="request()->routeIs('admin.layers.index')">
+                <x-jet-nav-link class="navbar" href="{{ route('admin.layers.index') }}" :active="request()->routeIs('admin.layers.index')">
                     {{ __('Lagen') }}
                 </x-jet-nav-link>
             </ul>
