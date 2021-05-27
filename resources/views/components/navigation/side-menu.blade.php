@@ -14,4 +14,11 @@
             <x-navigation.side-menu-item :menu-item="$menuItem" :subject-id="$menuItem['id']" :first-layer="true"/>
         @endforeach
     </ul>
+
+    @if (Auth::guest())
+        <div href="{{ route('admin.map.index') }}">inloggen</div>
+    @else
+        <div href="{{ route('admin.map.index') }}">admin paneel</div>
+    @endif
+
 </nav>
