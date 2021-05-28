@@ -7,9 +7,7 @@ use App\Http\Requests\Admin\Manager\StoreRequest;
 use App\Http\Requests\Admin\Manager\UpdateRequest;
 use App\Models\User;
 use Hash;
-use Laravel\Fortify\Fortify;
 use Password;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Str;
 
@@ -95,7 +93,7 @@ class ManagerController extends Controller
      *
      * @param \App\Http\Requests\Admin\Manager\UpdateRequest $request
      * @param \App\Models\User $manager
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request, User $manager)
     {
@@ -108,9 +106,11 @@ class ManagerController extends Controller
             return redirect()->back()->withErrors(['error' => 'Beheerder kon niet worden bijgewerkt.']);
         }
 
-        $this->handleRoleChange($manager, $data['role']);
+//        $this->handleRoleChange($manager, $data['role']);
 
-        $this->handlePermissionChange($manager, $data);
+        if ($data['role'] == 2) {
+            $this->handlePermissionChange($manager, $data['custom_permissions'] == '1', $data);
+        }
 
         return redirect()->route('admin.managers.index')->with('message', 'De beheerder is successvol aangepast!');
     }
@@ -173,14 +173,20 @@ class ManagerController extends Controller
         }
     }
 
-    private function handlePermissionChange(User $manager, $data) {
+    private function handlePermissionChange(User $manager, $wildcard, $data)
+    {
         $permissionsArray = [];
 
-        foreach ($data['layers'] as $layerId) {
-            array_push($permissionsArray, 'layers.*.'.$layerId);
-        }
-        foreach ($data['subjects'] as $subjectId) {
-            array_push($permissionsArray, 'subjects.*.'.$subjectId);
+        if ($wildcard) {
+            array_push($permissionsArray, 'subjects.*');
+            array_push($permissionsArray, 'layers.*');
+        } else {
+            foreach ($data['layers'] ?? [] as $layerId) {
+                array_push($permissionsArray, 'layers.update.'.$layerId);
+            }
+            foreach ($data['subjects'] ?? [] as $subjectId) {
+                array_push($permissionsArray, 'subjects.update.'.$subjectId);
+            }
         }
 
         $manager->syncPermissions($permissionsArray);

@@ -30,6 +30,8 @@
         </div>
     </div>
 
+    @dump($errors)
+
     <form method="POST" action="{{ route('admin.managers.update', $manager) }}">
         @csrf
         @method('PUT')
@@ -78,23 +80,23 @@
 
         <div id="allLayers" class="form-group" style="display: none;">
             <label>Heeft de beheerder het recht om alle bestaande lagen te beheren?</label>
-            <select class="form-control" id="allLayersSelect">
-                <option value="true">Ja</option>
-                <option value="false">Nee</option>
+            <select class="form-control" name="custom_permissions" id="allLayersSelect">
+                <option value="1">Ja</option>
+                <option value="0">Nee</option>
             </select>
         </div>
 
         <div id="subjectPermissionDiv" class="form-group" style="display: none;">
             <label>
                 <span style="font-weight: bold">onderwerpen</span> die deze beheerder mag beheren</label>
-            <select class="form-control" class="selectpicker" multiple data-live-search="true" id="subjectPermission">
+            <select name="subjects[]" class="form-control selectpicker" multiple data-live-search="true" id="subjectPermission">
                 <optgroup label="Onderwerpen">
                     {{--                    @foreach($subject as $subjects)--}}
                     {{--                        <option data-tokens="{{$subject->slug}}" value="subject-{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>--}}
                     {{--                    @endforeach--}}
-                    <option value="subject-1">Onderwerp 1</option>
-                    <option value="subject-2">Onderwerp 2</option>
-                    <option value="subject-3">Onderwerp 3</option>
+                    <option value="1">Onderwerp 1</option>
+                    <option value="2">Onderwerp 2</option>
+                    <option value="3">Onderwerp 3</option>
                 </optgroup>
             </select>
             <a class="btn btn-secondary" style="margin-top:30px;" onclick="window.Admin.ManagerEdit.showLayerPermissions()" id="assignLayersButton">Wijs specifieke lagen toe</a>
@@ -102,14 +104,14 @@
 
         <div id="layerPermissionDiv" class="form-group" style="display: none;">
             <label>Selecteer de <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
-            <select class="form-control" class="selectpicker" multiple data-live-search="true" id="layerPermission">
+            <select name="layers[]" class="form-control selectpicker" multiple data-live-search="true" id="layerPermission">
                 <optgroup label="Lagen">
                     {{--                    @foreach($layer as $layers)--}}
-                    {{--                        <option data-tokens="{{$layer->slug}}" data-myval="subject-{{$subject->id}}" value="layer-{{$layer->id}}" name="layer-{{$layer->id}}">{{$layer->name}}</option>--}}
+                    {{--                        <option data-tokens="{{$layer->slug}}" data-parent="subject-{{$subject->id}}" value="{{$layer->id}}">{{$layer->name}}</option>--}}
                     {{--                    @endforeach--}}
-                    <option value="layer-1" data-myval="subject-1">Laag 1</option>
-                    <option value="layer-2" data-myval="subject-1">Laag 2</option>
-                    <option value="layer-3" data-myval="subject-2">Laag 3</option>
+                    <option value="1" data-parent="subject-1">Laag 1</option>
+                    <option value="2" data-parent="subject-1">Laag 2</option>
+                    <option value="3" data-parent="subject-2">Laag 3</option>
                 </optgroup>
             </select>
         </div>

@@ -27,11 +27,11 @@ window.Admin = {
         showAllLayers: () => {
             let dropdown = document.querySelector('#allLayers');
             dropdown.style.display = "block";
-            if (document.querySelector('#allLayersSelect').value === "false") {
+            if (document.querySelector('#allLayersSelect').value === "0") {
                 window.Admin.ManagerEdit.showSubjectPermissions();
             }
             dropdown.addEventListener('change', () => {
-                if (document.querySelector('#allLayersSelect').value === "false") {
+                if (document.querySelector('#allLayersSelect').value === "0") {
                     window.Admin.ManagerEdit.showSubjectPermissions();
                 } else {
                     window.Admin.ManagerEdit.hidePermissionInterface();
@@ -67,11 +67,11 @@ window.Admin = {
             let subjects = document.querySelector('#subjectPermission').querySelectorAll('option')
             for (const subject of subjects) {
                 if (subject.selected) {
-                    subjectIds.push(subject.value);
+                    subjectIds.push(`subject-${subject.value}`);
                 }
             }
             for (const layer of document.querySelector('#layerPermission').querySelectorAll('option')) {
-                layer.selected = subjectIds.includes(layer.getAttribute('data-myval'));
+                layer.selected = subjectIds.includes(layer.getAttribute('data-parent'));
             }
         }
     }
