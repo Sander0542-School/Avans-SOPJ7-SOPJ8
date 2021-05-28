@@ -2,14 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Domain;
 use App\Models\Layer;
 use App\Models\Subject;
+use App\Observers\DomainObserver;
 use App\Observers\LayerObserver;
 use App\Observers\SubjectObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -33,5 +34,6 @@ class EventServiceProvider extends ServiceProvider
     {
         Subject::observe(SubjectObserver::class);
         Layer::observe(LayerObserver::class);
+        Domain::observe(DomainObserver::class);
     }
 }
