@@ -15,10 +15,10 @@
         @endforeach
     </ul>
 
-    @if (Auth::guest())
-        <div href="{{ route('admin.map.index') }}">inloggen</div>
-    @else
-        <div href="{{ route('admin.map.index') }}">admin paneel</div>
-    @endif
+    <div class="container">
+        <div class="col-md-12 text-center">
+            <a type="button" href="{{ route('admin.dashboard') }}" class="btn btn-primary btn-lg btn-block" style="background-color:#2E7D32;border-color:#2E7D32">Inloggen</a>
+        </div>
+    </div>
 
 </nav>

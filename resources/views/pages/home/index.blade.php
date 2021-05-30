@@ -1,7 +1,7 @@
 <x-map-layout>
     <div class="swapper">
         <div class="swapper-back">
-            <div id="subjectmap"></div>
+            <div id="subjectmap" ></div>
         </div>
         <div class="swapper-content">
             <div class="container py-4 h-100">
