@@ -106,7 +106,7 @@ class ManagerController extends Controller
             return redirect()->back()->withErrors(['error' => 'Beheerder kon niet worden bijgewerkt.']);
         }
 
-//        $this->handleRoleChange($manager, $data['role']);
+        $this->handleRoleChange($manager, $data['role']);
 
         if ($data['role'] == 2) {
             $this->handlePermissionChange($manager, $data['custom_permissions'] == '1', $data);
