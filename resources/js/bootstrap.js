@@ -59,4 +59,3 @@ require('jquery-ui/ui/widgets/sortable.js');
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
-

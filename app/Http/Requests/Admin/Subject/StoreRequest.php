@@ -14,7 +14,6 @@ class StoreRequest extends FormRequest
     public function authorize()
     {
         return $this->user()->hasRole('Super Admin');
-        //return true;
     }
 
     /**

@@ -12,7 +12,7 @@ class MapController extends Controller
 {
     public function index()
     {
-        $domains = Domain::orderBy('name')->get();
+        $domains = Domain::all();
         return view('pages.admin.map.index')
             ->with('domains', $domains);
     }
