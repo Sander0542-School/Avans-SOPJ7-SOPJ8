@@ -34,6 +34,7 @@ class ManagerControllerTest extends TestCase
             'name' => 'Test Manager',
             'email' => 'Manager@test.nl',
             'role' => 2,
+            'custom_permissions' => false
         ]);
 
         $response->assertRedirect(route('admin.managers.index'));
@@ -55,6 +56,7 @@ class ManagerControllerTest extends TestCase
             'name' => 'Test Manager',
             'email' => 'Manager@test.nl',
             'role' => 'Admin',
+            'custom_permissions' => false
         ]);
 
         $response->assertRedirect(route('admin.managers.index'));

@@ -93,6 +93,7 @@ class ManagerController extends Controller
         $subjects = Subject::all();
         $layers = Layer::all();
 
+//        $split
 
         return view('pages.admin.manager.edit')->with('manager', $manager)->with('roles', $roles)->with('subjects', $subjects)->with('layers',$layers);
     }
