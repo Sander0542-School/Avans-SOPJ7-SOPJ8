@@ -55,6 +55,10 @@ class ManagerController extends Controller
 
         $manager->assignRole(Role::findById($data['role'], config('fortify.guard')));
 
+        if ($data['role'] == 2) {
+            $this->handlePermissionChange($manager, $data['custom_permissions'] == '1', $data);
+        }
+
         $status = Password::sendResetLink($manager->only('email'));
 
         if ($status === Password::RESET_LINK_SENT) {
