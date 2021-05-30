@@ -88,7 +88,7 @@
 
         <div id="subjectPermissionDiv" class="form-group" style="display: none;">
             <label for="subjectPermission">
-                <span style="font-weight: bold">onderwerpen</span> die deze beheerder mag beheren
+                <span style="font-weight: bold">Onderwerpen</span> die deze beheerder mag beheren
             </label>
             <select name="subjects[]" class="form-control selectpicker" multiple data-live-search="true" id="subjectPermission" data-size="5" data-dropup-auto="false">
                 <optgroup label="Onderwerpen">
@@ -101,8 +101,7 @@
         </div>
 
         <div id="layerPermissionDiv" class="form-group" style="display: none;">
-            <label for="layerPermission">Selecteer de
-                <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
+            <label for="layerPermission"><span style="font-weight: bold">Lagen</span> die deze beheerder mag beheren.</label>
             <select name="layers[]" class="form-control selectpicker" multiple data-live-search="true" id="layerPermission" data-size="7" data-dropup-auto="false">
                 <optgroup label="Lagen">
                     @foreach($layers as $layer)
