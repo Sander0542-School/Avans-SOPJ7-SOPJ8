@@ -76,7 +76,7 @@ window.SubjectMap = {
                     html:
                         '<div class="marker-container">' +
                         '<img width="65" height="80" src="/images/MarkerImage.png"/>' +
-                        `<a class="btn btn-primary marker-button" onclick="window.Layer.load(${item.layers[0].slug}, ${item.id})" data-toggle="tooltip" data-placement="right" data-html="true" title="${item.description}" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</a>` +
+                        `<button class="btn btn-primary marker-button" data-toggle="tooltip" data-placement="right" data-html="true" title="${item.description}" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</button>` +
                         '</div>'
                 }),
                 subjectId: item.id
