@@ -36,6 +36,7 @@
                     <ul>
                         <li>Sleep de poppetjes om hen van locatie te veranderen.</li>
                         <li>Vergeet niet op de "Locaties opslaan" knop te drukken om de wijzingen door te voeren.</li>
+                        <li>Voeg een nieuw onderwerp toe door op de "Onderwerp toevoegen" knop te drukken.</li>
                     </ul>
                 </div>
             </div>

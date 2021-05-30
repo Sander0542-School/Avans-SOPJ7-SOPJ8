@@ -40,7 +40,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
     Route::prefix('subjects')->name('subjects.')->group(function(){
         Route::post('store', [SubjectController::class, 'store'])->name('store');
     });
-    
+
     Route::resource('managers', ManagerController::class);
 
     Route::prefix('map')->name('map.')->group(function () {
