@@ -18,7 +18,7 @@
         <div class="row">
             @foreach($layer->childLayers as $childLayer)
                 <div class="col">
-                    <button onclick="window.Layer.load('{{ $childLayer->slug }}', {{ $subjectId }});" class="btn btn-outline-primary btn-layer" >{{ $childLayer->name }}</button>
+                    <button onclick="window.Layer.load('{{ $childLayer->slug }}', {{ $subjectId }});" class="btn btn-outline-primary btn-layer">{{ $childLayer->name }}</button>
                 </div>
             @endforeach
         </div>
