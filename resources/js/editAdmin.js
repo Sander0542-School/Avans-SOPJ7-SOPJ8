@@ -1,11 +1,8 @@
-
-
 window.Admin = {
     ManagerEdit: {
         initAdmin: () => {
-            let roleSelect = document.querySelector('#inputRole');
             window.Admin.ManagerEdit.checkDropdown();
-            roleSelect.addEventListener('change', () => {
+            $('#inputRole').on('changed.bs.select', () => {
                 window.Admin.ManagerEdit.checkDropdown();
             });
         },
@@ -25,44 +22,45 @@ window.Admin = {
         },
 
         showAllLayers: () => {
-            let dropdown = document.querySelector('#allLayers');
-            dropdown.style.display = "block";
-            if (document.querySelector('#allLayersSelect').value === "0") {
+            const allLayers = document.querySelector('#allLayersSelect');
+            const allLayersDiv = document.querySelector('#allLayers');
+            if (allLayers.value === "0") {
                 window.Admin.ManagerEdit.showSubjectPermissions();
             }
-            dropdown.addEventListener('change', () => {
-                if (document.querySelector('#allLayersSelect').value === "0") {
+            $('#allLayersSelect').on('changed.bs.select', () => {
+                if (allLayers.value === "0") {
                     window.Admin.ManagerEdit.showSubjectPermissions();
                 } else {
                     window.Admin.ManagerEdit.hidePermissionInterface();
                 }
             });
+            allLayersDiv.style.display = "block";
         },
 
-        hideAllLayers:() => {
+        hideAllLayers: () => {
             document.querySelector('#allLayers').style.display = "none";
         },
 
-        showSubjectPermissions:() => {
+        showSubjectPermissions: () => {
             document.querySelector('#subjectPermissionDiv').style.display = "block";
             document.querySelector('#assignLayersButton').style.display = "inline-block";
         },
 
-        hidePermissionInterface:() => {
+        hidePermissionInterface: () => {
             document.querySelector('#subjectPermissionDiv').style.display = "none";
             document.querySelector('#layerPermissionDiv').style.display = "none";
         },
 
-        showLayerPermissions:() => {
+        showLayerPermissions: () => {
             window.Admin.ManagerEdit.selectLayerPermissions();
             document.querySelector('#layerPermissionDiv').style.display = "block";
-            document.querySelector('#subjectPermission').addEventListener('change',()=>{
+            $('#subjectPermission').on('changed.bs.select', () => {
                 window.window.Admin.ManagerEdit.selectLayerPermissions();
             });
             document.querySelector('#assignLayersButton').style.display = 'none';
         },
 
-        selectLayerPermissions:() => {
+        selectLayerPermissions: () => {
             let subjectIds = [];
             let subjects = document.querySelector('#subjectPermission').querySelectorAll('option')
             for (const subject of subjects) {

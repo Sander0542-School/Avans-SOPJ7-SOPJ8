@@ -47,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            <label for="inputName">Email</label>
+            <label for="inputEmail">Email</label>
             <input required type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="inputEmail" value="{{ $manager->email }}" autocomplete="email">
             @error('email')
             <div class="invalid-feedback">
@@ -57,7 +57,7 @@
         </div>
 
         <div class="form-group" id="roleForm">
-            <label for="inputName">Rol</label>
+            <label for="inputRole">Rol</label>
             <span data-toggle="tooltip" data-placement="right" title="Een Super Admin kan wel andere beheerders beheren, maar een normale Admin kan geen andere beheerders beheren.">
                 <i class="fa fa-info-circle my-float"></i>
             </span>
@@ -79,7 +79,7 @@
         </div>
 
         <div id="allLayers" class="form-group" style="display: none;">
-            <label>Heeft de beheerder het recht om alle bestaande lagen te beheren?</label>
+            <label for="allLayersSelect">Heeft de beheerder het recht om alle bestaande lagen te beheren?</label>
             <select class="form-control" name="custom_permissions" id="allLayersSelect">
                 <option value="1">Ja</option>
                 <option value="0">Nee</option>
@@ -87,8 +87,9 @@
         </div>
 
         <div id="subjectPermissionDiv" class="form-group" style="display: none;">
-            <label>
-                <span style="font-weight: bold">onderwerpen</span> die deze beheerder mag beheren</label>
+            <label for="subjectPermission">
+                <span style="font-weight: bold">onderwerpen</span> die deze beheerder mag beheren
+            </label>
             <select name="subjects[]" class="form-control selectpicker" multiple data-live-search="true" id="subjectPermission">
                 <optgroup label="Onderwerpen">
                     {{--                    @foreach($subject as $subjects)--}}
@@ -99,11 +100,11 @@
                     <option value="3">Onderwerp 3</option>
                 </optgroup>
             </select>
-            <a class="btn btn-secondary" style="margin-top:30px;" onclick="window.Admin.ManagerEdit.showLayerPermissions()" id="assignLayersButton">Wijs specifieke lagen toe</a>
+            <button type="button" class="btn btn-secondary" style="margin-top:30px;" onclick="window.Admin.ManagerEdit.showLayerPermissions()" id="assignLayersButton">Wijs specifieke lagen toe</button>
         </div>
 
         <div id="layerPermissionDiv" class="form-group" style="display: none;">
-            <label>Selecteer de <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
+            <label for="layerPermission">Selecteer de <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
             <select name="layers[]" class="form-control selectpicker" multiple data-live-search="true" id="layerPermission">
                 <optgroup label="Lagen">
                     {{--                    @foreach($layer as $layers)--}}

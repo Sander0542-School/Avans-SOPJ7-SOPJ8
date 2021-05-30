@@ -3895,9 +3895,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 window.Admin = {
   ManagerEdit: {
     initAdmin: function initAdmin() {
-      var roleSelect = document.querySelector('#inputRole');
       window.Admin.ManagerEdit.checkDropdown();
-      roleSelect.addEventListener('change', function () {
+      $('#inputRole').on('changed.bs.select', function () {
         window.Admin.ManagerEdit.checkDropdown();
       });
     },
@@ -3917,20 +3916,21 @@ window.Admin = {
       }
     },
     showAllLayers: function showAllLayers() {
-      var dropdown = document.querySelector('#allLayers');
-      dropdown.style.display = "block";
+      var allLayers = document.querySelector('#allLayersSelect');
+      var allLayersDiv = document.querySelector('#allLayers');
 
-      if (document.querySelector('#allLayersSelect').value === "0") {
+      if (allLayers.value === "0") {
         window.Admin.ManagerEdit.showSubjectPermissions();
       }
 
-      dropdown.addEventListener('change', function () {
-        if (document.querySelector('#allLayersSelect').value === "0") {
+      $('#allLayersSelect').on('changed.bs.select', function () {
+        if (allLayers.value === "0") {
           window.Admin.ManagerEdit.showSubjectPermissions();
         } else {
           window.Admin.ManagerEdit.hidePermissionInterface();
         }
       });
+      allLayersDiv.style.display = "block";
     },
     hideAllLayers: function hideAllLayers() {
       document.querySelector('#allLayers').style.display = "none";
@@ -3946,7 +3946,7 @@ window.Admin = {
     showLayerPermissions: function showLayerPermissions() {
       window.Admin.ManagerEdit.selectLayerPermissions();
       document.querySelector('#layerPermissionDiv').style.display = "block";
-      document.querySelector('#subjectPermission').addEventListener('change', function () {
+      $('#subjectPermission').on('changed.bs.select', function () {
         window.window.Admin.ManagerEdit.selectLayerPermissions();
       });
       document.querySelector('#assignLayersButton').style.display = 'none';
