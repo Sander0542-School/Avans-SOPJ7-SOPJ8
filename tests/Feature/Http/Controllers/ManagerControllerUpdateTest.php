@@ -120,10 +120,47 @@ class ManagerControllerUpdateTest extends TestCase
         $response = $this->put(route('admin.managers.update', $this->testUser), [
             'name' => $this->testUser->name,
             'email' => $this->testUser->email,
-            'custom_permissions' => true,
-            'subjects' => [1, 2, 3]
+            'role' => 2,
+            'custom_permissions' => 0,
+            'subjects' => [1, 3, 4]
         ]);
-        dd($this->testUser->hasPermissionTo('subjects.*.3'));
-        $this->assertTrue($this->testUser->getAllPermissions() == ['layers.*.1', 'layers.*.2', 'layers.*.3']);
+
+        $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.1'));
+        $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.3'));
+        $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.4'));
+        $this->assertNotTrue($this->testUser->hasPermissionTo('subjects.update.2'));
+    }
+
+    public function test_update_manager_permissions_add_layers() {
+        $this->testUser->assignRole('Admin');
+
+        $response = $this->put(route('admin.managers.update', $this->testUser), [
+            'name' => $this->testUser->name,
+            'email' => $this->testUser->email,
+            'role' => 2,
+            'custom_permissions' => 0,
+            'layers' => [1, 3, 4]
+        ]);
+
+        $this->assertTrue($this->testUser->hasPermissionTo('layers.update.1'));
+        $this->assertTrue($this->testUser->hasPermissionTo('layers.update.3'));
+        $this->assertTrue($this->testUser->hasPermissionTo('layers.update.4'));
+        $this->assertNotTrue($this->testUser->hasPermissionTo('layers.update.2'));
+    }
+
+    public function test_update_manager_permissions_add_wildcard() {
+        $this->testUser->assignRole('Admin');
+
+        $response = $this->put(route('admin.managers.update', $this->testUser), [
+            'name' => $this->testUser->name,
+            'email' => $this->testUser->email,
+            'role' => 2,
+            'custom_permissions' => true,
+            'subjects' => [1]
+        ]);
+        dd($this->testUser->getPermissionNames());
+
+        $this->assertTrue($this->testUser->hasPermissionTo('subjects.*'));
+        $this->assertTrue($this->testUser->hasPermissionTo('layers.*'));
     }
 }

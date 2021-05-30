@@ -93,7 +93,7 @@
             <select name="subjects[]" class="form-control selectpicker" multiple data-live-search="true" id="subjectPermission" data-size="5" data-dropup-auto="false">
                 <optgroup label="Onderwerpen">
                     @foreach($subjects as $subject)
-                        <option data-tokens="{{$subject->slug}}" value="subject-{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>
+                        <option data-tokens="{{$subject->slug}}" value="{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>
                     @endforeach
                 </optgroup>
             </select>

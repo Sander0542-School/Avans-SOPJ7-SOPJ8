@@ -196,7 +196,6 @@ class ManagerController extends Controller
                 array_push($permissionsArray, 'subjects.update.'.$subjectId);
             }
         }
-
         $manager->syncPermissions($permissionsArray);
     }
 }
