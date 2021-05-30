@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Manager\StoreRequest;
 use App\Http\Requests\Admin\Manager\UpdateRequest;
+use App\Models\Layer;
+use App\Models\Subject;
 use App\Models\User;
 use Hash;
 use Password;
@@ -88,8 +90,11 @@ class ManagerController extends Controller
     public function edit(User $manager)
     {
         $roles = Role::all();
+        $subjects = Subject::all();
+        $layers = Layer::all();
 
-        return view('pages.admin.manager.edit')->with('manager', $manager)->with('roles', $roles);
+
+        return view('pages.admin.manager.edit')->with('manager', $manager)->with('roles', $roles)->with('subjects', $subjects)->with('layers',$layers);
     }
 
     /**

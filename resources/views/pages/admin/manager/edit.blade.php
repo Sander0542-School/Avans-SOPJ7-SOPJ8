@@ -90,29 +90,24 @@
             <label for="subjectPermission">
                 <span style="font-weight: bold">onderwerpen</span> die deze beheerder mag beheren
             </label>
-            <select name="subjects[]" class="form-control selectpicker" multiple data-live-search="true" id="subjectPermission">
+            <select name="subjects[]" class="form-control selectpicker" multiple data-live-search="true" id="subjectPermission" data-size="5" data-dropup-auto="false">
                 <optgroup label="Onderwerpen">
-                    {{--                    @foreach($subject as $subjects)--}}
-                    {{--                        <option data-tokens="{{$subject->slug}}" value="subject-{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>--}}
-                    {{--                    @endforeach--}}
-                    <option value="1">Onderwerp 1</option>
-                    <option value="2">Onderwerp 2</option>
-                    <option value="3">Onderwerp 3</option>
+                    @foreach($subjects as $subject)
+                        <option data-tokens="{{$subject->slug}}" value="subject-{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>
+                    @endforeach
                 </optgroup>
             </select>
             <button type="button" class="btn btn-secondary" style="margin-top:30px;" onclick="window.Admin.ManagerEdit.showLayerPermissions()" id="assignLayersButton">Wijs specifieke lagen toe</button>
         </div>
 
         <div id="layerPermissionDiv" class="form-group" style="display: none;">
-            <label for="layerPermission">Selecteer de <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
-            <select name="layers[]" class="form-control selectpicker" multiple data-live-search="true" id="layerPermission">
+            <label for="layerPermission">Selecteer de
+                <span style="font-weight: bold">lagen</span> die deze beheerder mag beheren.</label>
+            <select name="layers[]" class="form-control selectpicker" multiple data-live-search="true" id="layerPermission" data-size="7" data-dropup-auto="false">
                 <optgroup label="Lagen">
-                    {{--                    @foreach($layer as $layers)--}}
-                    {{--                        <option data-tokens="{{$layer->slug}}" data-parent="subject-{{$subject->id}}" value="{{$layer->id}}">{{$layer->name}}</option>--}}
-                    {{--                    @endforeach--}}
-                    <option value="1" data-parent="subject-1">Laag 1</option>
-                    <option value="2" data-parent="subject-1">Laag 2</option>
-                    <option value="3" data-parent="subject-2">Laag 3</option>
+                    @foreach($layers as $layer)
+                        <option data-tokens="{{$layer->slug}}" data-parent="subject-{{$subject->id}}" value="{{$layer->id}}">{{$layer->name}}</option>
+                    @endforeach
                 </optgroup>
             </select>
         </div>
