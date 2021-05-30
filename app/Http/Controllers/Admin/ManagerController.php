@@ -116,7 +116,6 @@ class ManagerController extends Controller
         }
 
         $this->handleRoleChange($manager, $data['role']);
-
         if ($data['role'] == 2) {
             $this->handlePermissionChange($manager, $data['custom_permissions'] == '1', $data);
         }
