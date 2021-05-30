@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Manager\StoreRequest;
 use App\Http\Requests\Admin\Manager\UpdateRequest;
 use App\Models\Layer;
+use App\Models\LayerChoice;
 use App\Models\Subject;
 use App\Models\User;
 use Hash;
 use Password;
 use Spatie\Permission\Models\Role;
 use Str;
+use function React\Promise\all;
 
 class ManagerController extends Controller
 {
@@ -93,7 +95,7 @@ class ManagerController extends Controller
         $subjects = Subject::all();
         $layers = Layer::all();
 
-//        $split
+        $splitSubjects = $this->splitSubjectsWithLayers($subjects, $layers);
 
         return view('pages.admin.manager.edit')->with('manager', $manager)->with('roles', $roles)->with('subjects', $subjects)->with('layers',$layers);
     }
@@ -198,5 +200,14 @@ class ManagerController extends Controller
             }
         }
         $manager->syncPermissions($permissionsArray);
+    }
+
+    public function splitSubjectsWithLayers(Subject $subjects, Layers $layers) {
+        $layerChoices = LayerChoice::all();
+        $subjectChoice = SubjectChoice::all();
+
+        $subjectWithLayersArray = [];
+
+        dd($layerChoices);
     }
 }

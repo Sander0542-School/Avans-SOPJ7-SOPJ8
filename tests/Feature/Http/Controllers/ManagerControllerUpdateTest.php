@@ -158,7 +158,6 @@ class ManagerControllerUpdateTest extends TestCase
             'custom_permissions' => true,
             'subjects' => [1]
         ]);
-        dd($this->testUser->getPermissionNames());
 
         $this->assertTrue($this->testUser->hasPermissionTo('subjects.*'));
         $this->assertTrue($this->testUser->hasPermissionTo('layers.*'));
