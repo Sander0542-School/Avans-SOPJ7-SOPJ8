@@ -75,7 +75,7 @@ window.SubjectMap = {
                     className: 'marker-subject',
                     html: '<div class="marker-container">' +
                         '<img width="65" height="80" src="/images/MarkerImage.png"/>' +
-                        `<button class="btn btn-primary" class="marker-button" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</button>` +
+                        `<button class="btn btn-primary" class="marker-button" style="background-color:#${item.domain.color};border-color:#${item.domain.color}; width: max-content;">${item.name}</button>` +
                         '</div>'
                 }),
                 subjectId: item.id

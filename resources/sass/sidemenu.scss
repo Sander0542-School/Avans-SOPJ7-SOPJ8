@@ -29,6 +29,7 @@
     .menu-item:hover,
     .menu-item:focus {
         transition: all 0.3s;
+        max-width: 16rem;
 
         > a {
             color: inherit;
