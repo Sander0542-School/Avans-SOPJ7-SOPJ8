@@ -2,11 +2,13 @@
 
 namespace App\Observers;
 
+use App\Common\Traits\PermissionsTrait;
 use App\Models\Subject;
-use Spatie\Permission\Models\Permission;
 
 class SubjectObserver
 {
+    use PermissionsTrait;
+
     /**
      * Handle the Subject "created" event.
      *
@@ -15,9 +17,7 @@ class SubjectObserver
      */
     public function created(Subject $subject)
     {
-        Permission::create(['name' => 'subjects.*.'.$subject->id]);
-        Permission::create(['name' => 'subjects.update.'.$subject->id]);
-        Permission::create(['name' => 'subjects.delete.'.$subject->id]);
+        $this->createPermissions('subjects', $subject->id);
     }
 
     /**

@@ -2,28 +2,28 @@
 
 namespace App\Observers;
 
+use App\Common\Traits\PermissionsTrait;
 use App\Models\Domain;
-use Spatie\Permission\Models\Permission;
 
 class DomainObserver
 {
+    use PermissionsTrait;
+
     /**
      * Handle the Domain "created" event.
      *
-     * @param  \App\Models\Domain  $domain
+     * @param \App\Models\Domain $domain
      * @return void
      */
     public function created(Domain $domain)
     {
-        Permission::create(['name' => 'domains.*.'.$domain->id]);
-        Permission::create(['name' => 'domains.update.'.$domain->id]);
-        Permission::create(['name' => 'domains.delete.'.$domain->id]);
+        $this->createPermissions('domains', $domain->id);
     }
 
     /**
      * Handle the Domain "updated" event.
      *
-     * @param  \App\Models\Domain  $domain
+     * @param \App\Models\Domain $domain
      * @return void
      */
     public function updated(Domain $domain)
@@ -34,7 +34,7 @@ class DomainObserver
     /**
      * Handle the Domain "deleted" event.
      *
-     * @param  \App\Models\Domain  $domain
+     * @param \App\Models\Domain $domain
      * @return void
      */
     public function deleted(Domain $domain)
@@ -45,7 +45,7 @@ class DomainObserver
     /**
      * Handle the Domain "restored" event.
      *
-     * @param  \App\Models\Domain  $domain
+     * @param \App\Models\Domain $domain
      * @return void
      */
     public function restored(Domain $domain)
@@ -56,7 +56,7 @@ class DomainObserver
     /**
      * Handle the Domain "force deleted" event.
      *
-     * @param  \App\Models\Domain  $domain
+     * @param \App\Models\Domain $domain
      * @return void
      */
     public function forceDeleted(Domain $domain)
