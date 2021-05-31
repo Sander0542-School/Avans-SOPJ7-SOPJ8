@@ -2,24 +2,20 @@
 
 namespace Http\Controllers;
 
-use App\Http\Controllers\Admin\ManagerController;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
 Use Spatie\Permission\Models\Role;
 
 class ManagerControllerUpdateTest extends TestCase
 {
-
-    use RefreshDatabase;
-
     public $user;
     public $testUser;
 
     protected function setUp(): void
     {
         parent::setUp();
-
+        $this->artisan('cache:clear');
+        $this->artisan('migrate:fresh');
         $this->seed();
 
         $this->user = User::create([
@@ -42,6 +38,7 @@ class ManagerControllerUpdateTest extends TestCase
     protected function tearDown(): void
     {
         User::destroy($this->user->id);
+        User::destroy($this->testUser->id);
         parent::tearDown();
     }
 
