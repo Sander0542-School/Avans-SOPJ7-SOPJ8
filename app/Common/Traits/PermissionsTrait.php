@@ -37,7 +37,7 @@ trait PermissionsTrait
         $permissions = [];
 
         foreach (self::$types as $type) {
-            $permissions[] = $prefix.'.'.$id.'.'.$type;
+            $permissions[] = $prefix.'.'.$type.'.'.$id;
         }
 
         return $permissions;
