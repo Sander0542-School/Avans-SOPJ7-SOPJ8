@@ -125,7 +125,6 @@ class ManagerControllerUpdateTest extends TestCase
             'subjects' => [1, 3, 4]
         ]);
 
-
         $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.1'));
         $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.3'));
         $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.4'));
