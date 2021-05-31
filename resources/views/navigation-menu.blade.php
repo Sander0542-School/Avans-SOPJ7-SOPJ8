@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand mr-4" href="/">
-            <img width="64" height="64" src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}"/>
+            <x-jet-application-mark width="36"/>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -11,22 +11,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <x-jet-nav-link class="navbar"  href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                <x-jet-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
                     {{ __('Dashboard') }}
                 </x-jet-nav-link>
-                <x-jet-nav-link class="navbar" href="{{ route('admin.map.index') }}" :active="request()->routeIs('admin.map.index')">
+                <x-jet-nav-link href="{{ route('admin.map.index') }}" :active="request()->routeIs('admin.map.index')">
                     {{ __('Map') }}
                 </x-jet-nav-link>
                 @role('Super Admin')
-                    <x-jet-nav-link class="navbar"  href="{{ route('admin.managers.index') }}" :active="request()->routeIs('admin.managers.index')">
+                    <x-jet-nav-link href="{{ route('admin.managers.index') }}" :active="request()->routeIs('admin.managers.index')">
                         {{ __('Beheerders') }}
                     </x-jet-nav-link>
                 @endrole
-                <x-jet-nav-link class="navbar" href="{{ route('admin.menu.index') }}" :active="request()->routeIs('admin.menu.index')">
+                <x-jet-nav-link href="{{ route('admin.menu.index') }}" :active="request()->routeIs('admin.menu.index')">
                     {{ __('Menu') }}
                 </x-jet-nav-link>
 
-                <x-jet-nav-link class="navbar" href="{{ route('admin.layers.index') }}" :active="request()->routeIs('admin.layers.index')">
+                <x-jet-nav-link href="{{ route('admin.layers.index') }}" :active="request()->routeIs('admin.layers.index')">
                     {{ __('Lagen') }}
                 </x-jet-nav-link>
             </ul>
