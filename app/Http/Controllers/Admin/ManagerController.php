@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Manager\UpdateRequest;
 use App\Models\Layer;
 use App\Models\LayerChoice;
 use App\Models\Subject;
+use App\Models\SubjectChoice;
 use App\Models\User;
 use Hash;
 use Password;
@@ -94,6 +95,7 @@ class ManagerController extends Controller
         $roles = Role::all();
         $subjects = Subject::all();
         $layers = Layer::all();
+
 
         $splitSubjects = $this->splitSubjectsWithLayers($subjects, $layers);
 
@@ -202,12 +204,29 @@ class ManagerController extends Controller
         $manager->syncPermissions($permissionsArray);
     }
 
-    public function splitSubjectsWithLayers(Subject $subjects, Layers $layers) {
+    public function splitSubjectsWithLayers($subjects, $layers) {
         $layerChoices = LayerChoice::all();
         $subjectChoice = SubjectChoice::all();
 
         $subjectWithLayersArray = [];
 
-        dd($layerChoices);
+        foreach ($subjects as $subject) {
+            array_push($subjectWithLayersArray, [$subject]);
+        }
+
+        foreach ($subjectChoice as $sChoice) {
+            $index = $sChoice->subject_id-1;
+            $layerId = $sChoice->layer_id;
+            array_push($subjectWithLayersArray[$index], $layers->where('id', $layerId));
+
+            foreach ($layerChoices as $lChoice) {
+                if ($lChoice->parent_layer_id == $layerId) {
+                    array_push($subjectWithLayersArray[$index], $layers->where('id', $lChoice->child_layer_id));
+                }
+            }
+        }
+
+
+        dd($subjectWithLayersArray);
     }
 }
