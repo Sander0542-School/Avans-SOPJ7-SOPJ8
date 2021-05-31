@@ -7,12 +7,12 @@ use App\Models\Subject;
 use App\Models\User;
 use Database\Factories\SubjectFactory;
 use Hash;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class MapControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     protected function setUp(): void
     {
