@@ -52,7 +52,7 @@
             @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="roleForm">
             <label for="inputName">Rol</label>
             <span data-toggle="tooltip" data-placement="right" title="Een Super Admin kan wel andere beheerders beheren, maar een normale Admin kan geen andere beheerders beheren.">
                 <i class="fa fa-info-circle my-float"></i>
@@ -70,10 +70,45 @@
             @enderror
         </div>
 
+        <div id="allLayers" class="form-group" style="display: none;">
+            <label for="allLayersSelect">Heeft de beheerder het recht om alle bestaande lagen te beheren?</label>
+            <select class="form-control" name="custom_permissions" id="allLayersSelect">
+                <option value="1">Ja</option>
+                <option value="0">Nee</option>
+            </select>
+        </div>
+
+        <div id="subjectPermissionDiv" class="form-group" style="display: none;">
+            <label for="subjectPermission">
+                <span style="font-weight: bold">Onderwerpen</span> die deze beheerder mag beheren
+            </label>
+            <select name="subjects[]" class="form-control selectpicker" multiple data-live-search="true" id="subjectPermission" data-size="5" data-dropup-auto="false">
+                <optgroup label="Onderwerpen">
+                    @foreach($subjects as $subject)
+                        <option data-tokens="{{$subject->slug}}" value="{{$subject->id}}" name="subject-{{$subject->id}}">{{$subject->name}}</option>
+                    @endforeach
+                </optgroup>
+            </select>
+            <button type="button" class="btn btn-secondary" style="margin-top:30px;" onclick="window.Admin.ManagerEdit.showLayerPermissions()" id="assignLayersButton">Wijs specifieke lagen toe</button>
+        </div>
+
+        <div id="layerPermissionDiv" class="form-group" style="display: none;">
+            <label for="layerPermission"><span style="font-weight: bold">Lagen</span> die deze beheerder mag beheren.</label>
+            <select name="layers[]" class="form-control selectpicker" multiple data-live-search="true" id="layerPermission" data-size="7" data-dropup-auto="false">
+                <optgroup label="Lagen">
+                    @foreach($layers as $layer)
+                        <option data-tokens="{{$layer->slug}}" data-parent="subject-{{$subject->id}}" value="{{$layer->id}}">{{$layer->name}}</option>
+                    @endforeach
+                </optgroup>
+            </select>
+        </div>
+
         <button class="btn btn-success btn-success-axe float-right" type="submit">Toevoegen</button>
         <a class="btn btn-danger btn-danger-axe" href="{{ route('admin.managers.index') }}">Annuleren</a>
     </form>
-
+    @push('scripts')
+        <script defer>window.Admin.ManagerEdit.initAdmin();</script>
+    @endpush
 </x-app-layout>
 
 

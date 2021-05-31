@@ -38,8 +38,13 @@ class ManagerController extends Controller
     public function create()
     {
         $roles = Role::all();
+        $subjects = Subject::all();
+        $layers = Layer::all();
 
-        return view('pages.admin.manager.create')->with('roles', $roles);
+        return view('pages.admin.manager.create')
+            ->with('roles', $roles)
+            ->with('subjects', $subjects)
+            ->with('layers', $layers);
     }
 
     /**
