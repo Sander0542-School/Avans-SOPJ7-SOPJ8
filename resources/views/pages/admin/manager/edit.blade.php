@@ -82,9 +82,17 @@
             <label for="allLayersSelect">Heeft de beheerder het recht om alle bestaande lagen te beheren?</label>
             <select class="form-control" name="custom_permissions" id="allLayersSelect">
                 <option value="1">Ja</option>
-                <option value="0">Nee</option>
+                <option value="0" @if($permissions!=null) selected @endif>Nee</option>
             </select>
         </div>
+
+        @if($permissions!=null)
+        @foreach($permissions as $permission)
+            <input type="hidden" value="{{$permission}}" class="allPermissions">
+        @endforeach
+        @else
+            <input type="hidden" value="0" class="allPermissions">
+        @endif
 
         <div id="subjectPermissionDiv" class="form-group" style="display: none;">
             <label for="subjectPermission">
