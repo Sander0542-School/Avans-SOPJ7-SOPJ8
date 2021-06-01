@@ -33,11 +33,7 @@
     <div class="row">
         <form class="col" action="{{ route('admin.menu.update') }}" method="post">
             @csrf
-            <div class="col-span-1 text-right">
-                <button type="submit" class=" hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow btn btn-primary">
-                    Opslaan
-                </button>
-            </div>
+
             <div class="sortable">
                 @foreach($subjects as $subject)
                     <div id="subjectItem{{ $subject->id }}" class="sortable-item card my-2 w-100">
@@ -63,14 +59,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-span-1 float-right my-2 w-100">
-                                <input name="subjects[{{ $subject->id }}][description]" data-name="description" type="text" class="form-control" value="{{ $subject->description }}" placeholder="Beschrijving">
-                            </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-
+            <div class="col-span-1 text-right">
+                <button type="submit" class=" hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow btn btn-primary">
+                    Opslaan
+                </button>
+            </div>
         </form>
     </div>
 
