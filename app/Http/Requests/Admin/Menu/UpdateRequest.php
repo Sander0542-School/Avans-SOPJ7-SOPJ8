@@ -28,6 +28,7 @@ class UpdateRequest extends FormRequest
             'subject.*.domain_id' => ['required', 'integer', 'exists:domains,id'],
             'subject.*.name' => ['required', 'string', 'max:255'],
             'subject.*.order' => ['required', 'integer'],
+            'subject.*.description' => ['string', 'max:255'],
         ];
     }
 }
