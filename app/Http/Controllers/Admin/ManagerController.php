@@ -108,7 +108,8 @@ class ManagerController extends Controller
             ->with('roles', $roles)
             ->with('subjects', $subjects)
             ->with('layers', $layers)
-            ->with('separatedSubjects', $splitSubjects);
+            ->with('separatedSubjects', $splitSubjects)
+            ->with('permissions', $manager->getPermissionNames());
     }
 
     /**
@@ -130,6 +131,7 @@ class ManagerController extends Controller
         }
 
         $this->handleRoleChange($manager, $data['role']);
+
         if ($data['role'] == 2) {
             $this->handlePermissionChange($manager, $data['custom_permissions'] == '1', $data);
         }
@@ -200,14 +202,10 @@ class ManagerController extends Controller
         $permissionsArray = [];
 
         if ($wildcard) {
-            array_push($permissionsArray, 'subjects.*');
             array_push($permissionsArray, 'layers.*');
         } else {
             foreach ($data['layers'] ?? [] as $layerId) {
                 array_push($permissionsArray, 'layers.update.'.$layerId);
-            }
-            foreach ($data['subjects'] ?? [] as $subjectId) {
-                array_push($permissionsArray, 'subjects.update.'.$subjectId);
             }
         }
         $manager->syncPermissions($permissionsArray);
@@ -226,11 +224,12 @@ class ManagerController extends Controller
         foreach ($subjectChoice as $sChoice) {
             $index = $sChoice->subject_id-1;
             $layerId = $sChoice->layer_id;
-            array_push($subjectWithLayersArray[$index], $layers->where('id', $layerId));
+            array_push($subjectWithLayersArray[$index], $layers->where('id', $layerId)->first());
 
             foreach ($layerChoices as $lChoice) {
                 if ($lChoice->parent_layer_id == $layerId) {
-                    array_push($subjectWithLayersArray[$index], $layers->where('id', $lChoice->child_layer_id));
+                    $layer = $layers->where('id', $lChoice->child_layer_id)->first();
+                    array_push($subjectWithLayersArray[$index], $layer);
                 }
             }
         }

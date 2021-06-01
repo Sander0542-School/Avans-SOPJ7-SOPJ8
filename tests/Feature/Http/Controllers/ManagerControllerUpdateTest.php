@@ -111,23 +111,6 @@ class ManagerControllerUpdateTest extends TestCase
         $this->assertTrue($updatedManager->email == $newEmail);
     }
 
-    public function test_update_manager_permissions_add_subjects() {
-        $this->testUser->assignRole('Admin');
-
-        $response = $this->put(route('admin.managers.update', $this->testUser), [
-            'name' => $this->testUser->name,
-            'email' => $this->testUser->email,
-            'role' => 2,
-            'custom_permissions' => 0,
-            'subjects' => [1, 3, 4]
-        ]);
-
-        $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.1'));
-        $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.3'));
-        $this->assertTrue($this->testUser->hasPermissionTo('subjects.update.4'));
-        $this->assertNotTrue($this->testUser->hasPermissionTo('subjects.update.2'));
-    }
-
     public function test_update_manager_permissions_add_layers() {
         $this->testUser->assignRole('Admin');
 
@@ -156,7 +139,6 @@ class ManagerControllerUpdateTest extends TestCase
             'subjects' => [1]
         ]);
 
-        $this->assertTrue($this->testUser->hasPermissionTo('subjects.*'));
         $this->assertTrue($this->testUser->hasPermissionTo('layers.*'));
     }
 }
