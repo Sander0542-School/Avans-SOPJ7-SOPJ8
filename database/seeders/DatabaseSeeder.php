@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
                     'name' => $subjectData[0],
                     'lat' => $subjectData[1],
                     'lon' => $subjectData[2],
+                    'description' => 'test',
                     'order' => ++$orderId,
                 ]);
 
