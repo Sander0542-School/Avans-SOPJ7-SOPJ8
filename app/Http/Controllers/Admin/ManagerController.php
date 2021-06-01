@@ -109,7 +109,7 @@ class ManagerController extends Controller
             ->with('subjects', $subjects)
             ->with('layers', $layers)
             ->with('separatedSubjects', $splitSubjects)
-            ->with('permissions', $manager->getPermissionNames());
+            ->with('permissions', $this->getOnlyLayerIdsForPermissions($manager));
     }
 
     /**
@@ -235,5 +235,16 @@ class ManagerController extends Controller
         }
 
         return $subjectWithLayersArray;
+    }
+
+    private function getOnlyLayerIdsForPermissions(User $manager) {
+        $permissions = $manager->getPermissionNames();
+        $layerIds = [];
+
+        foreach ($permissions as $permission) {
+            array_push($layerIds, (int)explode('.', $permission)[2]);
+        }
+
+        return $layerIds;
     }
 }
