@@ -102,10 +102,16 @@
 
         <div id="layerPermissionDiv" class="form-group" style="display: none;">
             <label for="layerPermission"><span style="font-weight: bold">Lagen</span> die deze beheerder mag beheren.</label>
-            <select name="layers[]" class="form-control selectpicker" multiple data-live-search="true" id="layerPermission" data-size="7" data-dropup-auto="false">
+            <select name="layers[]" class="form-control selectpicker" multiple data-live-search="true" id="layerPermission" data-size="9" data-dropup="false">
                 <optgroup label="Lagen">
-                    @foreach($layers as $layer)
-                        <option data-tokens="{{$layer->slug}}" data-parent="subject-{{$subject->id}}" value="{{$layer->id}}">{{$layer->name}}</option>
+                    @foreach($separatedSubjects as $layersWithSubject)
+                        <optgroup label="{{$layersWithSubject[0]->name}}">
+                            @foreach($layersWithSubject as $layerOrSubject)
+                                @if($layerOrSubject != $layersWithSubject[0])
+                                    <option data-tokens="{{$layerOrSubject->slug}}" data-parent="subject-{{$layersWithSubject[0]->id}}" value="{{$layerOrSubject->id}}">{{$layerOrSubject->name}}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
                     @endforeach
                 </optgroup>
             </select>
