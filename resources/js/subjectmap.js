@@ -69,11 +69,7 @@ window.SubjectMap = {
     placeMarkers: (subjects, draggable = false) => {
         if (window.SubjectMap.map == null) return;
         subjects.forEach(function (item) {
-            console.log(item.name);
-            console.log(item.layers);
-            console.log(item.layers[0].slug);
-            console.log(item.id);
-            let slug = item.layers[0].slug;
+
             let marker = new Leaflet.marker({lat: item.lat, lon: item.lon}, {
                 draggable: draggable,
                 icon: new Leaflet.DivIcon({
@@ -87,8 +83,15 @@ window.SubjectMap = {
                 subjectId: item.id
             });
 
+            let buttons = ""
+
+            for (const layer of item.layers){
+                buttons += "<button class='btn btn-sm btn-primary m-1' onclick='window.SubjectMap.handleButton("+layer.slug+", "+item.id+")'>"+layer.name+"</button><br/>"
+            }
+
             marker.addTo(window.SubjectMap.map)
-                .bindPopup("<h3>"+item.name+"</h3> <p>"+item.description+"</p> <button class='btn btn-sm btn-primary' onclick='window.Layer.load("+slug+", "+item.id+")'>"+item.layers[0].name+"</button>");
+                .bindPopup("<h3>"+item.name+"</h3> <p>"+item.description+"</p> " + buttons
+                )
         });
     },
     setMarkerVisibility: (visible) => {
@@ -125,5 +128,9 @@ window.SubjectMap = {
         });
 
         return subjects;
+    },
+    handleButton: (slug, itemId) => {
+        console.log(slug);
+        console.log(itemId);
     }
 }

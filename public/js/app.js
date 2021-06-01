@@ -3946,6 +3946,12 @@ window.SideMenu = {
   \************************************/
 /***/ (() => {
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var layerTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 var southWest = Leaflet.latLng(52.108672, 6.573487),
     northEast = Leaflet.latLng(52.120610, 6.614364),
@@ -4020,11 +4026,6 @@ window.SubjectMap = {
     var draggable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (window.SubjectMap.map == null) return;
     subjects.forEach(function (item) {
-      console.log(item.name);
-      console.log(item.layers);
-      console.log(item.layers[0].slug);
-      console.log(item.id);
-      var slug = item.layers[0].slug;
       var marker = new Leaflet.marker({
         lat: item.lat,
         lon: item.lon
@@ -4036,7 +4037,23 @@ window.SubjectMap = {
         }),
         subjectId: item.id
       });
-      marker.addTo(window.SubjectMap.map).bindPopup("<h3>" + item.name + "</h3> <p>" + item.description + "</p> <button class='btn btn-sm btn-primary' onclick='window.Layer.load(" + slug + ", " + item.id + ")'>" + item.layers[0].name + "</button>");
+      var buttons = "";
+
+      var _iterator = _createForOfIteratorHelper(item.layers),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var layer = _step.value;
+          buttons += "<button class='btn btn-sm btn-primary m-1' onclick='window.SubjectMap.handleButton(" + layer.slug + ", " + item.id + ")'>" + layer.name + "</button><br/>";
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      marker.addTo(window.SubjectMap.map).bindPopup("<h3>" + item.name + "</h3> <p>" + item.description + "</p> " + buttons);
     });
   },
   setMarkerVisibility: function setMarkerVisibility(visible) {
@@ -4069,6 +4086,10 @@ window.SubjectMap = {
       }
     });
     return subjects;
+  },
+  handleButton: function handleButton(slug, itemId) {
+    console.log(slug);
+    console.log(itemId);
   }
 };
 
