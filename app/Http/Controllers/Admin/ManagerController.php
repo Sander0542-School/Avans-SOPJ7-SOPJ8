@@ -41,10 +41,12 @@ class ManagerController extends Controller
         $subjects = Subject::all();
         $layers = Layer::all();
 
+        $splitSubjects = $this->splitSubjectsWithLayers($subjects, $layers);
+
         return view('pages.admin.manager.create')
             ->with('roles', $roles)
             ->with('subjects', $subjects)
-            ->with('layers', $layers);
+            ->with('separatedSubjects', $splitSubjects);
     }
 
     /**
@@ -107,7 +109,6 @@ class ManagerController extends Controller
             ->with('manager', $manager)
             ->with('roles', $roles)
             ->with('subjects', $subjects)
-            ->with('layers', $layers)
             ->with('separatedSubjects', $splitSubjects)
             ->with('permissions', $manager->getPermissionNames());
     }
@@ -233,7 +234,6 @@ class ManagerController extends Controller
                 }
             }
         }
-
         return $subjectWithLayersArray;
     }
 }
