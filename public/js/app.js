@@ -4045,7 +4045,7 @@ window.SubjectMap = {
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var layer = _step.value;
-          buttons += "<button class='btn btn-sm btn-primary m-1' onclick='window.SubjectMap.handleButton(" + layer.slug + ", " + item.id + ")'>" + layer.name + "</button><br/>";
+          buttons += "<button class=\"btn btn-sm btn-primary m-1\" onclick=\"window.Layer.load('".concat(layer.slug, "', ").concat(item.id, ")\">").concat(layer.name, "</button></br>");
         }
       } catch (err) {
         _iterator.e(err);
@@ -4086,10 +4086,6 @@ window.SubjectMap = {
       }
     });
     return subjects;
-  },
-  handleButton: function handleButton(slug, itemId) {
-    console.log(slug);
-    console.log(itemId);
   }
 };
 

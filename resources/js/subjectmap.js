@@ -84,9 +84,8 @@ window.SubjectMap = {
             });
 
             let buttons = ""
-
             for (const layer of item.layers){
-                buttons += "<button class='btn btn-sm btn-primary m-1' onclick='window.SubjectMap.handleButton("+layer.slug+", "+item.id+")'>"+layer.name+"</button><br/>"
+                buttons += `<button class="btn btn-sm btn-primary m-1" onclick="window.Layer.load('${layer.slug}', ${item.id})">${layer.name}</button></br>`
             }
 
             marker.addTo(window.SubjectMap.map)
@@ -128,9 +127,5 @@ window.SubjectMap = {
         });
 
         return subjects;
-    },
-    handleButton: (slug, itemId) => {
-        console.log(slug);
-        console.log(itemId);
     }
 }
