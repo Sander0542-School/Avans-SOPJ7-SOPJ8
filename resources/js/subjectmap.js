@@ -69,22 +69,27 @@ window.SubjectMap = {
     placeMarkers: (subjects, draggable = false) => {
         if (window.SubjectMap.map == null) return;
         subjects.forEach(function (item) {
+            console.log(item.name);
+            console.log(item.layers);
+            console.log(item.layers[0].slug);
+            console.log(item.id);
+            let slug = item.layers[0].slug;
             let marker = new Leaflet.marker({lat: item.lat, lon: item.lon}, {
                 draggable: draggable,
                 icon: new Leaflet.DivIcon({
                     className: 'marker-subject',
                     html:
                         '<div class="marker-container">' +
-                        '<img width="65" height="80" src="/images/MarkerImage.png"/>' +
-                        `<button class="btn btn-primary marker-button" data-toggle="tooltip" data-placement="right" data-html="true" title="${item.description}" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</button>` +
+                        '  <img width="65" height="80" src="/images/MarkerImage.png"/>' +
+                        `  <span type="button" class="btn btn-primary marker-button" data-container="body" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</span>` +
                         '</div>'
                 }),
                 subjectId: item.id
             });
 
-            marker.addTo(window.SubjectMap.map);
+            marker.addTo(window.SubjectMap.map)
+                .bindPopup("<h3>"+item.name+"</h3> <p>"+item.description+"</p> <button class='btn btn-sm btn-primary' onclick='window.Layer.load("+slug+", "+item.id+")'>"+item.layers[0].name+"</button>");
         });
-        $('[data-toggle="tooltip"]').tooltip()
     },
     setMarkerVisibility: (visible) => {
         document.querySelectorAll('#subjectmap .marker-subject').forEach((marker) => {
