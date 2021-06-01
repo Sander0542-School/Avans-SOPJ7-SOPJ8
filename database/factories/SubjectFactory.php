@@ -28,8 +28,7 @@ class SubjectFactory extends Factory
             'domain_id' => Domain::inRandomOrder()->first()->id,
             'lat' => ($this->faker->numberBetween(52108672, 52120610) / 1000000),
             'lon' => ($this->faker->numberBetween(6573487, 6614364) / 1000000),
-            'order' => 1,
-            'description' => Str::random(20),
+            'order' => 1
         ];
     }
 }

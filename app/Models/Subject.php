@@ -12,7 +12,6 @@ class Subject extends Model
     protected $fillable = [
         'domain_id',
         'name',
-        'description',
         'order',
         'lon',
         'lat',
