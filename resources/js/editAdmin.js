@@ -5,6 +5,22 @@ window.Admin = {
             $('#inputRole').on('changed.bs.select', () => {
                 window.Admin.ManagerEdit.checkDropdown();
             });
+
+            let allPermissions = document.querySelectorAll('.allPermissions');
+            let subjects = document.querySelector('#layerPermission').querySelectorAll('option');
+            if (allPermissions[0] === 0) {
+                return;
+            } else {
+                window.Admin.ManagerEdit.showAllLayers();
+                window.Admin.ManagerEdit.showLayerPermissions();
+                for (const permissionId of allPermissions) {
+                    for (const subject of subjects) {
+                        if (subject.value===permissionId.value) {
+                            subject.selected = true;
+                        }
+                    }
+                }
+            }
         },
 
         checkDropdown: () => {
