@@ -30,8 +30,6 @@
         </div>
     </div>
 
-    @dump($errors)
-
     <form method="POST" action="{{ route('admin.managers.update', $manager) }}">
         @csrf
         @method('PUT')
