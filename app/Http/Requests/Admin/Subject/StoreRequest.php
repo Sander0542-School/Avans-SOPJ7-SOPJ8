@@ -25,14 +25,17 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => [
+                'string',
                 'required',
                 'max:255',
             ],
             'description' => [
+                'string',
                 'required',
                 'max:255',
             ],
             'domain_id' => [
+                'integer',
                 'required',
             ]
         ];
