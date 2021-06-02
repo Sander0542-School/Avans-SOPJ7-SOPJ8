@@ -48,7 +48,7 @@
                                 <div class="col-1">
                                     <span class="btn btn-link" style="cursor: grab">
                                         <i class="fas fa-2x fa-sort" title=
-                                            "Sleep het onderwerp in de gewenste volgorde"
+                                        "Sleep het onderwerp in de gewenste volgorde"
                                         ></i>
                                     </span>
                                 </div>
@@ -62,6 +62,9 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-span-1 float-right my-2 w-100">
+                                <input name="subjects[{{ $subject->id }}][description]" data-name="description" type="text" class="form-control" value="{{ $subject->description }}" placeholder="Beschrijving">
                             </div>
                         </div>
                     </div>
