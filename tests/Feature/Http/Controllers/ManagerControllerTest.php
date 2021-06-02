@@ -4,17 +4,17 @@ namespace Http\Controllers;
 
 use App\Models\User;
 use Hash;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ManagerControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->seed();
 
         $this->actingAs(User::first());
