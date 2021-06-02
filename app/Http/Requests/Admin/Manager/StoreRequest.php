@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin\Manager;
 
+use App\Models\Layer;
+use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -42,6 +44,23 @@ class StoreRequest extends FormRequest
                 'integer',
                 Rule::exists(Role::class, 'id')->where('guard_name', config('fortify.guard'))
             ],
+            'custom_permissions' => [
+                'required_if:role,2',
+                'boolean',
+            ],
+            'subjects' => [
+                'required_if:custom_permissions,true',
+                'array',
+            ],
+            'subjects.*' => [
+                Rule::exists(Subject::class, 'id'),
+            ],
+            'layers' => [
+                'array',
+            ],
+            'layers.*' => [
+                Rule::exists(Layer::class, 'id'),
+            ]
         ];
     }
 }

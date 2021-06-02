@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Manager\StoreRequest;
 use App\Http\Requests\Admin\Manager\UpdateRequest;
+use App\Models\Layer;
+use App\Models\LayerChoice;
+use App\Models\Subject;
+use App\Models\SubjectChoice;
 use App\Models\User;
 use Hash;
-use Laravel\Fortify\Fortify;
 use Password;
 use Spatie\Permission\Models\Role;
 use Str;
+use function React\Promise\all;
 
 class ManagerController extends Controller
 {
@@ -34,8 +38,15 @@ class ManagerController extends Controller
     public function create()
     {
         $roles = Role::all();
+        $subjects = Subject::all();
+        $layers = Layer::all();
 
-        return view('pages.admin.manager.create')->with('roles', $roles);
+        $splitSubjects = $this->splitSubjectsWithLayers($subjects, $layers);
+
+        return view('pages.admin.manager.create')
+            ->with('roles', $roles)
+            ->with('subjects', $subjects)
+            ->with('separatedSubjects', $splitSubjects);
     }
 
     /**
@@ -51,10 +62,14 @@ class ManagerController extends Controller
         $manager = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make(Str::random(12))
+            'password' => Hash::make(Str::random(12)),
         ]);
 
         $manager->assignRole(Role::findById($data['role'], config('fortify.guard')));
+
+        if ($data['role'] == 2) {
+            $this->handlePermissionChange($manager, $data['custom_permissions'] == '1', $data);
+        }
 
         $status = Password::sendResetLink($manager->only('email'));
 
@@ -85,7 +100,17 @@ class ManagerController extends Controller
     public function edit(User $manager)
     {
         $roles = Role::all();
-        return view('pages.admin.manager.edit')->with('manager', $manager)->with('roles', $roles);
+        $subjects = Subject::all();
+        $layers = Layer::all();
+
+        $splitSubjects = $this->splitSubjectsWithLayers($subjects, $layers);
+
+        return view('pages.admin.manager.edit')
+            ->with('manager', $manager)
+            ->with('roles', $roles)
+            ->with('subjects', $subjects)
+            ->with('separatedSubjects', $splitSubjects)
+            ->with('permissions', $this->getOnlyLayerIdsForPermissions($manager));
     }
 
     /**
@@ -93,21 +118,24 @@ class ManagerController extends Controller
      *
      * @param \App\Http\Requests\Admin\Manager\UpdateRequest $request
      * @param \App\Models\User $manager
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request, User $manager)
     {
-
         $data = $request->validated();
 
-        if (!$manager->update([
+        if (! $manager->update([
             'name' => $data['name'],
-            'email' => $data['email']
+            'email' => $data['email'],
         ])) {
             return redirect()->back()->withErrors(['error' => 'Beheerder kon niet worden bijgewerkt.']);
         }
 
         $this->handleRoleChange($manager, $data['role']);
+
+        if ($data['role'] == 2) {
+            $this->handlePermissionChange($manager, $data['custom_permissions'] == '1', $data);
+        }
 
         return redirect()->route('admin.managers.index')->with('message', 'De beheerder is successvol aangepast!');
     }
@@ -120,7 +148,7 @@ class ManagerController extends Controller
      */
     public function destroy(User $manager)
     {
-        if ($manager == null){
+        if ($manager == null) {
             return redirect()->back()->withErrors(['error' => 'De admin kan niet verwijderd worden']);
         }
 
@@ -140,7 +168,7 @@ class ManagerController extends Controller
     {
         $manager = User::withTrashed()->find($managerId);
 
-        if ($manager == null){
+        if ($manager == null) {
             return redirect()->back()->withErrors(['error' => 'De admin kan niet hersteld worden']);
         }
 
@@ -157,7 +185,8 @@ class ManagerController extends Controller
         return view('pages.admin.manager.deleted')->with('managers', $managers);
     }
 
-    private function handleRoleChange(User $manager, $roleId) {
+    private function handleRoleChange(User $manager, $roleId)
+    {
         $currentRoleId = $manager->roles[0]->id;
         $currentRole = Role::all()->where('id', $currentRoleId)->first();
 
@@ -167,5 +196,55 @@ class ManagerController extends Controller
             $newRole = Role::all()->where('id', $roleId)->first();
             $manager->assignRole($newRole->name);
         }
+    }
+
+    private function handlePermissionChange(User $manager, $wildcard, $data)
+    {
+        $permissionsArray = [];
+
+        if ($wildcard) {
+            array_push($permissionsArray, 'layers.*');
+        } else {
+            foreach ($data['layers'] ?? [] as $layerId) {
+                array_push($permissionsArray, 'layers.update.'.$layerId);
+            }
+        }
+        $manager->syncPermissions($permissionsArray);
+    }
+
+    public function splitSubjectsWithLayers($subjects, $layers) {
+        $layerChoices = LayerChoice::all();
+        $subjectChoice = SubjectChoice::all();
+
+        $subjectWithLayersArray = [];
+
+        foreach ($subjects as $subject) {
+            array_push($subjectWithLayersArray, [$subject]);
+        }
+
+        foreach ($subjectChoice as $sChoice) {
+            $index = $sChoice->subject_id-1;
+            $layerId = $sChoice->layer_id;
+            array_push($subjectWithLayersArray[$index], $layers->where('id', $layerId)->first());
+
+            foreach ($layerChoices as $lChoice) {
+                if ($lChoice->parent_layer_id == $layerId) {
+                    $layer = $layers->where('id', $lChoice->child_layer_id)->first();
+                    array_push($subjectWithLayersArray[$index], $layer);
+                }
+            }
+        }
+        return $subjectWithLayersArray;
+    }
+
+    private function getOnlyLayerIdsForPermissions(User $manager) {
+        $permissions = $manager->getPermissionNames();
+        $layerIds = [];
+
+        foreach ($permissions as $permission) {
+            array_push($layerIds, (int)explode('.', $permission)[2]);
+        }
+
+        return $layerIds;
     }
 }
