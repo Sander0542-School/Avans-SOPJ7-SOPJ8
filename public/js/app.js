@@ -3802,6 +3802,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
+__webpack_require__(/*! ./editAdmin */ "./resources/js/editAdmin.js");
+
 __webpack_require__(/*! ./sidemenu */ "./resources/js/sidemenu.js");
 
 __webpack_require__(/*! ./subjectmap */ "./resources/js/subjectmap.js");
@@ -3878,6 +3880,117 @@ $(function () {
 $(document).ready(function () {
   $('#btnPopover').popover();
 });
+
+/***/ }),
+
+/***/ "./resources/js/editAdmin.js":
+/*!***********************************!*\
+  !*** ./resources/js/editAdmin.js ***!
+  \***********************************/
+/***/ (() => {
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+window.Admin = {
+  ManagerEdit: {
+    initAdmin: function initAdmin() {
+      window.Admin.ManagerEdit.checkDropdown();
+      $('#inputRole').on('changed.bs.select', function () {
+        window.Admin.ManagerEdit.checkDropdown();
+      });
+    },
+    checkDropdown: function checkDropdown() {
+      var roleSelect = document.querySelector('#inputRole');
+
+      if (roleSelect.value === "2") {
+        window.Admin.ManagerEdit.showAllLayers();
+      } else {
+        if (document.querySelector('#allLayers').style.display === "block") {
+          window.Admin.ManagerEdit.hideAllLayers();
+        }
+
+        if (document.querySelector('#subjectPermissionDiv').style.display === "block") {
+          window.Admin.ManagerEdit.hidePermissionInterface();
+        }
+      }
+    },
+    showAllLayers: function showAllLayers() {
+      var allLayers = document.querySelector('#allLayersSelect');
+      var allLayersDiv = document.querySelector('#allLayers');
+
+      if (allLayers.value === "0") {
+        window.Admin.ManagerEdit.showSubjectPermissions();
+      }
+
+      $('#allLayersSelect').on('changed.bs.select', function () {
+        if (allLayers.value === "0") {
+          window.Admin.ManagerEdit.showSubjectPermissions();
+        } else {
+          window.Admin.ManagerEdit.hidePermissionInterface();
+        }
+      });
+      allLayersDiv.style.display = "block";
+    },
+    hideAllLayers: function hideAllLayers() {
+      document.querySelector('#allLayers').style.display = "none";
+    },
+    showSubjectPermissions: function showSubjectPermissions() {
+      document.querySelector('#subjectPermissionDiv').style.display = "block";
+      document.querySelector('#assignLayersButton').style.display = "inline-block";
+    },
+    hidePermissionInterface: function hidePermissionInterface() {
+      document.querySelector('#subjectPermissionDiv').style.display = "none";
+      document.querySelector('#layerPermissionDiv').style.display = "none";
+    },
+    showLayerPermissions: function showLayerPermissions() {
+      window.Admin.ManagerEdit.selectLayerPermissions();
+      document.querySelector('#layerPermissionDiv').style.display = "block";
+      $('#subjectPermission').on('changed.bs.select', function () {
+        window.window.Admin.ManagerEdit.selectLayerPermissions();
+      });
+      document.querySelector('#assignLayersButton').style.display = 'none';
+    },
+    selectLayerPermissions: function selectLayerPermissions() {
+      var subjectIds = [];
+      var subjects = document.querySelector('#subjectPermission').querySelectorAll('option');
+
+      var _iterator = _createForOfIteratorHelper(subjects),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var subject = _step.value;
+
+          if (subject.selected) {
+            subjectIds.push("subject-".concat(subject.value));
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var _iterator2 = _createForOfIteratorHelper(document.querySelector('#layerPermission').querySelectorAll('option')),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var layer = _step2.value;
+          layer.selected = subjectIds.includes(layer.getAttribute('data-parent'));
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+    }
+  }
+};
 
 /***/ }),
 
