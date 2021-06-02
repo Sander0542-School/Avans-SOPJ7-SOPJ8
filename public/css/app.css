@@ -17511,6 +17511,7 @@ readers do not read off random characters that represent icons */
 .sidemenu .menu-item:hover,
 .sidemenu .menu-item:focus {
   transition: all 0.3s;
+  max-width: 16rem;
 }
 .sidemenu .menu-item > a,
 .sidemenu .menu-item:hover > a,
@@ -17647,7 +17648,7 @@ readers do not read off random characters that represent icons */
   color: #000000 !important;
 }
 
-.navbar {
+.nav-link {
   color: #1c1c1c !important;
 }
 
