@@ -49,7 +49,6 @@ class UpdateRequest extends FormRequest
                 'boolean',
             ],
             'subjects' => [
-                'required_if:custom_permissions,true',
                 'array',
             ],
             'subjects.*' => [

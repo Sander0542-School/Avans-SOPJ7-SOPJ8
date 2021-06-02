@@ -1,4 +1,4 @@
-describe('Manage Layers', () => {
+describe('Manage Managers', () => {
     beforeEach(() => {
         cy.refreshDatabase();
 
@@ -11,10 +11,11 @@ describe('Manage Layers', () => {
         cy.visit('/admin/managers/');
 
         cy.get(':nth-child(2) > .text-right > .btn-warning').click();
-        cy.get('.filter-option-inner-inner').click();
+        cy.get('#roleForm > .dropdown > .btn').click();
         cy.get('#bs-select-1-1 > .text').click();
         cy.get('.btn-success').click();
 
+        cy.visit('/admin/managers/');
         cy.get('tbody > :nth-child(2) > :nth-child(3)').contains('Super Admin');
     });
 
@@ -22,7 +23,7 @@ describe('Manage Layers', () => {
         cy.visit('/admin/managers/');
 
         cy.get(':nth-child(3) > .text-right > .btn-warning').click();
-        cy.get('.filter-option-inner-inner').click();
+        cy.get('#roleForm > .dropdown > .btn').click();
         cy.get('#bs-select-1-2 > .text').click();
         cy.get('.btn-success').click();
 
