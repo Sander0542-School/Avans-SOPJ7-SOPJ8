@@ -9,7 +9,6 @@ window.Admin = {
             let allPermissions = document.querySelectorAll('.allPermissions');
             let subjects = document.querySelector('#layerPermission').querySelectorAll('option');
 
-            debugger;
             if (allPermissions[0]!=null) {
                 if (allPermissions[0].value === '0') {
                     return;
