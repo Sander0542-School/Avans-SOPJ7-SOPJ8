@@ -32,7 +32,6 @@ class MenuController extends Controller
                 'domain_id' => $formSubject['domain_id'],
                 'name' => $formSubject['name'],
                 'order' => $formSubject['order'],
-                'description' => $formSubject['description'],
             ]);
 
             if ($subject == null) {
