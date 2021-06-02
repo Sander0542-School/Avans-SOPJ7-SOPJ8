@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Subject\StoreRequest;
 use App\Http\Resources\SubjectResource;
 use App\Models\Subject;
 
@@ -33,5 +34,28 @@ class SubjectController extends Controller
         }
 
         return new SubjectResource($subject);
+    }
+
+    public function store(StoreRequest $request)
+    {
+        $data = $request->validated();
+
+        $subject = Subject::create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'lon' => 6.581911,
+            'lat' => 52.121066,
+            'domain_id' => $data['domain_id'],
+            'order' => $this->getLastOrder(),
+        ]);
+
+        return redirect()->route('admin.map.index')->with('success', 'Het onderwerp is toegevoegd!');
+    }
+
+    public function getLastOrder(): int
+    {
+        $subjects = Subject::orderBy('order','DESC')->get();
+        $order = $subjects[0]['order'] + 1;
+        return $order;
     }
 }
