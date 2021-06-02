@@ -45,7 +45,8 @@ class MapControllerTest extends TestCase
                 [
                     'id' => $subject->id,
                     'lat' => 52.113052,
-                    'lon' => 6.611401
+                    'lon' => 6.611401,
+                    'description' => "this is a test",
                 ]
             ]
         ]);
