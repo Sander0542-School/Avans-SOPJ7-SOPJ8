@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\LayerController;
 use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Api\SubjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -37,14 +36,11 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::get('restore/{manager}', [ManagerController::class, 'restore'])->name('restore');
     });
 
-    Route::prefix('subjects')->name('subjects.')->group(function(){
-        Route::post('store', [SubjectController::class, 'store'])->name('store');
-    });
-
     Route::resource('managers', ManagerController::class);
 
     Route::prefix('map')->name('map.')->group(function () {
         Route::get('', [MapController::class, 'index'])->name('index');
+        Route::post('store', [MapController::class, 'store'])->name('store');
         Route::post('update', [MapController::class, 'update'])->name('update');
     });
 });

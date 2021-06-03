@@ -53,7 +53,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('admin.subjects.store') }}">
+                    <form method="POST" action="{{ route('admin.map.store') }}">
                         @csrf
 
                         <div class="form-group">
