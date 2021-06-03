@@ -14,7 +14,8 @@
     "devDependencies": {
         "cypress": "^7.0.1",
         "cypress-intellij-reporter": "^0.0.6",
-        "cypress-laravel": "^0.2.0"
+        "cypress-laravel": "^0.2.0",
+        "leaflet-responsive-popup": "^0.6.4"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.3",
