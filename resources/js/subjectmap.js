@@ -95,7 +95,8 @@ window.SubjectMap = {
             }).setContent("<h3>"+item.name+"</h3> <p>"+item.description+"</p> " + buttons);
 
             marker.addTo(window.SubjectMap.map)
-                .bindPopup(popup)
+                .bindPopup(popup);
+            marker.on("mouseover", function(evt) { this.openPopup(); });
         });
     },
     setMarkerVisibility: (visible) => {
