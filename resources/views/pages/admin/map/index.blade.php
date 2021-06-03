@@ -2,7 +2,8 @@
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
             {{ __('Map') }}
-            <button id="saveLocations" onclick="saveLocations()" class="btn btn-primary float-right">{{ __('Locaties opslaan') }}</button>
+            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#subjectModal">{{ __('Onderwerp toevoegen') }}</button>
+            <button id="saveLocations" onclick="saveLocations()" class="btn btn-primary float-right mx-1">{{ __('Locaties opslaan') }}</button>
         </h2>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -33,9 +34,64 @@
                 </div>
                 <div class="modal-body">
                     <ul>
-                        <li>- Sleep de poppetjes om hen van locatie te veranderen.</li>
-                        <li>- Vergeet niet op de "Locaties opslaan" knop te drukken om de wijzingen door te voeren.</li>
+                        <li>Sleep de poppetjes om hen van locatie te veranderen.</li>
+                        <li>Vergeet niet op de "Locaties opslaan" knop te drukken om de wijzingen door te voeren.</li>
+                        <li>Voeg een nieuw onderwerp toe door op de "Onderwerp toevoegen" knop te drukken.</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="subjectModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Onderwerp toevoegen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('admin.map.store') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="inputName">Naam</label>
+                            <input required type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="inputName" autocomplete="name">
+                            @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputDescription">Beschrijving</label>
+                            <input required type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription">
+                            @error('description')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputDomain">Domein</label>
+                            <select name="domain_id" class="form-control">
+                                @foreach($domains as $domain)
+                                    <option value="{{ $domain->id }}">{{ $domain->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('domain')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <button class="btn btn-success btn-success-axe float-right" type="submit">Toevoegen</button>
+                    </form>
                 </div>
             </div>
         </div>

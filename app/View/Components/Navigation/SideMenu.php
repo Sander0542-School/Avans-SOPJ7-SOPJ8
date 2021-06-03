@@ -46,12 +46,12 @@ class SideMenu extends Component
     {
         $menu = [];
 
-        foreach (Subject::orderBy('order')->get() as $subject) {
+        foreach (Subject::orderBy('order')->get(['id', 'name']) as $subject) {
             $subMenu = [
                 'id' => $subject->id,
                 'name' => $subject->name,
                 'slug' => Str::slug($subject->name),
-                'children' => $this->getChildren($subject->layers),
+                'children' => $this->getChildren($subject->layers()->get(['layers.id', 'name', 'slug'])),
             ];
             array_push($menu, $subMenu);
         }
@@ -74,7 +74,7 @@ class SideMenu extends Component
             $subMenu = [
                 'name' => $layer->name,
                 'slug' => $layer->slug,
-                'children' => $this->getChildren($layer->childLayers),
+                'children' => $this->getChildren($layer->childLayers()->get(['layers.id', 'name', 'slug'])),
             ];
             array_push($menu, $subMenu);
         }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Subject\StoreRequest;
 use App\Http\Resources\SubjectResource;
 use App\Models\Subject;
 
@@ -15,7 +16,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return SubjectResource::collection(Subject::all());
+        return SubjectResource::collection(Subject::with(['layers' => function ($query) {
+            $query->select(['layers.id', 'layers.name', 'layers.slug']);
+        }])->get());
     }
 
     /**

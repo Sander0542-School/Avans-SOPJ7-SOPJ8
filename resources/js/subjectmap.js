@@ -1,3 +1,4 @@
+const R = require("leaflet-responsive-popup");
 const layerTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const southWest = Leaflet.latLng(52.108672, 6.573487),
     northEast = Leaflet.latLng(52.120610, 6.614364),
@@ -69,19 +70,33 @@ window.SubjectMap = {
     placeMarkers: (subjects, draggable = false) => {
         if (window.SubjectMap.map == null) return;
         subjects.forEach(function (item) {
+
             let marker = new Leaflet.marker({lat: item.lat, lon: item.lon}, {
                 draggable: draggable,
                 icon: new Leaflet.DivIcon({
                     className: 'marker-subject',
-                    html: '<div class="marker-container">' +
-                        '<img width="65" height="80" src="/images/MarkerImage.png"/>' +
-                        `<button class="btn btn-primary" class="marker-button" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</button>` +
+                    html:
+                        '<div class="marker-container">' +
+                        '  <img class="marker-image" width="65" height="80" src="/images/MarkerImage.png"/>' +
+                        `  <span type="button" class="btn btn-primary marker-button " data-container="body" style="background-color:#${item.domain.color};border-color:#${item.domain.color}">${item.name}</span>` +
                         '</div>'
                 }),
                 subjectId: item.id
             });
 
-            marker.addTo(window.SubjectMap.map);
+            let buttons = ""
+            for (const layer of item.layers){
+                buttons += `<button class="btn btn-sm btn-primary m-1" onclick="window.Layer.load('${layer.slug}', ${item.id})">${layer.name}</button></br>`
+            }
+            const popup = R.responsivePopup({
+                hasTip: true,
+                autoPan: true,
+                offset: [15, 20]
+            }).setContent("<h3>"+item.name+"</h3> <p>"+item.description+"</p> " + buttons);
+
+            marker.addTo(window.SubjectMap.map)
+                .bindPopup(popup);
+            marker.on("mouseover", function(evt) { this.openPopup(); });
         });
     },
     setMarkerVisibility: (visible) => {

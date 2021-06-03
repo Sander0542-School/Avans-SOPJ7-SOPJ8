@@ -4,17 +4,17 @@ namespace Http\Controllers;
 
 use App\Models\User;
 use Hash;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ManagerControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->seed();
 
         $this->actingAs(User::first());
@@ -34,6 +34,7 @@ class ManagerControllerTest extends TestCase
             'name' => 'Test Manager',
             'email' => 'Manager@test.nl',
             'role' => 2,
+            'custom_permissions' => false
         ]);
 
         $response->assertRedirect(route('admin.managers.index'));
@@ -55,6 +56,7 @@ class ManagerControllerTest extends TestCase
             'name' => 'Test Manager',
             'email' => 'Manager@test.nl',
             'role' => 'Admin',
+            'custom_permissions' => false
         ]);
 
         $response->assertRedirect(route('admin.managers.index'));

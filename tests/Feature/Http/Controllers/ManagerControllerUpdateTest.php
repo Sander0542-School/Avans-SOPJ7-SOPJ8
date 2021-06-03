@@ -2,24 +2,20 @@
 
 namespace Http\Controllers;
 
-use App\Http\Controllers\Admin\ManagerController;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
 Use Spatie\Permission\Models\Role;
 
 class ManagerControllerUpdateTest extends TestCase
 {
-
-    use RefreshDatabase;
-
     public $user;
     public $testUser;
 
     protected function setUp(): void
     {
         parent::setUp();
-
+        $this->artisan('cache:clear');
+        $this->artisan('migrate:fresh');
         $this->seed();
 
         $this->user = User::create([
@@ -42,6 +38,7 @@ class ManagerControllerUpdateTest extends TestCase
     protected function tearDown(): void
     {
         User::destroy($this->user->id);
+        User::destroy($this->testUser->id);
         parent::tearDown();
     }
 
@@ -55,7 +52,8 @@ class ManagerControllerUpdateTest extends TestCase
         $response = $this->put(route('admin.managers.update', $this->testUser), [
             'name' => '1',
             'email' => '1@test.nl',
-            'role' => $superAdminRole->id
+            'role' => $superAdminRole->id,
+            'custom_permissions' => false
         ]);
 
         $updatedManager = User::where('email', '1@test.nl')->first();
@@ -73,11 +71,11 @@ class ManagerControllerUpdateTest extends TestCase
         $response = $this->put(route('admin.managers.update', $this->testUser), [
             'name' => '1',
             'email' => '1@test.nl',
-            'role' => $adminRole->id
+            'role' => $adminRole->id,
+            'custom_permissions' => false
         ]);
 
         $updatedManager = User::where('email', '1@test.nl')->first();
-
         $this->assertTrue($updatedManager->hasRole($admin));
     }
 
@@ -89,7 +87,8 @@ class ManagerControllerUpdateTest extends TestCase
         $response = $this->put(route('admin.managers.update', $this->testUser), [
             'name' => $newName,
             'email' => '1@test.nl',
-            'role' => 2
+            'role' => 2,
+            'custom_permissions' => false
         ]);
 
         $updatedManager = User::where('email', '1@test.nl')->first();
@@ -104,10 +103,42 @@ class ManagerControllerUpdateTest extends TestCase
         $response = $this->put(route('admin.managers.update', $this->testUser), [
             'name' => '1',
             'email' => $newEmail,
-            'role' => 2
+            'role' => 2,
+            'custom_permissions' => false
         ]);
 
         $updatedManager = User::where('name', '1')->first();
         $this->assertTrue($updatedManager->email == $newEmail);
+    }
+
+    public function test_update_manager_permissions_add_layers() {
+        $this->testUser->assignRole('Admin');
+
+        $response = $this->put(route('admin.managers.update', $this->testUser), [
+            'name' => $this->testUser->name,
+            'email' => $this->testUser->email,
+            'role' => 2,
+            'custom_permissions' => 0,
+            'layers' => [1, 3, 4]
+        ]);
+
+        $this->assertTrue($this->testUser->hasPermissionTo('layers.update.1'));
+        $this->assertTrue($this->testUser->hasPermissionTo('layers.update.3'));
+        $this->assertTrue($this->testUser->hasPermissionTo('layers.update.4'));
+        $this->assertNotTrue($this->testUser->hasPermissionTo('layers.update.2'));
+    }
+
+    public function test_update_manager_permissions_add_wildcard() {
+        $this->testUser->assignRole('Admin');
+
+        $response = $this->put(route('admin.managers.update', $this->testUser), [
+            'name' => $this->testUser->name,
+            'email' => $this->testUser->email,
+            'role' => 2,
+            'custom_permissions' => true,
+            'subjects' => [1]
+        ]);
+
+        $this->assertTrue($this->testUser->hasPermissionTo('layers.*'));
     }
 }

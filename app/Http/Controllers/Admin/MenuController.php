@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Menu\UpdateRequest;
 use App\Models\Domain;
 use App\Models\Subject;
@@ -31,6 +32,7 @@ class MenuController extends Controller
                 'domain_id' => $formSubject['domain_id'],
                 'name' => $formSubject['name'],
                 'order' => $formSubject['order'],
+                'description' => $formSubject['description'],
             ]);
 
             if ($subject == null) {

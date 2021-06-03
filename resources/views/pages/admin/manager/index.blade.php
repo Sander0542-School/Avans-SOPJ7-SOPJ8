@@ -8,7 +8,7 @@
     </x-slot>
 
     <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
-        <i class="fa fa-info-circle my-float" ></i>
+        <i class="fa fa-info-circle my-float"></i>
     </button>
 
     <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
@@ -58,11 +58,13 @@
                     <td>{{ $manager->roles[0]['name'] }}</td>
                     <td class="text-right">
                         <a class="btn btn-success" href="{{ route('admin.managers.show', ['manager' => $manager]) }}"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-warning" href="{{ route('admin.managers.edit', ['manager' => $manager]) }}"><i class="fas fa-edit"></i></a>
-                        @if(auth()->user()->id != $manager->id && !$manager->hasRole('Super Admin'))
-                            <button class="btn btn-danger" onclick="deleteManager({{ $manager->id }}, '{{ $manager->name }}', '{{ route('admin.managers.destroy', ['manager' => $manager]) }}')">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                        @if(auth()->user()->id != $manager->id)
+                            <a class="btn btn-warning" href="{{ route('admin.managers.edit', ['manager' => $manager]) }}"><i class="fas fa-edit"></i></a>
+                            @if(!$manager->hasRole('Super Admin'))
+                                <button class="btn btn-danger" onclick="deleteManager({{ $manager->id }}, '{{ $manager->name }}', '{{ route('admin.managers.destroy', ['manager' => $manager]) }}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            @endif
                         @endif
                     </td>
                 </tr>

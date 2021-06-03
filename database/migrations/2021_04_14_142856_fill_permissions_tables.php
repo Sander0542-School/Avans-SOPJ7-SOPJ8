@@ -14,8 +14,19 @@ class FillPermissionsTables extends Migration
     public function up()
     {
         Permission::create(['name' => 'domains.*']);
-        Permission::create(['name' => 'layers.*']);
+        Permission::create(['name' => 'domains.create']);
+        Permission::create(['name' => 'domains.update.*']);
+        Permission::create(['name' => 'domains.delete.*']);
+
         Permission::create(['name' => 'subjects.*']);
+        Permission::create(['name' => 'subjects.create']);
+        Permission::create(['name' => 'subjects.update.*']);
+        Permission::create(['name' => 'subjects.delete.*']);
+
+        Permission::create(['name' => 'layers.*']);
+        Permission::create(['name' => 'layers.create']);
+        Permission::create(['name' => 'layers.update.*']);
+        Permission::create(['name' => 'layers.delete.*']);
 
         Role::create([
             'id' => 1,

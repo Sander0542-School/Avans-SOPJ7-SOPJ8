@@ -20,6 +20,10 @@ describe('Manage Menu', () => {
 
                 cy.wrap($item).find('i.fa-sort')
                     .trigger('mousedown', {which: 1})
+                    .trigger('mousemove', {which: 1, pageY: 400})
+                    .trigger('mousemove', {which: 1, pageY: 350})
+                    .trigger('mousemove', {which: 1, pageY: 300})
+                    .trigger('mousemove', {which: 1, pageY: 250})
                     .trigger('mousemove', {which: 1, pageY: 200})
                     .trigger('mouseup')
 

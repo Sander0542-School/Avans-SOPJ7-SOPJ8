@@ -7,12 +7,12 @@ use App\Models\Subject;
 use App\Models\User;
 use Database\Factories\SubjectFactory;
 use Hash;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class MapControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     protected function setUp(): void
     {
@@ -45,7 +45,8 @@ class MapControllerTest extends TestCase
                 [
                     'id' => $subject->id,
                     'lat' => 52.113052,
-                    'lon' => 6.611401
+                    'lon' => 6.611401,
+                    'description' => "this is a test",
                 ]
             ]
         ]);

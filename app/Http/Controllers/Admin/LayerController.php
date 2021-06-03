@@ -20,7 +20,7 @@ class LayerController extends Controller
      */
     public function index()
     {
-        $layers = Layer::all();
+        $layers = Layer::all(['id', 'name', 'slug']);
 
         return view('pages.admin.layers.index')->with('layers', $layers);
     }
