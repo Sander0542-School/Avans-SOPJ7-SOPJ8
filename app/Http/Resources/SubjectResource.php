@@ -22,7 +22,7 @@ class SubjectResource extends JsonResource
             'lon' => $this->lon,
             'order' => $this->order,
             'domain' => new DomainResource($this->domain),
-            'layers' => LayerResource::collection($this->layers)
+            'layers' => LayerResource::collection($this->whenLoaded('layers'))
         ];
     }
 }

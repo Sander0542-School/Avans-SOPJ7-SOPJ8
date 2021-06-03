@@ -16,7 +16,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return SubjectResource::collection(Subject::all());
+        return SubjectResource::collection(Subject::with(['layers' => function ($query) {
+            $query->select(['layers.id', 'layers.name', 'layers.slug']);
+        }])->get());
     }
 
     /**
@@ -34,28 +36,5 @@ class SubjectController extends Controller
         }
 
         return new SubjectResource($subject);
-    }
-
-    public function store(StoreRequest $request)
-    {
-        $data = $request->validated();
-
-        $subject = Subject::create([
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'lon' => 6.581911,
-            'lat' => 52.121066,
-            'domain_id' => $data['domain_id'],
-            'order' => $this->getLastOrder(),
-        ]);
-
-        return redirect()->route('admin.map.index')->with('success', 'Het onderwerp is toegevoegd!');
-    }
-
-    public function getLastOrder(): int
-    {
-        $subjects = Subject::orderBy('order','DESC')->get();
-        $order = $subjects[0]['order'] + 1;
-        return $order;
     }
 }
