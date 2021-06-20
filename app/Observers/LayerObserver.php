@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Common\Traits\PermissionsTrait;
 use App\Models\Layer;
+use App\Models\LayerHistory;
 
 class LayerObserver
 {
@@ -28,7 +29,13 @@ class LayerObserver
      */
     public function updated(Layer $layer)
     {
-        //
+        LayerHistory::create([
+            'layer_id' => $layer->id,
+            'action' => 'updated',
+            'name' => $layer->name,
+            'slug' => $layer->slug,
+            'content' => $layer->content,
+        ]);
     }
 
     /**
@@ -39,7 +46,13 @@ class LayerObserver
      */
     public function deleted(Layer $layer)
     {
-        //
+        LayerHistory::create([
+            'layer_id' => $layer->id,
+            'action' => 'deleted',
+            'name' => $layer->name,
+            'slug' => $layer->slug,
+            'content' => $layer->content,
+        ]);
     }
 
     /**
@@ -50,7 +63,13 @@ class LayerObserver
      */
     public function restored(Layer $layer)
     {
-        //
+        LayerHistory::create([
+            'layer_id' => $layer->id,
+            'action' => 'restored',
+            'name' => $layer->name,
+            'slug' => $layer->slug,
+            'content' => $layer->content,
+        ]);
     }
 
     /**
@@ -61,6 +80,12 @@ class LayerObserver
      */
     public function forceDeleted(Layer $layer)
     {
-        //
+        LayerHistory::create([
+            'layer_id' => $layer->id,
+            'action' => 'deleted',
+            'name' => $layer->name,
+            'slug' => $layer->slug,
+            'content' => $layer->content,
+        ]);
     }
 }
