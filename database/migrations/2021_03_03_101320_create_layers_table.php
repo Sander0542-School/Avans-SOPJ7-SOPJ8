@@ -18,6 +18,7 @@ class CreateLayersTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('content');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
