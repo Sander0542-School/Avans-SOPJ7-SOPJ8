@@ -60,10 +60,9 @@ class MapController extends Controller
     public function destroy(Request $request)
     {
         $subjectChoise = $request -> subjectChoise;
-        $choices = Subject::all()->where('subject_id', $subjectChoise);
-        $choices->delete();
+        //$choices = Subject::where('id', $subjectChoise)->delete();
 
-
+        $subjectChoise->hasColumn('subject_choices')->delete();
         //$choices = SubjectChoice::all()->where('subject_id', $subject->id);
 
         /*        $selected = [];
