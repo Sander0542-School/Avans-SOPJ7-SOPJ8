@@ -22,7 +22,7 @@ class CreateSubjectsTable extends Migration
             $table->decimal('lat', 8, 6);
             $table->timestamps();
 
-            $table->foreign('domain_id')->references('id')->on('domains')->onDelete('cascade');
+            $table->foreign('domain_id')->references('id')->on('domains');
         });
     }
 

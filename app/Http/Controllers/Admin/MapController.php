@@ -62,8 +62,11 @@ class MapController extends Controller
         $subjectChoise = $request -> subjectChoise;
         //$choices = Subject::where('id', $subjectChoise)->delete();
 
-        $subjectChoise->hasColumn('subject_choices')->delete();
+        //$subjectChoise->hasColumn('subject_choices')->delete();
         //$choices = SubjectChoice::all()->where('subject_id', $subject->id);
+        $subject = Subject::find($subjectChoise);
+        $subject->delete();
+        //$subject->subjectChoices()->detach();
 
         /*        $selected = [];
                 foreach ($choices as $subject => $value){

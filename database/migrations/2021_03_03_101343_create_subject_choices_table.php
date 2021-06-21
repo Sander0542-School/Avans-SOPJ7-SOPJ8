@@ -21,7 +21,7 @@ class CreateSubjectChoicesTable extends Migration
 
             $table->unique(['subject_id', 'layer_id']);
 
-            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('layer_id')->references('id')->on('layers');
         });
     }
