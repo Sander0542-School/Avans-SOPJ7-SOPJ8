@@ -39,6 +39,7 @@
                         <li>Sleep de poppetjes om hen van locatie te veranderen.</li>
                         <li>Vergeet niet op de "Locaties opslaan" knop te drukken om de wijzingen door te voeren.</li>
                         <li>Voeg een nieuw onderwerp toe door op de "Onderwerp toevoegen" knop te drukken.</li>
+                        <li>Het is mogelijk om een onderwerp te verwijderen door op de knop "Onderwerpen verwijderen" te drukken.</li>
                     </ul>
                 </div>
             </div>
@@ -58,13 +59,13 @@
                     <form method="POST" action="{{ route('admin.map.destroy') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="inputDomain">Naam</label>
-                            <select for="subjectChoise" name="subjectChoise" id="subjectChoise"class="form-control">
+                            <label for="inputSubject">Naam</label>
+                            <select for="subjectChoice" name="subjectChoice" id="subjectChoice"class="form-control">
                                 @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                 @endforeach
                             </select>
-                            @error('domain')
+                            @error('subject')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

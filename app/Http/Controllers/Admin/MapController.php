@@ -59,25 +59,13 @@ class MapController extends Controller
 
     public function destroy(Request $request)
     {
-        $subjectChoise = $request -> subjectChoise;
-        //$choices = Subject::where('id', $subjectChoise)->delete();
+        $subjectChoice = $request->subjectChoice;
+        $subject = Subject::find($subjectChoice);
+        if ($subject == null) {
+            return redirect()->back()->withErrors(['error' => 'Het onderwerp kan niet verwijderd worden']);
+        }
 
-        //$subjectChoise->hasColumn('subject_choices')->delete();
-        //$choices = SubjectChoice::all()->where('subject_id', $subject->id);
-        $subject = Subject::find($subjectChoise);
         $subject->delete();
-        //$subject->subjectChoices()->detach();
-
-        /*        $selected = [];
-                foreach ($choices as $subject => $value){
-                    if ($choices->selected == true) {
-                        $selected[] = $value;
-                        $choices->forget($subject);
-                    }
-                }*/
-        //Subject::all()->where('subject_id', $subject->id)->delete();
-
-        //$subject->delete();
 
         return redirect()->route('admin.map.index')
             ->with('success', 'Het onderwerp is succesvol verwijderd.');

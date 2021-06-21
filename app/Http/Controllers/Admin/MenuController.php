@@ -49,6 +49,4 @@ class MenuController extends Controller
             'menu' => $errors,
         ]);
     }
-
-
 }
