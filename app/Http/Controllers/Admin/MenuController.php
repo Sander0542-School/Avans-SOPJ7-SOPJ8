@@ -50,20 +50,21 @@ class MenuController extends Controller
         ]);
     }
 
-    public function destroy($subjectId)
+    public function destroy(Subject $subject)
     {
-        $subject = Subject::find($subjectId);
+        $choices = SubjectChoice::all()->where('subject_id', $subject->id);
 
-        $choices = SubjectChoice::all()->where('subject_id', $subjectId);
-
-        $selected = [];
+/*        $selected = [];
         foreach ($choices as $subject => $value){
             if ($choices->selected == true) {
                 $selected[] = $value;
                 $choices->forget($subject);
             }
-        }
+        }*/
 
         $subject->delete();
+
+        return redirect()->route('admin.menu.index')
+            ->with('success', 'Het onderwerp is succesvol verwijderd.');
     }
 }
