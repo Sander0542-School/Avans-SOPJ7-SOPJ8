@@ -62,6 +62,10 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <button class="btn btn-danger" href="{{ route('admin.menu.destroy', ['$subject'=> $subject->id]) }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+
                             </div>
                             <div class="col-span-1 float-right my-2 w-100">
                                 <input name="subjects[{{ $subject->id }}][description]" data-name="description" type="text" class="form-control" value="{{ $subject->description }}" placeholder="Beschrijving">
