@@ -30,7 +30,6 @@
             </div>
         </div>
     </div>
-
     <div class="card">
         <div class="card-body">
             <div class="form-group m-0">
@@ -66,7 +65,6 @@
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>
-
                 </tr>
             @endforeach
             </tbody>
