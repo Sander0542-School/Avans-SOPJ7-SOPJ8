@@ -3,7 +3,7 @@
         <h2 class="h4 font-weight-bold">
             {{ __('Lagen') }}
             <a id="newLayer" href="{{ route('admin.layers.create') }}" class="btn btn-primary float-right">{{ __('Nieuwe laag') }}</a>
-            <a id="newArchive" href="{{ route('admin.layers.deleted') }}" class="btn btn-primary float-right mx-1">{{ __('Verwijderde layers') }}</a>
+            <a id="newArchive" href="{{ route('admin.layers.deleted') }}" class="btn btn-primary float-right mx-1">{{ __('Verwijderde lagen') }}</a>
         </h2>
     </x-slot>
 

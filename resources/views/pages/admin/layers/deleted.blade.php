@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('laag') }}
-            <a id="listlayer" href="{{ route('admin.layers.index') }}" class="btn btn-primary float-right">{{ __('Terug naar de lijst') }}</a>
+            {{ __('Laag') }}
+            <a id="listLayer" href="{{ route('admin.layers.index') }}" class="btn btn-primary float-right">{{ __('Terug naar de lijst') }}</a>
         </h2>
     </x-slot>
 
@@ -21,8 +21,8 @@
                 </div>
                 <div class="modal-body">
                     <ul>
-                        <li>Op deze pagina zijn alle verwijderde beheerders te vinden. </li>
-                        <li>Gebruik de zoekfunctie om te zoeken op naam, email of rol. </li>
+                        <li>Op deze pagina zijn alle verwijderde lagen te vinden. </li>
+                        <li>Gebruik de knopjes om een laag te bekijken of om het uit het archief te halen. </li>
                     </ul>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                         @endif
                     </td>
                     <td class="text-right">
-                        <button class="btn btn-danger" onclick="modalShow('{{ route('admin.layers.restore', ['layer' => $layer]) }}', '{{ $layer->id }}')">
+                        <button class="btn btn-danger" onclick="modalShow('{{ route('admin.layers.restore', ['layer' => $layer]) }}', '{{ $layer->name }}')">
                             <i class="fas fa-trash-restore"></i>
                         </button>
                     </td>
@@ -73,7 +73,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="layerRestoreModalLabel" class="modal-title">Beheerder Herstellen</h5>
+                    <h5 id="layerRestoreModalLabel" class="modal-title">Laag Herstellen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
