@@ -140,7 +140,7 @@ class LayerController extends Controller
     {
         $layers = Layer::onlyTrashed()->paginate(10);
 
-        return view('pages.admin.layer.deleted')->with('layers', $layers);
+        return view('pages.admin.layers.deleted')->with('layers', $layers);
     }
 
     /**
