@@ -110,8 +110,17 @@ class LayerController extends Controller
     }
 
     public function viewchange(LayerHistory $change) {
+        $previousChange = null;
 
-        return view('pages.admin.layers.history')->with(['change' => $change, 'layer' => $change->layer()->first()]);
+        if (LayerHistory::where('layer_id', $change->layer_id)->count() > 1) {
+            $previousChange = LayerHistory::where('layer_id', $change->layer_id)->where('id', '<', $change->id)->orderByDesc('id')->first();
+        }
+
+        if ($previousChange == $change) {
+            $previousChange = null;
+        }
+
+        return view('pages.admin.layers.history')->with(['change' => $change, 'layer' => $change->layer()->first(), 'previousChange' => $previousChange ?? null]);
     }
 
     /**
