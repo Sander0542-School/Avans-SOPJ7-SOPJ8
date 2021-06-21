@@ -2,8 +2,10 @@
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
             {{ __('Map') }}
-            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#subjectModal">{{ __('Onderwerp toevoegen') }}</button>
-            <button id="saveLocations" onclick="saveLocations()" class="btn btn-primary float-right mx-1">{{ __('Locaties opslaan') }}</button>
+            <button class="btn btn-primary float-right mx-1" data-toggle="modal" data-target="#subjectModal">{{ __('Onderwerp toevoegen') }}</button>
+            <button class="btn btn-primary float-right " data-toggle="modal" data-target="#subjectModalDestroy">{{ __('Onderwerp verwijderen') }}</button>
+            <button class="btn btn-primary float-right mx-1" id="saveLocations" onclick="saveLocations()" >{{ __('Locaties opslaan') }}</button>
+
         </h2>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -43,6 +45,37 @@
         </div>
     </div>
 
+    <div class="modal fade" id="subjectModalDestroy" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Onderwerp toevoegen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('admin.map.destroy') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="inputDomain">Naam</label>
+                            <select name="domain_id" class="form-control">
+                                @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('domain')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <button class="btn btn-danger btn-success-axe float-right" type="submit">Verwijderen</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="subjectModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -96,7 +129,6 @@
             </div>
         </div>
     </div>
-
     <div id="subjectmap"></div>
 
     @push('scripts')

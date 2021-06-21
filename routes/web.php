@@ -27,7 +27,6 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
     Route::prefix('menu')->name('menu.')->group(function () {
         Route::get('', [MenuController::class, 'index'])->name('index');
         Route::post('update', [MenuController::class, 'update'])->name('update');
-        Route::post('destroy', [MenuController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix("layers")->name("layers.")->group(function () {
@@ -48,6 +47,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::get('', [MapController::class, 'index'])->name('index');
         Route::post('store', [MapController::class, 'store'])->name('store');
         Route::post('update', [MapController::class, 'update'])->name('update');
+        Route::post('destroy', [MapController::class, 'destroy'])->name('destroy');
+
     });
 });
 

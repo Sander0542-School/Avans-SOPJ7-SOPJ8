@@ -13,9 +13,9 @@ class MapController extends Controller
     public function index()
     {
         $domains = Domain::all();
-
+        $subjects = Subject::all();
         return view('pages.admin.map.index')
-            ->with('domains', $domains);
+            ->with('domains', $domains)->with('subjects', $subjects);
     }
 
     public function store(StoreRequest $request)
@@ -54,5 +54,24 @@ class MapController extends Controller
     private function getLastOrder()
     {
         return Subject::max('order') ?? 0 + 1;
+    }
+
+    public function destroy(Subject $subject)
+    {
+        //$choices = SubjectChoice::all()->where('subject_id', $subject->id);
+
+        /*        $selected = [];
+                foreach ($choices as $subject => $value){
+                    if ($choices->selected == true) {
+                        $selected[] = $value;
+                        $choices->forget($subject);
+                    }
+                }*/
+        //Subject::all()->where('subject_id', $subject->id)->delete();
+
+        $subject->delete();
+
+        return redirect()->route('admin.menu.index')
+            ->with('success', 'Het onderwerp is succesvol verwijderd.');
     }
 }
