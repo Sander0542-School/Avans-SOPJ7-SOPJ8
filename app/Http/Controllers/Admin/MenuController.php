@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Menu\UpdateRequest;
 use App\Models\Domain;
 use App\Models\Subject;
+use App\Models\SubjectChoice;
 use Cache;
 
 class MenuController extends Controller
@@ -47,5 +48,22 @@ class MenuController extends Controller
         return redirect()->back()->withErrors([
             'menu' => $errors,
         ]);
+    }
+
+    public function destroy($subjectId)
+    {
+        $subject = Subject::find($subjectId);
+
+        $choices = SubjectChoice::all()->where('subject_id', $subjectId);
+
+        $selected = [];
+        foreach ($choices as $subject => $value){
+            if ($choices->selected == true) {
+                $selected[] = $value;
+                $choices->forget($subject);
+            }
+        }
+
+        $subject->delete();
     }
 }
