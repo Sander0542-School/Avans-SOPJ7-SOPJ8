@@ -9,6 +9,24 @@
         <i class="fa fa-info-circle my-float" ></i>
     </button>
 
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Geschiedenis uitleg</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Op deze pagina kan worden ingezien welke aanpassingen een specifieke laag heeft doorgaan.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card">
         <table id="layerTable" class="table m-0">
             <thead>

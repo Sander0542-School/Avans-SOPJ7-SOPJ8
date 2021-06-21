@@ -119,7 +119,6 @@ class LayerController extends Controller
         if ($previousChange == $change) {
             $previousChange = null;
         }
-
         return view('pages.admin.layers.history')->with(['change' => $change, 'layer' => $change->layer()->first(), 'previousChange' => $previousChange ?? null]);
     }
 

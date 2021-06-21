@@ -11,7 +11,7 @@
     background-color: red;
 }
 .yellow-content {
-    background-color: orange;
+    background-color: yellow;
 }
 .changesDiv {
     display: flex;
@@ -25,6 +25,9 @@
     margin-right: 5px;
     text-align: center;
     padding:10px;
+}
+.change h2 {
+    text-decoration: underline;
 }
 .change div {
     text-align: left;
