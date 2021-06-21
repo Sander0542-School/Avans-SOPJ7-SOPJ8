@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Beheerder') }}
+            {{ __('laag') }}
             <a id="listlayer" href="{{ route('admin.layers.index') }}" class="btn btn-primary float-right">{{ __('Terug naar de lijst') }}</a>
         </h2>
     </x-slot>
@@ -43,8 +43,7 @@
             <thead>
             <tr>
                 <th class="border-0">Naam</th>
-                <th class="border-0">Email</th>
-                <th class="border-0">Rol</th>
+                <th class="border-0">Bovenliggende laag</th>
                 <th class="border-0"></th>
             </tr>
             </thead>
@@ -52,14 +51,17 @@
             @foreach($layers as $layer)
                 <tr>
                     <td>{{ $layer->name }}</td>
-                    <td>{{ $layer->email }}</td>
-                    <td>{{ $layer->roles[0]['name'] }}</td>
-                    <td class="text-right">
-                        @if(auth()->user()->id != $layer->id && !$layer->hasRole('Super Admin'))
-                            <button class="btn btn-danger" onclick="modalShow('{{ route('admin.layers.restore', ['layer' => $layer]) }}', '{{ $layer->name }}')">
-                                <i class="fas fa-trash-restore"></i>
-                            </button>
+                    <td>
+                        @if($layer->subject != null)
+                            {{ $layer->subject->name }}
+                        @elseif($layer->parentLayer != null)
+                            {{ $layer->parentLayer->name }}
                         @endif
+                    </td>
+                    <td class="text-right">
+                        <button class="btn btn-danger" onclick="modalShow('{{ route('admin.layers.restore', ['layer' => $layer]) }}', '{{ $layer->id }}')">
+                            <i class="fas fa-trash-restore"></i>
+                        </button>
                     </td>
                 </tr>
             @endforeach
@@ -77,7 +79,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Weet je zeker dat je <span id="modallayerName"></span> wil herstellen?</p>
+                    <p>Weet je zeker dat je <span id="modalLayerName"></span> wil herstellen?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
@@ -90,7 +92,7 @@
     @push('scripts')
         <script>
             function modalShow(url, name) {
-                document.getElementById('modallayerName').innerText = name;
+                document.getElementById('modalLayerName').innerText = name;
                 document.getElementById('modalSubmit').href = url;
 
                 $('#layerRestoreModal').modal('show');
