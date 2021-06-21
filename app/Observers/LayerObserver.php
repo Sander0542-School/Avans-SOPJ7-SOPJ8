@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Common\Traits\PermissionsTrait;
 use App\Models\Layer;
 use App\Models\LayerHistory;
+use Auth;
 
 class LayerObserver
 {
@@ -31,6 +32,7 @@ class LayerObserver
     {
         LayerHistory::create([
             'layer_id' => $layer->id,
+            'user_id' => Auth::user()->id ?? null,
             'action' => 'updated',
             'name' => $layer->name,
             'slug' => $layer->slug,
@@ -48,6 +50,7 @@ class LayerObserver
     {
         LayerHistory::create([
             'layer_id' => $layer->id,
+            'user_id' => Auth::user()->id ?? null,
             'action' => 'deleted',
             'name' => $layer->name,
             'slug' => $layer->slug,
@@ -65,6 +68,7 @@ class LayerObserver
     {
         LayerHistory::create([
             'layer_id' => $layer->id,
+            'user_id' => Auth::user()->id ?? null,
             'action' => 'restored',
             'name' => $layer->name,
             'slug' => $layer->slug,
@@ -82,6 +86,7 @@ class LayerObserver
     {
         LayerHistory::create([
             'layer_id' => $layer->id,
+            'user_id' => Auth::user()->id ?? null,
             'action' => 'deleted',
             'name' => $layer->name,
             'slug' => $layer->slug,
