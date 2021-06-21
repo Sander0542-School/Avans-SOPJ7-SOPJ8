@@ -13,3 +13,26 @@
 .yellow-content {
     background-color: orange;
 }
+.changesDiv {
+    display: flex;
+    flex-direction: row;
+}
+.change {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    padding:10px;
+}
+.change div {
+    text-align: left;
+}
+.changetitle {
+    text-align: center;
+}
+.changetitle span {
+    font-weight: bold;
+}
+
