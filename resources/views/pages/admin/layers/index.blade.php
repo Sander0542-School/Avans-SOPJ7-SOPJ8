@@ -61,12 +61,38 @@
                     </td>
                     <td class="text-right">
                         <a class="btn btn-warning" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
+                        <button class="btn btn-danger" onclick="deleteLayer({{ $layer->id }}, '{{ $layer->name }}', '{{ route('admin.layers.destroy', ['layer' => $layer]) }}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </td>
+
                 </tr>
             @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="modal" id="layerDeleteModal" tabindex="-1" role="dialog" aria-labelledby="layerDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="layerDeleteModalLabel" class="modal-title">Beheerder verwijderen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Weet je zeker dat je <span id="modalLayerName"></span> wil verwijderen?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
+                    <form id="modalLayerForm" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Verwijderen</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     @push('scripts')
@@ -85,6 +111,12 @@
                         row.style.display = 'none';
                     }
                 });
+            }
+            function deleteLayer(id, name, action) {
+                document.getElementById('modalLayerName').innerText = name;
+                document.getElementById('modalLayerForm').action = action;
+
+                $('#layerDeleteModal').modal('show');
             }
         </script>
     @endpush
