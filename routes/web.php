@@ -29,7 +29,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::post('update', [MenuController::class, 'update'])->name('update');
     });
 
-    Route::prefix("layers")->name("layers")->group(function () {
+    Route::prefix("layers")->name("layers.")->group(function () {
         Route::get('deleted', [LayerController::class, 'deleted'])->name('deleted');
         Route::get('restore/{layers}', [LayerController::class, 'restore'])->name('restore');
     });
