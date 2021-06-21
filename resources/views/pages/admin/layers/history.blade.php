@@ -9,7 +9,7 @@
         <i class="fa fa-info-circle my-float" ></i>
     </button>
     <div>
-        <h2>user:{{$user->name}} {{$change->action}} on: {{$change->updated_at}}</h2>
+        <h2>user:{{$change->user->name}} {{$change->action}} on: {{$change->updated_at}}</h2>
         <div>
             {{$layer->title}}
         </div>
@@ -24,5 +24,5 @@
                 @endif>{{$change->content}}</span>
         </div>
     </div>
-    <a class="btn btn-danger" href="{{ route('admin.layers.history-index',['layer'=>$layer]) }}">Terug</a>
+    <a class="btn btn-danger" href="{{ route('admin.layers.history',['layer'=>$layer]) }}">Terug</a>
 </x-app-layout>

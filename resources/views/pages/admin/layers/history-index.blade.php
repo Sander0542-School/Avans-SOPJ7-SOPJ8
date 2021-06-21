@@ -24,10 +24,10 @@
                 <tr>
                     <td>{{$change->name}}</td>
                     <td>{{$change->action}}</td>
-                    <td>{{$change->user_id}}</td>
+                    <td>{{$change->user->name}}</td>
                     <td>{{$change->updated_at}}</td>
                     <td class="text-right">
-                        <a class="btn btn-warning" href="{{ route('admin.layers.history', ['change' => $change]) }}"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-warning" href="{{ route('admin.layers.changes', ['change' => $change]) }}"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
             @endforeach

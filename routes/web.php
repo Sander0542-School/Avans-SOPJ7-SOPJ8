@@ -30,8 +30,10 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
     });
 
     Route::resource('layers', LayerController::class)->only(['index', 'create', 'edit', 'store', 'update']);
-    Route::get('/layers/history', [LayerController::class,'history'])->name('history');
-    Route::get('/layers/history/changes',[LayerController::class,'viewchange'])->name('changes');
+    Route::prefix('layers')->name('layers.')->group(function () {
+        Route::get('{layer}/history', [LayerController::class,'history'])->name('history');
+        Route::get('/history/{change}',[LayerController::class,'viewchange'])->name('changes');
+    });
 
     Route::prefix('managers')->name('managers.')->group(function () {
         Route::get('deleted', [ManagerController::class, 'deleted'])->name('deleted');

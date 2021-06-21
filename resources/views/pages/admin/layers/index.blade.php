@@ -62,9 +62,9 @@
                     <td class="text-right">
                         <a class="btn btn-warning" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
                     </td>
-{{--                    <td>--}}
-{{--                        <a class="btn btn-warning" href="{{ route('history', ['layer' => $layer]) }}"><i class="fas fa-eye"></i></a>--}}
-{{--                    </td>--}}
+                    <td>
+                        <a class="btn btn-warning" href="{{ route('admin.layers.history', ['layer' => $layer]) }}"><i class="fas fa-eye"></i></a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
