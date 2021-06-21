@@ -17673,6 +17673,10 @@ readers do not read off random characters that represent icons */
   overflow-y: auto;
 }
 
+.btn-danger {
+  min-width: 45px;
+}
+
 .wrapper {
   display: flex;
   width: 100%;

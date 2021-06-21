@@ -52,7 +52,7 @@ class MenuController extends Controller
 
     public function destroy(Subject $subject)
     {
-        $choices = SubjectChoice::all()->where('subject_id', $subject->id);
+        //$choices = SubjectChoice::all()->where('subject_id', $subject->id);
 
 /*        $selected = [];
         foreach ($choices as $subject => $value){
@@ -61,8 +61,9 @@ class MenuController extends Controller
                 $choices->forget($subject);
             }
         }*/
+        //SubjectChoice::all()->where('subject_id', $subject->id)->delete();
 
-        $subject->delete();
+        //$subject->delete();
 
         return redirect()->route('admin.menu.index')
             ->with('success', 'Het onderwerp is succesvol verwijderd.');
