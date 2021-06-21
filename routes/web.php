@@ -31,7 +31,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
 
     Route::prefix("layers")->name("layers.")->group(function () {
         Route::get('deleted', [LayerController::class, 'deleted'])->name('deleted');
-        Route::get('restore/{layers}', [LayerController::class, 'restore'])->name('restore');
+        Route::get('restore/{layer}', [LayerController::class, 'restore'])->name('restore');
     });
 
     Route::resource('layers', LayerController::class);
