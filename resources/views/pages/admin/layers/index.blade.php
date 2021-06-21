@@ -6,6 +6,7 @@
         </h2>
     </x-slot>
 
+
     <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
         <i class="fa fa-info-circle my-float" ></i>
     </button>
@@ -60,6 +61,7 @@
                     </td>
                     <td class="text-right">
                         <a class="btn btn-warning" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
             @endforeach
