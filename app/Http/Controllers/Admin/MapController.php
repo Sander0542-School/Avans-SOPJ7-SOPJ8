@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Map\UpdateRequest;
 use App\Http\Requests\Admin\Subject\StoreRequest;
 use App\Models\Domain;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 
 class MapController extends Controller
 {
@@ -56,8 +57,13 @@ class MapController extends Controller
         return Subject::max('order') ?? 0 + 1;
     }
 
-    public function destroy(Subject $subject)
+    public function destroy(Request $request)
     {
+        $subjectChoise = $request -> subjectChoise;
+        $choices = Subject::all()->where('subject_id', $subjectChoise);
+        $choices->delete();
+
+
         //$choices = SubjectChoice::all()->where('subject_id', $subject->id);
 
         /*        $selected = [];
@@ -69,9 +75,9 @@ class MapController extends Controller
                 }*/
         //Subject::all()->where('subject_id', $subject->id)->delete();
 
-        $subject->delete();
+        //$subject->delete();
 
-        return redirect()->route('admin.menu.index')
+        return redirect()->route('admin.map.index')
             ->with('success', 'Het onderwerp is succesvol verwijderd.');
     }
 }

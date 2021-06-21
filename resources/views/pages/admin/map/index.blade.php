@@ -59,7 +59,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="inputDomain">Naam</label>
-                            <select name="domain_id" class="form-control">
+                            <select for="subjectChoise" name="subjectChoise" id="subjectChoise"class="form-control">
                                 @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                 @endforeach
