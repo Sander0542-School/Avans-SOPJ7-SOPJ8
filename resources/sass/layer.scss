@@ -4,15 +4,6 @@
         padding: 16px;
     }
 }
-.green-content {
-    background-color: lawngreen;
-}
-.red-content {
-    background-color: red;
-}
-.yellow-content {
-    background-color: yellow;
-}
 .changesDiv {
     display: flex;
     flex-direction: row;
@@ -33,7 +24,7 @@
     text-align: left;
 }
 .changetitle {
-    text-align: center;
+    text-align: left;
 }
 .changetitle span {
     font-weight: bold;

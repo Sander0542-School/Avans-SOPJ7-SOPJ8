@@ -44,9 +44,9 @@
             <h2>Van:</h2>
             <div>
                 @if($previousChange !=null)
-                {{$previousChange->content}}
+                {!!$previousChange->content!!}
                 @else
-                    No previous changes were found.
+                    Er zijn geen voorgaande veranderingen gevonden.
                 @endif
             </div>
         </div>
@@ -54,13 +54,7 @@
         <div class="change">
             <h2>Naar:</h2>
             <div>
-            <span @if($change->action == "updated")
-                  class="yellow-content"
-                  @elseif($change->action == "deleted")
-                  class="red-content"
-                  @else
-                  class="green-content"
-                @endif>{{$change->content}}</span>
+            <span>{!!$change->content!!}</span>
             </div>
         </div>
 
