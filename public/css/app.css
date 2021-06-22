@@ -17677,6 +17677,12 @@ readers do not read off random characters that represent icons */
   min-width: 45px;
 }
 
+.login-button {
+  margin-bottom: 25px;
+  background-color: #2E7D32;
+  border-color: #2E7D32;
+}
+
 .wrapper {
   display: flex;
   width: 100%;
