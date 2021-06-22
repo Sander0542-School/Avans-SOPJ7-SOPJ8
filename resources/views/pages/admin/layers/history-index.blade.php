@@ -34,7 +34,7 @@
                 <th class="border-0">Laag</th>
                 <th class="border-0">Actie</th>
                 <th class="border-0">Wie</th>
-                <th class="border-0">Wanneer</th>
+                <th class="border-0" onclick="window.ChangeFilter.FilterBy.date()">Wanneer<i class="fas fa-sort ml-1" role="button"></i></th>
             </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
                     <td>{{$change->name}}</td>
                     <td>{{$change->action}}</td>
                     <td>{{$change->user->email}}</td>
-                    <td>{{$change->updated_at}}</td>
+                    <td id="date">{{$change->updated_at}}</td>
                     <td class="text-right">
                         <a class="btn btn-warning" href="{{ route('admin.layers.changes', ['change' => $change]) }}"><i class="fas fa-eye"></i></a>
                     </td>
