@@ -84,19 +84,25 @@ window.SubjectMap = {
                 subjectId: item.id
             });
 
-            let buttons = ""
-            for (const layer of item.layers){
-                buttons += `<button class="btn btn-sm btn-primary m-1" onclick="window.Layer.load('${layer.slug}', ${item.id})">${layer.name}</button></br>`
-            }
-            const popup = R.responsivePopup({
-                hasTip: true,
-                autoPan: true,
-                offset: [15, 20]
-            }).setContent("<h3>"+item.name+"</h3> <p>"+item.description+"</p> " + buttons);
+            if (draggable) {
+                marker.addTo(window.SubjectMap.map);
+            } else {
+                let buttons = ""
+                for (const layer of item.layers) {
+                    buttons += `<button class="btn btn-sm btn-primary m-1" onclick="window.Layer.load('${layer.slug}', ${item.id})">${layer.name}</button></br>`
+                }
 
-            marker.addTo(window.SubjectMap.map)
-                .bindPopup(popup);
-            marker.on("mouseover", function(evt) { this.openPopup(); });
+                const popup = R.responsivePopup({
+                    hasTip: true,
+                    autoPan: true,
+                    offset: [15, 20]
+                }).setContent("<h3>" + item.name + "</h3> <p>" + item.description + "</p> " + buttons);
+
+                marker.addTo(window.SubjectMap.map).bindPopup(popup);
+                marker.on("mouseover", function (evt) {
+                    this.openPopup();
+                });
+            }
         });
     },
     setMarkerVisibility: (visible) => {
