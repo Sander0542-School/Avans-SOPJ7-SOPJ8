@@ -49,7 +49,6 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::post('store', [MapController::class, 'store'])->name('store');
         Route::post('update', [MapController::class, 'update'])->name('update');
         Route::post('destroy', [MapController::class, 'destroy'])->name('destroy');
-
     });
 });
 
