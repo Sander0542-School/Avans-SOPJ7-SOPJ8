@@ -1,12 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Lagen') }}
-            <a id="newLayer" href="{{ route('admin.layers.create') }}" class="btn btn-primary float-right">{{ __('Nieuwe laag') }}</a>
-            <a id="newArchive" href="{{ route('admin.layers.deleted') }}" class="btn btn-primary float-right mx-1">{{ __('Verwijderde lagen') }}</a>
+            {{ __('Laag') }}
+            <a id="listLayer" href="{{ route('admin.layers.index') }}" class="btn btn-primary float-right">{{ __('Terug naar de lijst') }}</a>
         </h2>
     </x-slot>
-
 
     <button type="button" class="btn btn-primary information" data-toggle="modal" data-target="#infoModal">
         <i class="fa fa-info-circle my-float" ></i>
@@ -23,17 +21,18 @@
                 </div>
                 <div class="modal-body">
                     <ul>
-                        <li>-Klik op de knop "Nieuwe laag" om een nieuwe laag toe te voegen.</li>
-                        <li>-Klik op de gele knop op de rij van een laag die je wilt aanpassen.</li>
+                        <li>Op deze pagina zijn alle verwijderde lagen te vinden. </li>
+                        <li>Gebruik de knopjes om een laag te bekijken of om het uit het archief te halen. </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="card">
         <div class="card-body">
             <div class="form-group m-0">
-                <input type="text" id="inputFilter" class="form-control" onkeyup="filterLayers()" placeholder="Zoek door lagen">
+                <input type="text" id="inputFilter" class="form-control" onkeyup="filterLayers()" placeholder="Zoek door beheerders">
             </div>
         </div>
     </div>
@@ -44,7 +43,7 @@
             <thead>
             <tr>
                 <th class="border-0">Naam</th>
-                <th class="border-0">Bovenliggend</th>
+                <th class="border-0">Bovenliggende laag</th>
                 <th class="border-0"></th>
             </tr>
             </thead>
@@ -60,10 +59,8 @@
                         @endif
                     </td>
                     <td class="text-right">
-                        <a class="btn btn-primary layer-history" href="{{ route('admin.layers.history', ['layer' => $layer]) }}"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-warning layer-edit" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
-                        <button class="btn btn-danger layer-destory" onclick="deleteLayer({{ $layer->id }}, '{{ $layer->name }}', '{{ route('admin.layers.destroy', ['layer' => $layer]) }}')">
-                            <i class="fas fa-trash"></i>
+                        <button class="btn btn-danger" onclick="modalShow('{{ route('admin.layers.restore', ['layer' => $layer]) }}', '{{ $layer->name }}')">
+                            <i class="fas fa-trash-restore"></i>
                         </button>
                     </td>
                 </tr>
@@ -71,25 +68,22 @@
             </tbody>
         </table>
     </div>
-    <div class="modal" id="layerDeleteModal" tabindex="-1" role="dialog" aria-labelledby="layerDeleteModalLabel" aria-hidden="true">
+
+    <div class="modal" id="layerRestoreModal" tabindex="-1" role="dialog" aria-labelledby="layerRestoreModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="layerDeleteModalLabel" class="modal-title">Beheerder verwijderen</h5>
+                    <h5 id="layerRestoreModalLabel" class="modal-title">Laag Herstellen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Weet je zeker dat je <span id="modalLayerName"></span> wil verwijderen?</p>
+                    <p>Weet je zeker dat je <span id="modalLayerName"></span> wil herstellen?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
-                    <form id="modalLayerForm" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Verwijderen</button>
-                    </form>
+                    <a class="btn btn-danger" id ='modalSubmit'>Herstellen</a>
                 </div>
             </div>
         </div>
@@ -97,6 +91,13 @@
 
     @push('scripts')
         <script>
+            function modalShow(url, name) {
+                document.getElementById('modalLayerName').innerText = name;
+                document.getElementById('modalSubmit').href = url;
+
+                $('#layerRestoreModal').modal('show');
+            }
+
             function filterLayers() {
                 const input = document.getElementById("inputFilter");
                 const filter = input.value.toUpperCase();
@@ -111,12 +112,6 @@
                         row.style.display = 'none';
                     }
                 });
-            }
-            function deleteLayer(id, name, action) {
-                document.getElementById('modalLayerName').innerText = name;
-                document.getElementById('modalLayerForm').action = action;
-
-                $('#layerDeleteModal').modal('show');
             }
         </script>
     @endpush

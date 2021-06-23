@@ -123,6 +123,47 @@ class LayerController extends Controller
     }
 
     /**
+     * @param \App\Models\Layer $layer
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Layer $layer)
+    {
+        if ($layer == null) {
+            return redirect()->back()->withErrors(['error' => 'De laag kan niet verwijderd worden']);
+        }
+
+        $layer->delete();
+
+        return redirect()->route('admin.layers.index')
+            ->with('success', 'De laag is succesvol gearchiveerd.');
+    }
+
+    /**
+     * @param $layerId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($layerId)
+    {
+        $layer = Layer::withTrashed()->find($layerId);
+
+        if ($layer == null) {
+            return redirect()->back()->withErrors(['error' => 'De layer kan niet hersteld worden']);
+        }
+
+        $layer->restore();
+
+        return redirect()->route('admin.layers.index')
+            ->with('success', 'De layer is met succes uit het archief gehaald.');
+    }
+
+    public function deleted()
+    {
+        $layers = Layer::onlyTrashed()->paginate(10);
+
+        return view('pages.admin.layers.deleted')->with('layers', $layers);
+    }
+
+    /**
      * Set the parent of the layer when filled
      *
      * @param \App\Models\Layer $layer
