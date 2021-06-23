@@ -16,6 +16,7 @@ class CreateLayerHistoriesTable extends Migration
         Schema::create('layer_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('layer_id')->constrained('layers', 'id');
+            $table->foreignId('user_id')->nullable()->constrained('users', 'id');
             $table->string('action');
             $table->string('name');
             $table->string('slug');

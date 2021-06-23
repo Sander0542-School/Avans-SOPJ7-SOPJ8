@@ -57,7 +57,6 @@
                     <td>{{ $manager->email }}</td>
                     <td>{{ $manager->roles[0]['name'] }}</td>
                     <td class="text-right">
-                        <a class="btn btn-success" href="{{ route('admin.managers.show', ['manager' => $manager]) }}"><i class="fas fa-eye"></i></a>
                         @if(auth()->user()->id != $manager->id)
                             <a class="btn btn-warning" href="{{ route('admin.managers.edit', ['manager' => $manager]) }}"><i class="fas fa-edit"></i></a>
                             @if(!$manager->hasRole('Super Admin'))

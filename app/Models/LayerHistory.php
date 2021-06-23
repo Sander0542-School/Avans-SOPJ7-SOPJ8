@@ -11,6 +11,7 @@ class LayerHistory extends Model
 
     protected $fillable = [
         'layer_id',
+        'user_id',
         'action',
         'name',
         'slug',
@@ -19,6 +20,11 @@ class LayerHistory extends Model
 
     public function layer()
     {
-        return $this->belongsTo(Layer::class, 'id', 'layer_id');
+        return $this->belongsTo(Layer::class, 'layer_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

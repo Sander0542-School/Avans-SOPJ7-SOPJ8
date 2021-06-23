@@ -46,6 +46,7 @@
                 <th class="border-0">Naam</th>
                 <th class="border-0">Bovenliggend</th>
                 <th class="border-0"></th>
+                <th class="border-0"></th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +65,9 @@
                         <button class="btn btn-danger" onclick="deleteLayer({{ $layer->id }}, '{{ $layer->name }}', '{{ route('admin.layers.destroy', ['layer' => $layer]) }}')">
                             <i class="fas fa-trash"></i>
                         </button>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="{{ route('admin.layers.history', ['layer' => $layer]) }}"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
             @endforeach

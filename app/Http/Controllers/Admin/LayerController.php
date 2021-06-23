@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Layer\StoreRequest;
 use App\Http\Requests\Admin\Layer\UpdateRequest;
 use App\Models\Layer;
 use App\Models\LayerChoice;
+use App\Models\LayerHistory;
 use App\Models\Subject;
 use App\Models\SubjectChoice;
 use Illuminate\Support\Str;
@@ -100,6 +101,25 @@ class LayerController extends Controller
         $this->handleParent($layer, $data['parent'] ?? null);
 
         return redirect()->route('admin.layers.index')->with('message', 'De laag is successvol aangepast');
+    }
+
+    public function history(Layer $layer) {
+        $changes = LayerHistory::where('layer_id', $layer->id)->get();
+
+        return view('pages.admin.layers.history-index')->with('changes', $changes);
+    }
+
+    public function viewchange(LayerHistory $change) {
+        $previousChange = null;
+
+        if (LayerHistory::where('layer_id', $change->layer_id)->count() > 1) {
+            $previousChange = LayerHistory::where('layer_id', $change->layer_id)->where('id', '<', $change->id)->orderByDesc('id')->first();
+        }
+
+        if ($previousChange == $change) {
+            $previousChange = null;
+        }
+        return view('pages.admin.layers.history')->with(['change' => $change, 'layer' => $change->layer()->first(), 'previousChange' => $previousChange ?? null]);
     }
 
     /**
