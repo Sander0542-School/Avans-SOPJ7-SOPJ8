@@ -45,6 +45,7 @@
                 <th class="border-0">Naam</th>
                 <th class="border-0">Bovenliggend</th>
                 <th class="border-0"></th>
+                <th class="border-0"></th>
             </tr>
             </thead>
             <tbody>
@@ -60,6 +61,9 @@
                     </td>
                     <td class="text-right">
                         <a class="btn btn-warning" href="{{ route('admin.layers.edit', ['layer' => $layer]) }}"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="{{ route('admin.layers.history', ['layer' => $layer]) }}"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
             @endforeach

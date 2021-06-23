@@ -39,7 +39,7 @@ describe('Manage Layers', () => {
         cy.create('App\\Models\\Layer');
 
         cy.visit('/admin/layers');
-        cy.get('#layerTable > tbody > tr a').should('be.visible').click();
+        cy.get('#layerTable > tbody > tr > .text-right > .btn').should('be.visible').click();
 
         cy.fixture('layers/update').then((layer) => {
             cy.get('#inputName').should('be.visible').clear().type(layer.name);

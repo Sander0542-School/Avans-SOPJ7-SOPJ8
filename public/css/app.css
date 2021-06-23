@@ -17812,6 +17812,49 @@ readers do not read off random characters that represent icons */
   padding: 16px;
 }
 
+.green-content {
+  background-color: lawngreen;
+}
+
+.red-content {
+  background-color: red;
+}
+
+.yellow-content {
+  background-color: yellow;
+}
+
+.changesDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.change {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  padding: 10px;
+}
+
+.change h2 {
+  text-decoration: underline;
+}
+
+.change div {
+  text-align: left;
+}
+
+.changetitle {
+  text-align: center;
+}
+
+.changetitle span {
+  font-weight: bold;
+}
+
 .information {
   position: fixed;
   bottom: 60px;
