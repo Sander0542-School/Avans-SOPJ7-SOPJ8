@@ -29,19 +29,18 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->name('admin.')
         Route::post('update', [MenuController::class, 'update'])->name('update');
     });
 
-    Route::resource('layers', LayerController::class)->except(['show']);
     Route::prefix('layers')->name('layers.')->group(function () {
         Route::get('{layer}/history', [LayerController::class,'history'])->name('history');
         Route::get('/history/{change}',[LayerController::class,'viewchange'])->name('changes');
         Route::get('deleted', [LayerController::class, 'deleted'])->name('deleted');
         Route::get('restore/{layer}', [LayerController::class, 'restore'])->name('restore');
     });
+    Route::resource('layers', LayerController::class)->except(['show']);
 
     Route::prefix('managers')->name('managers.')->group(function () {
         Route::get('deleted', [ManagerController::class, 'deleted'])->name('deleted');
         Route::get('restore/{manager}', [ManagerController::class, 'restore'])->name('restore');
     });
-
     Route::resource('managers', ManagerController::class);
 
     Route::prefix('map')->name('map.')->group(function () {
