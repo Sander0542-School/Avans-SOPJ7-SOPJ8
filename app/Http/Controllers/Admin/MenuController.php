@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Menu\UpdateRequest;
 use App\Models\Domain;
 use App\Models\Subject;
+use App\Models\SubjectChoice;
 use Cache;
 
 class MenuController extends Controller

@@ -4,3 +4,29 @@
         padding: 16px;
     }
 }
+.changesDiv {
+    display: flex;
+    flex-direction: row;
+}
+.change {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    padding:10px;
+}
+.change h2 {
+    text-decoration: underline;
+}
+.change div {
+    text-align: left;
+}
+.changetitle {
+    text-align: left;
+}
+.changetitle span {
+    font-weight: bold;
+}
+

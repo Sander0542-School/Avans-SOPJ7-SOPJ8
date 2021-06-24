@@ -7,15 +7,16 @@ use App\Http\Requests\Admin\Map\UpdateRequest;
 use App\Http\Requests\Admin\Subject\StoreRequest;
 use App\Models\Domain;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 
 class MapController extends Controller
 {
     public function index()
     {
         $domains = Domain::all();
-
+        $subjects = Subject::all();
         return view('pages.admin.map.index')
-            ->with('domains', $domains);
+            ->with('domains', $domains)->with('subjects', $subjects);
     }
 
     public function store(StoreRequest $request)
@@ -54,5 +55,19 @@ class MapController extends Controller
     private function getLastOrder()
     {
         return Subject::max('order') ?? 0 + 1;
+    }
+
+    public function destroy(Request $request)
+    {
+        $subjectChoice = $request->subjectChoice;
+        $subject = Subject::find($subjectChoice);
+        if ($subject == null) {
+            return redirect()->back()->withErrors(['error' => 'Het onderwerp kan niet verwijderd worden']);
+        }
+
+        $subject->delete();
+
+        return redirect()->route('admin.map.index')
+            ->with('success', 'Het onderwerp is succesvol verwijderd.');
     }
 }
